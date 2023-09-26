@@ -36,7 +36,7 @@ h2 {
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    gap: 10px;
+    gap: 8px;
     width: 80%;
 }
 .newsWin {
@@ -85,6 +85,9 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: start;
+}
+.userData ul li p span {
+    padding-left: 14px;
 }
 .userData ul li input {
     border: 2px solid #6b6b6b;

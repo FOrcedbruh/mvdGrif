@@ -140,8 +140,11 @@ const Register: React.FC = () => {
                 // @ts-ignore
             case 'firts_name':
                 setNameDirty(true);
+                // @ts-ignore
             case 'username': 
                 setUsernameDirty(true);
+            case 'ConfirmPassword':
+                setPasswordMatch(true);
             break;
         }
     }
@@ -240,7 +243,7 @@ const Register: React.FC = () => {
                             </div>
                             <div className={style.regDiv}>
                                 <label htmlFor="ConfirmPassword">Подтвердите пароль</label>
-                                <input type="password" name='ConfirmPassword' value={confirmPassword} onChange={e => {confirmPasswordHandler(e)}} placeholder='Ваш пароль...'/>
+                                <input type="password" name='ConfirmPassword' value={confirmPassword} onBlur={e => blurHandler(e)} onChange={e => {confirmPasswordHandler(e)}} placeholder='Ваш пароль...'/>
                                 {(passwordMatchError && passwordMatch) && <section className={style.error}>{passwordMatchError}</section>}
                             </div>
                             <div className={style.regDiv}>

@@ -1,6 +1,6 @@
 import style from './../../styles/ComponentStyles/Profile.module.css';
 import newsLine from './../../images/newsLine.svg';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from 'react-router-dom';
@@ -113,25 +113,25 @@ return (
                     </div>
                     
                     <ul>
-                        <li> <p>Имя:  {nameValue ? <span>{nameValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                        <li> <p>Имя:  {nameValue  ? <span>{nameValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
                             {correctProfile && <input type="text" value={nameValue} onChange={e => {nameHandler(e)}} name='name'/>}
                         </li>
                         <li> <p>Фамилия: {lnameValue ? <span>{lnameValue}</span> :  <Skeleton variant='text' width={180}  height={40}/>}</p>
                             {correctProfile && <input type="text" value={lnameValue} onChange={e => {lnameHandler(e)}} name='last_name'/>}
                         </li>
-                        <li> <p>Пользователь: {usernameValue} {!usernameValue && <Skeleton variant='text' width={180} height={40}/>}</p>
+                        <li> <p>Пользователь: {usernameValue ? <span>{usernameValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
                             {correctProfile && <input type="text" value={usernameValue} onChange={e => {usernameHandler(e)}} name='username'/>}
                         </li>
-                        <li> <p>Почта: {emailValue} {!emailValue && <Skeleton variant='text' width={180} height={40}/>}</p>
+                        <li> <p>Почта: {emailValue ? <span>{emailValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
                             {correctProfile && <input type="email" value={emailValue} onChange={e => {emailHandler(e)}} name='email'/>}
                         </li>
-                        <li> <p>Регион: {regionValue} {!regionValue && <Skeleton variant='text' width={180} height={40}/>}</p>
+                        <li> <p>Регион: {regionValue ? <span>{regionValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
                             {correctProfile && <input type="region" value={regionValue} onChange={e => {regionHandler(e)}} name='region'/>}
                         </li>
-                        <li> <p>Город: {cityValue} {!cityValue && <Skeleton variant='text' width={180} height={40}/>}</p>
+                        <li> <p>Город: {cityValue ? <span>{cityValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
                             {correctProfile && <input type="city" value={cityValue} onChange={e => {cityHandler(e)}} name='city'/>}
                         </li>
-                        <li> <p>Школа: {schoolValue} {!schoolValue && <Skeleton variant='text' width={180} height={40}/>}</p>
+                        <li> <p>Школа: {schoolValue ? <span>{schoolValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
                             {correctProfile && <input type="school" value={schoolValue} onChange={e => {schoolHandler(e)}} name='city'/>}
                         </li>
                         <li>Дата рождения: 
