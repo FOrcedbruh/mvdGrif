@@ -1,0 +1,67 @@
+.window {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    z-index: 2;
+    padding: 0 90px;
+}
+.grif {
+    width: 50%;
+}
+.grif img {
+    width: 800px;
+    height: 800px;
+}
+.tests {
+    width: 100%;
+    color: #fff;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+h1 {
+    padding-bottom: 40px;
+}
+.categories {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+.categories div {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.categories div h3 {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.categories div article {
+    border-radius: 10px;
+    border: 1px solid #E1E1E1;
+    background: linear-gradient(124deg, #FFF 0%, #E9E9E9 100%);
+    width: 160px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+}
+.categories div article p{
+    color: #000;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.595px;
+    align-self: end;
+    padding-bottom: 5px;
+}

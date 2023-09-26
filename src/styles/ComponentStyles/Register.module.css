@@ -1,0 +1,129 @@
+.aura {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    z-index: 3;
+}
+.regWin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(123.64deg, rgba(255, 255, 255, 0) -22.71%, rgba(255, 255, 255, 0.039) 70.04%);
+    backdrop-filter: blur(30px);
+    border: 2px solid #5f5f5f;
+    gap: 10%;
+    min-width: 46%;
+    min-height: 93%;
+    height: 60%;
+    border-radius: 40px;
+    padding: 2%;
+    gap: 20px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.regWin div.regDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    width: 70%;
+}
+.regWin div input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    padding-left: 20px;
+    background: linear-gradient(123.64deg, rgba(255, 255, 255, 0) -22.38%, rgba(255, 255, 255, 0.039) 70.38%);
+    backdrop-filter: blur(21px);
+    transition: transform .3s ease-in-out;
+    color: #9706f7;
+    border: 1px solid #5c5c5c2f;
+}
+.regWin div input:focus {
+    transform: translateX(10px);
+    border: 3px solid #9706f7;
+}
+.error {
+    height: 25px;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #ff8a8a;
+    font-size: 12px;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.regBtn {
+    border: none;
+    outline: none;
+    width: 40%;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #9706f7;
+    transition: all .2s ease-in-out;
+}
+.regBtn:hover {
+    transform:  translateY(-5px);
+    box-shadow: 2px 2px 20px #9706f7;
+}
+.eye {
+    position: absolute;
+    margin-left: 26%;
+    margin-top: 4%;
+    cursor: pointer;
+}
+.eyeLog {
+    position: absolute;
+    margin-left: 48%;
+    margin-top: 4%;
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    color: #9706f7;
+    font-weight: 600;
+}
+.regWin div.logDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    width: 60%;
+}
+.inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 80%;
+    flex-wrap: wrap;
+}
+.inputWindows {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+}

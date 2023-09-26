@@ -1,0 +1,74 @@
+
+.quizWin {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.quiz {
+    width: 40%;
+    height: 60%;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+    background-color: blueviolet;
+    border-radius: 40px;
+    color: #fff;
+    text-align: center;
+}
+.variants {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+.variants li {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(93, 19, 161);
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+.progress {
+    height: 5px;
+    background-color: chartreuse;
+    transition: all .5s ease-in-out;
+    align-self: start;
+    margin-left: 50px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+.result {
+    width: 50%;
+    height: 40vh;
+    background-color: rgb(93, 19, 161);
+    z-index: 2;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+.result span {
+    color: chartreuse;
+}
+.aura {
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
