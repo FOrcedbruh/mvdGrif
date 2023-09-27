@@ -11,7 +11,7 @@ const instance = axios.create({
 
 const authAPI = {
     create(username: string, first_name: string, last_name: string, email: string, region: string, city: string, password: string) {
-        return instance.post(`user/register/`, {username, first_name, last_name, email, region, city, password})
+        return  instance.post(`user/register/`, {username, first_name, last_name, email, region, city, password})
             .then(response => {
                 return response.data
             })
@@ -34,12 +34,42 @@ const authAPI = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-        });
+        })
+            .then(response => {
+                const city = response.data.city
+                localStorage.setItem('city', city)
+                const date_birthday = response.data.date_birthday
+                localStorage.setItem('date_birthday', date_birthday)
+                const email = response.data.email
+                localStorage.setItem('email', email)
+                const first_name = response.data.first_name
+                localStorage.setItem('first_name', first_name)
+                const grade = response.data.grade
+                localStorage.setItem('grade', grade)
+                const id = response.data.id
+                localStorage.setItem('id', id)
+                const image = response.data.image
+                localStorage.setItem('image', image)
+                const last_name = response.data.last_name
+                localStorage.setItem('last_name', last_name)
+                const region = response.data.region
+                localStorage.setItem('region', region)
+                const school = response.data.school
+                localStorage.setItem('school', school)
+                const sex = response.data.sex
+                localStorage.setItem('sex', sex)
+                const username = response.data.username
+                localStorage.setItem('username', username)
+
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });;
     }
 }
 
 
-  
+
 
 
 export {authAPI};

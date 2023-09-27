@@ -4,8 +4,9 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { Link } from 'react-router-dom';
 import { authAPI } from '../AuthorizationData';
+import LoginType from '../../types/LoginType';
 
-const Login: React.FC = () => {
+const Login: React.FC<LoginType> = ({showProfile, setShowProfile}) => {
 
     const [usernameDirty, setUsernameDirty] = useState<boolean>(false);
     const [username, setUsername] = useState<string>('');
@@ -47,13 +48,12 @@ const Login: React.FC = () => {
     const blurHandler = (e: React.FocusEvent<HTMLInputElement, Element>) => {
         switch (e.target.name) {
             // @ts-ignore
-            case 'password': 
+            case 'password':
                 setPasswordDirty(true);
             case 'username':
                 setUsernameDirty(true);
         }
     }
-
 
 
     const loginHandler = () => {
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
     return (
         <section className={style.aura}>
             <section className={`${style.regWin} regWin`}>
-            <form method='post'>
+            <form name='login'>
                 <h1>Войти</h1>
                 <div className={style.logDiv}>
                     <label htmlFor="username">Username</label>
@@ -77,7 +77,7 @@ const Login: React.FC = () => {
                     <div onClick={() => {setEye(!eye)}} className={style.eyeLog}>{eye ? <VisibilityOutlinedIcon color='secondary'/> : <VisibilityOffOutlinedIcon color='secondary'/>}</div>
                     {(passwordDirty && passwordError) && <section className={style.error}>{passwordError}</section>}
                 </div>
-                <button type='submit' className={style.regBtn} disabled={!formValid} onClick={loginHandler}>Войти</button>
+                <button form='login' type='submit' className={style.regBtn} disabled={!formValid} onClick={loginHandler}>Войти</button>
             </form>
             <p>
             У вас еще нет аккаунта?

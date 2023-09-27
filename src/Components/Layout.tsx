@@ -9,6 +9,8 @@ import { useMediaQuery } from 'react-responsive';
 import { LayoutType } from '../types/layoutType';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { StoreContext } from '../contexts/storeContext';
+import { useContext } from 'react';
 
 
 
@@ -48,6 +50,9 @@ const Materials: React.FC = () => {
 
 
 const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
+
+    const {last_name, first_name, showProfile} = useContext(StoreContext);
+
 
     const [home, setHome] = useState<boolean>(false);
     const [materials, setMaterials] = useState<boolean>(false);
@@ -92,10 +97,16 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                     </ul>
                 </nav>
                 <ThemeThumb />
+                {showProfile ?
+                    <div className={style.profileInf}>
+                        <NavLink to='/профиль' className={style.profileLink}>{first_name} {last_name}</NavLink>
+                    </div>
+                 : 
                 <div className={style.profile}>
                     <Link to='войти'>Войти</Link>
                     <Link to='регистрация'><span>Регистрация</span></Link>
-                </div>
+                </div>}
+                
             </header>
         </>
     )

@@ -81,3 +81,17 @@
 .mobileNav  ul li {
     border-bottom: 1px solid #8437c2;
 }
+.profileInf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    transition: transform .2s ease;
+}
+.profileInf:hover {
+    transform: scale(1.2);
+}
+.profileLink {
+    padding-right: 4%;
+    color: #fff;
+}

@@ -1,6 +1,6 @@
 import style from './../../styles/ComponentStyles/Profile.module.css';
 import newsLine from './../../images/newsLine.svg';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +9,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import AddingAvatar from '../AddingAvatar';
 import Avatar from '@mui/material/Avatar';
-
-
+import { useContext } from 'react';
+import { StoreContext } from '../../contexts/storeContext';
 
 
 
@@ -18,18 +18,26 @@ import Avatar from '@mui/material/Avatar';
 
 const Profile: React.FC = () => {
 
+    
+
+    const {first_name, last_name,  setFirst_name, setLast_name} = useContext(StoreContext)
+
     const navigate = useNavigate();
 
     const goBack = () => navigate(-1);
 
     const [correctProfile, setCorrectProfile] = useState<boolean>(false);
-    const [nameValue, setNamevalue] = useState<string>('');
-    const [lnameValue, setLnameValue] = useState<string>('');
-    const [usernameValue, setUsernameValue] = useState<string>('');
-    const [emailValue, setEmailValue] = useState<string>('');
-    const [regionValue, setRegionValue] = useState<string>('');
-    const [cityValue, setCityValue] = useState<string>('');
-    const [schoolValue, setSchoolValue] = useState<string>('');
+    
+    const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
+    const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
+    const [region, setRegion] = useState<string>(localStorage.getItem('region') || '');
+    const [city, setCity] = useState<string>(localStorage.getItem('city') || '');
+    const [school, setSchool] = useState<string>(localStorage.getItem('school') || '');
+
+
+    
+
+    
 
     const [preview, setPreview] = useState<any>(null);
 
@@ -37,32 +45,33 @@ const Profile: React.FC = () => {
         setCorrectProfile(true);
         if (correctProfile) {
             setCorrectProfile(false);
-
         }
     }
 
 
 
+
+
     const nameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNamevalue(e.target.value);
+        setFirst_name(e.target.value);
     }
     const lnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLnameValue(e.target.value);
+        setLast_name(e.target.value);
     }
     const usernameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUsernameValue(e.target.value);
+        setUsername(e.target.value);
     }
     const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmailValue(e.target.value);
+        setEmail(e.target.value);
     }
     const regionHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setRegionValue(e.target.value);
+        setRegion(e.target.value);
     }
     const cityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCityValue(e.target.value);
+        setCity(e.target.value);
     }
     const schoolHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSchoolValue(e.target.value);
+        setSchool(e.target.value);
     }
 
 
@@ -74,24 +83,6 @@ const Profile: React.FC = () => {
     }
 
 
-    
-
-    /*const authAPI = {
-        // профиль
-        me(token: string) {
-            // const token = localStorage.getItem('token')
-            return instance.get('user/profile/', {
-                headers: {
-                    'Authorization': Bearer ${token}
-                }
-            });
-        }
-    }
-
-    useEffect(() => {
-        const token: string = '3ae7399c2fb938265eb2c46438e8f5862ac3f776';
-        authAPI.me(token).then(res => res.data);
-    })*/
 
     const news: Array<string> = [
         'Придумали, как сделать лампы накаливания более энергоэффективными и долговечными', 'В России разработали систему для настройки оптимальной работы головного мозга', 'Проблема процессоров Intel'
@@ -111,28 +102,27 @@ return (
                     <div className={style.avatar}>
                     <Avatar src={preview} />  {correctProfile && <Fab style={{'width': 40, 'height': 30}} onClick={renderChoosePhotoHandler}><AddIcon /></Fab>}
                     </div>
-                    
                     <ul>
-                        <li> <p>Имя:  {nameValue  ? <span>{nameValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
-                            {correctProfile && <input type="text" value={nameValue} onChange={e => {nameHandler(e)}} name='name'/>}
+                        <li> <p>Имя:  {first_name  ? <span>{first_name}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                            {correctProfile && <input type="text" value={first_name} onChange={e => {nameHandler(e)}} name='name'/>}
                         </li>
-                        <li> <p>Фамилия: {lnameValue ? <span>{lnameValue}</span> :  <Skeleton variant='text' width={180}  height={40}/>}</p>
-                            {correctProfile && <input type="text" value={lnameValue} onChange={e => {lnameHandler(e)}} name='last_name'/>}
+                        <li> <p>Фамилия: {last_name ? <span>{last_name}</span> :  <Skeleton variant='text' width={180}  height={40}/>}</p>
+                            {correctProfile && <input type="text" value={last_name} onChange={e => {lnameHandler(e)}} name='last_name'/>}
                         </li>
-                        <li> <p>Пользователь: {usernameValue ? <span>{usernameValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
-                            {correctProfile && <input type="text" value={usernameValue} onChange={e => {usernameHandler(e)}} name='username'/>}
+                        <li> <p>Пользователь: {username ? <span>{username}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                            {correctProfile && <input type="text" value={username} onChange={e => {usernameHandler(e)}} name='username'/>}
                         </li>
-                        <li> <p>Почта: {emailValue ? <span>{emailValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
-                            {correctProfile && <input type="email" value={emailValue} onChange={e => {emailHandler(e)}} name='email'/>}
+                        <li> <p>Почта: {email ? <span>{email}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                            {correctProfile && <input type="email" value={email} onChange={e => {emailHandler(e)}} name='email'/>}
                         </li>
-                        <li> <p>Регион: {regionValue ? <span>{regionValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
-                            {correctProfile && <input type="region" value={regionValue} onChange={e => {regionHandler(e)}} name='region'/>}
+                        <li> <p>Регион: {region ? <span>{region}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                            {correctProfile && <input type="region" value={region} onChange={e => {regionHandler(e)}} name='region'/>}
                         </li>
-                        <li> <p>Город: {cityValue ? <span>{cityValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
-                            {correctProfile && <input type="city" value={cityValue} onChange={e => {cityHandler(e)}} name='city'/>}
+                        <li> <p>Город: {city ? <span>{city}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                            {correctProfile && <input type="city" value={city} onChange={e => {cityHandler(e)}} name='city'/>}
                         </li>
-                        <li> <p>Школа: {schoolValue ? <span>{schoolValue}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
-                            {correctProfile && <input type="school" value={schoolValue} onChange={e => {schoolHandler(e)}} name='city'/>}
+                        <li> <p>Школа: {school ? <span>{school}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                            {correctProfile && <input type="school" value={school} onChange={e => {schoolHandler(e)}} name='city'/>}
                         </li>
                         <li>Дата рождения: 
 
