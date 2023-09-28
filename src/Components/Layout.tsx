@@ -1,5 +1,5 @@
 import style from './../styles/ComponentStyles/Layout.module.css';
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, Outlet } from 'react-router-dom'
 import gerb from './../images/logo-gerb.svg';
 import grif from './../images/logo-grif.svg';
 import line from './../images/logo-line.svg';
@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { StoreContext } from '../contexts/storeContext';
 import { useContext } from 'react';
+import Avatar from '@mui/material/Avatar';
 
 
 
@@ -51,7 +52,7 @@ const Materials: React.FC = () => {
 
 const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
 
-    const {last_name, first_name, showProfile} = useContext(StoreContext);
+    const {last_name, first_name, showProfile, preview} = useContext(StoreContext);
 
 
     const [home, setHome] = useState<boolean>(false);
@@ -99,7 +100,7 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                 <ThemeThumb />
                 {showProfile ?
                     <div className={style.profileInf}>
-                        <NavLink to='/профиль' className={style.profileLink}>{first_name} {last_name}</NavLink>
+                        <NavLink to='/профиль' className={style.profileLink}>{first_name} {last_name}</NavLink> <Avatar src={preview}/>
                     </div>
                  : 
                 <div className={style.profile}>
@@ -108,12 +109,18 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                 </div>}
                 
             </header>
+            <main className='container'>
+                <Outlet />
+            </main>
         </>
     )
 }
 
 
+
 const LayoutMobile: React.FC = () => {
+
+    const {last_name, first_name, showProfile} = useContext(StoreContext);
 
     const [home, setHome] = useState<boolean>(false);
     const [materials, setMaterials] = useState<boolean>(false);
@@ -150,10 +157,15 @@ const LayoutMobile: React.FC = () => {
                     <img src={grif}/>
                 </div>
                 <ThemeThumb />
+                {showProfile ?
+                    <div className={style.profileInf}>
+                        <NavLink to='/профиль' className={style.profileLink}>{first_name} {last_name}</NavLink>
+                    </div>
+                 : 
                 <div className={style.profile}>
                     <Link to='войти'>Войти</Link>
                     <Link to='регистрация'><span>Регистрация</span></Link>
-                </div>
+                </div>}
             </header>
             {nav && <nav className={style.mobileNav}>
                         <ul className={style.main} style={{'flexDirection': 'column'}}>

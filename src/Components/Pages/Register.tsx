@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { authAPI } from '../AuthorizationData';
-
-
+import Checkbox from '@mui/material/Checkbox';
+import mainGrif from './../../images/main-grif.svg';
+import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 const Register: React.FC = () => {
@@ -170,7 +172,10 @@ const Register: React.FC = () => {
 
 
     return (
+        <>
+        <img src={mainGrif} className={style.mainGrif}/>
         <section className={style.aura}>
+            <Button variant='text' color='secondary' className={style.goHomeBtn}><ArrowBackIcon /> <Link to='/'>На главную</Link></Button>
             <section className={`${style.regWin} regWin`}>
             <form name='register'>
                 <h1>Регистрация</h1>
@@ -201,7 +206,7 @@ const Register: React.FC = () => {
                                 <input type="text" name='region' value={region} placeholder='Ваш Регион...' onChange={e => {regionHandler(e)}}/>
                             </div>
                             <div className={style.regDiv}>
-                                <label htmlFor="city">Ваш Город</label>
+                                <label htmlFor="city">Населенный пункт</label>
                                 <input type="text" name='city' value={city} placeholder='Ваш Город...' onChange={e => {cityHandler(e)}}/>
                             </div>
                             
@@ -215,7 +220,7 @@ const Register: React.FC = () => {
                                 </Select>
                             </div>
                             <div className={style.regDiv}>
-                                <label htmlFor="class">Ваш класс</label>
+                                <label htmlFor="class">Класс обучения</label>
                                 <Select label="Ваш класс" color='secondary' value={clas} onChange={handleClass} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -228,11 +233,10 @@ const Register: React.FC = () => {
                                     <MenuItem value={9}>9</MenuItem>
                                     <MenuItem value={10}>10</MenuItem>
                                     <MenuItem value={11}>11</MenuItem>
-
                                 </Select>
                             </div>
                             <div className={style.regDiv}>
-                                <label htmlFor="school">Ваша школа(полное название)</label>
+                                <label htmlFor="school">Наименование учебного заведения</label>
                                 <input type="text" value={school} name='school' onChange={e => {schoolHandle(e)}} placeholder='Ваша школа...'/>
                             </div>
                             <div className={style.regDiv}>
@@ -257,6 +261,8 @@ const Register: React.FC = () => {
             <p>У вас уже есть аккаунт?<Link to='/войти'>Войти</Link></p>
         </section>
         </section>
+        </>
+        
         
     )
 }

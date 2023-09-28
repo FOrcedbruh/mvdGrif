@@ -5,8 +5,14 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import { Link } from 'react-router-dom';
 import { authAPI } from '../AuthorizationData';
 import LoginType from '../../types/LoginType';
+import mainGrif from './../../images/main-grif.svg';
+import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const Login: React.FC<LoginType> = ({showProfile, setShowProfile}) => {
+
+
+
+const Login: React.FC<LoginType> = () => {
 
     const [usernameDirty, setUsernameDirty] = useState<boolean>(false);
     const [username, setUsername] = useState<string>('');
@@ -62,29 +68,34 @@ const Login: React.FC<LoginType> = ({showProfile, setShowProfile}) => {
 
 
     return (
-        <section className={style.aura}>
-            <section className={`${style.regWin} regWin`}>
-            <form name='login'>
-                <h1>Войти</h1>
-                <div className={style.logDiv}>
-                    <label htmlFor="username">Username</label>
-                    <input type="text" name='username' placeholder='Username...' onChange={e => {usernameHandler(e)}}/>
-                    {(usernameDirty && usernameError) && <section className={style.error}>{usernameError}</section>}
-                </div>
-                <div className={style.logDiv}>
-                    <label htmlFor="password">Пароль</label>
-                    <input onChange={e => passworHandler(e)} onBlur={e => blurHandler(e)} type={`${eye ? "password" : "text"}`} name="password" placeholder="Ваш пароль..."/>
-                    <div onClick={() => {setEye(!eye)}} className={style.eyeLog}>{eye ? <VisibilityOutlinedIcon color='secondary'/> : <VisibilityOffOutlinedIcon color='secondary'/>}</div>
-                    {(passwordDirty && passwordError) && <section className={style.error}>{passwordError}</section>}
-                </div>
-                <button form='login' type='submit' className={style.regBtn} disabled={!formValid} onClick={loginHandler}>Войти</button>
-            </form>
-            <p>
-            У вас еще нет аккаунта?
-                <Link to='/регистрация'>Зарегистрироваться</Link>
-            </p>
-        </section>
-        </section>
+        <>
+        <img src={mainGrif} className={style.mainGrif}/>
+            <section className={style.aura}>
+                <Button variant='text' color='secondary' className={style.goHomeBtn}><ArrowBackIcon /> <Link to='/'>На главную</Link></Button>
+                <section className={`${style.regWin} regWin`}>
+                    <form name='login'>
+                        <h1>Войти</h1>
+                        <div className={style.logDiv}>
+                            <label htmlFor="username">Username</label>
+                            <input type="text" name='username' placeholder='Username...' onChange={e => {usernameHandler(e)}}/>
+                            {(usernameDirty && usernameError) && <section className={style.error}>{usernameError}</section>}
+                        </div>
+                        <div className={style.logDiv}>
+                            <label htmlFor="password">Пароль</label>
+                            <input onChange={e => passworHandler(e)} onBlur={e => blurHandler(e)} type={`${eye ? "password" : "text"}`} name="password" placeholder="Ваш пароль..."/>
+                            <div onClick={() => {setEye(!eye)}} className={style.eyeLog}>{eye ? <VisibilityOutlinedIcon color='secondary'/> : <VisibilityOffOutlinedIcon color='secondary'/>}</div>
+                            {(passwordDirty && passwordError) && <section className={style.error}>{passwordError}</section>}
+                        </div>
+                        <button form='login' type='submit' className={style.regBtn} disabled={!formValid} onClick={loginHandler}>Войти</button>
+                    </form>
+                    <p>
+                    У вас еще нет аккаунта?
+                        <Link to='/регистрация'>Зарегистрироваться</Link>
+                    </p>
+                </section>
+            </section>
+        </>
+        
         
     )
 }

@@ -20,7 +20,8 @@ const Profile: React.FC = () => {
 
     
 
-    const {first_name, last_name,  setFirst_name, setLast_name} = useContext(StoreContext)
+    const {first_name, last_name,  setFirst_name, setLast_name, preview, setPreview} = useContext(StoreContext);
+    
 
     const navigate = useNavigate();
 
@@ -35,11 +36,8 @@ const Profile: React.FC = () => {
     const [school, setSchool] = useState<string>(localStorage.getItem('school') || '');
 
 
-    
 
     
-
-    const [preview, setPreview] = useState<any>(null);
 
     const correctProfileHandler = () => {
         setCorrectProfile(true);
