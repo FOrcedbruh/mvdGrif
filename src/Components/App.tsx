@@ -24,7 +24,7 @@ const App: React.FC = () => {
 
     const progress: any = () => {
         const windowScroll: number = window.scrollY;
-        const height: number = 2398;
+        const height: number = 2400;
         setPercent(percent + (windowScroll / height) * 100);
     }
 
@@ -37,8 +37,8 @@ const App: React.FC = () => {
 
     // отображение в header имени и фамилии
 
-    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || 'Ilya');
-    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || 'Chaplya');
+    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
+    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
     
     // состоние для логики рендера профиля
 
@@ -57,21 +57,34 @@ const App: React.FC = () => {
 
     const [preview, setPreview] = useState<any>(null);
 
+    // snackbar 
+
+
+    const [snack, setSnack] = useState<boolean>(false);
+
+    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+
+        setSnack(false);
+    }
+
 
     return (
         <>
-            <StoreContext.Provider value={{first_name, last_name, setFirst_name, setLast_name, showProfile, setShowProfile, preview, setPreview}}>
+            <StoreContext.Provider value={{first_name, last_name, setFirst_name, setLast_name, showProfile, setShowProfile, preview, setPreview, snack, setSnack, handleClose}}>
                 <section className="wrapper">
                     <div className='progressBar' style={{width: `${percent}%`}}></div>
                             <Routes>
                                 <Route  path="/" element={<Layout />}>
-                                    <Route path='/Тесты' element={<TestCategories />}/>
                                     <Route path="/" index element={<Home />}/>
                                 </Route>
                                 <Route path="/Профиль" element={showProfile ? <Profile /> : <Login/>} />
                                 <Route path='/Войти' element={<Login showProfile={showProfile} setShowProfile={setShowProfile}/>}/>
                                 <Route path='/Регистрация' element={<Register />}/>
                                 <Route path="Тесты/:title" element={<Quiz />}/>
+                                <Route path='/Тесты' element={<TestCategories />}/>
                             </Routes>
                         <TopButton />
                 </section>

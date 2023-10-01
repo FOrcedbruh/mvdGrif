@@ -16,6 +16,7 @@ import { StoreContext } from '../../contexts/storeContext';
 
 
 
+
 const Profile: React.FC = () => {
 
     
@@ -81,9 +82,24 @@ const Profile: React.FC = () => {
     }
 
 
+    interface newsType {
+        title: string,
+        id: number
+    }
 
-    const news: Array<string> = [
-        'Придумали, как сделать лампы накаливания более энергоэффективными и долговечными', 'В России разработали систему для настройки оптимальной работы головного мозга', 'Проблема процессоров Intel'
+    const news: Array<newsType> = [
+        {
+            title:'Придумали, как сделать лампы накаливания более энергоэффективными и долговечными',
+             id: 1
+        },
+         {
+            title:  'В России разработали систему для настройки оптимальной работы головного мозга',
+            id: 2
+        },
+          {
+            title: 'Проблема процессоров Intel',
+            id: 3
+        }
     ];
 
 
@@ -134,8 +150,8 @@ return (
                     </article>
                     <img src={newsLine}/>
                     <div className={style.newItems}>
-                        {news.map(item => {return (<div className={style.newItem}>
-                            {item}
+                        {news.map(item => {return (<div className={style.newItem} key={item.id}>
+                            {item.title}
                         </div>)})}
                     </div>
                 </div>

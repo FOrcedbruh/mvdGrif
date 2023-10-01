@@ -1,7 +1,12 @@
 import style from './../../styles/ComponentStyles/TestCategories.module.css';
 import grif from './../../images/testGrif.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Test from '../../types/Test';
+import { Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+
+
 
 interface Category {
     category: string;
@@ -25,13 +30,18 @@ const TestItem: React.FC<Category> = ({category}) => {
 
 const TestCategories: React.FC = () => {
 
-    const categories: Array<string> = ['web', 'crypto', 'forensic', 'osint']
+    const categories: Array<string> = ['web', 'crypto', 'forensic', 'osint'];
+
+    const navigate = useNavigate();
+
+    const goBack = () => navigate(-1);
 
 
     return (
         <section className={`${style.window} testCategoryWindow`}>
+            <Button variant='text' color='secondary' onClick={goBack} className={style.backBtn}><ArrowBackIcon />  Назад</Button>
+            <h1 className={style.title}>Тесты</h1>
             <div className={style.tests}>
-                <h1>Тесты</h1>
                 {categories.map(category => {
                     return (<TestItem category={category}/>)
                 })}

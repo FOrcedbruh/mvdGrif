@@ -4,6 +4,13 @@
     margin: 0;
     padding: 0;
 }
+::selection {
+    background-color: #50238c8f;
+    color: #fff;
+}
+::placeholder {
+    color: var(--placeholderColor);
+}
 :root {
     --background-size: 100vh;
     --textColor: #000;
@@ -15,6 +22,7 @@
     --borderBottom: #fff;
     --WelcomeShadow: 5px 5px 20px #857694;
     --scrollbarColor: #fff;
+    --placeholderColor: #2c2c2c;
 }
 body {
     margin: 0;
@@ -73,6 +81,7 @@ html[data-theme = 'light'] {
     --borderBottom: #fff;
     --WelcomeShadow: 5px 5px 20px #857694;
     --scrollbarColor: #fff;
+    --placeholderColor: #2c2c2c;
 }
 html[data-theme = 'dark'] {
     --textColor: #fff;
@@ -83,6 +92,7 @@ html[data-theme = 'dark'] {
     --borderBottom: #8437c2;
     --WelcomeShadow: 5px 5px 20px #331c4b;
     --scrollbarColor: #000;
+    --placeholderColor: #9e9e9e;
 }
 .topBtn {
     background-color: #331C41;
@@ -114,6 +124,9 @@ html[data-theme = 'dark'] {
 }
 .testCategoryWindow {
     background-color: var(--Color);
+}
+.testCategoryWindow h1 {
+    color: var(--textColor);
 }
 .quizWindow {
     background: var(--main-backColor);

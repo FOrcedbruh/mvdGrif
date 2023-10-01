@@ -1,5 +1,5 @@
 import style from './../../styles/ComponentStyles/Register.module.css'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { Link } from 'react-router-dom';
@@ -8,11 +8,17 @@ import LoginType from '../../types/LoginType';
 import mainGrif from './../../images/main-grif.svg';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Snackbar from '@mui/material/Snackbar';
+import { StoreContext } from '../../contexts/storeContext';
+import Alert from '@mui/material/Alert';
 
 
 
 
 const Login: React.FC<LoginType> = () => {
+
+
+    const { snack, handleClose } = useContext(StoreContext);
 
     const [usernameDirty, setUsernameDirty] = useState<boolean>(false);
     const [username, setUsername] = useState<string>('');
@@ -64,12 +70,13 @@ const Login: React.FC<LoginType> = () => {
 
     const loginHandler = () => {
         authAPI.login(username, password).then(data => {console.log(data)});
+        window.location.reload();
     }
 
 
     return (
         <>
-        <img src={mainGrif} className={style.mainGrif}/>
+            <img src={mainGrif} className={style.mainGrif}/>
             <section className={style.aura}>
                 <Button variant='text' color='secondary' className={style.goHomeBtn}><ArrowBackIcon /> <Link to='/'>На главную</Link></Button>
                 <section className={`${style.regWin} regWin`}>
@@ -93,6 +100,15 @@ const Login: React.FC<LoginType> = () => {
                         <Link to='/регистрация'>Зарегистрироваться</Link>
                     </p>
                 </section>
+                <Snackbar 
+                    open={snack}
+                    autoHideDuration={5000}
+                    onClose={handleClose}
+                >
+                    <Alert severity='warning' sx={{width: '100%'}}>
+                        Авторизируйтесь или зарегистрируйтесь для дальнейшей работы
+                    </Alert>
+                </Snackbar>
             </section>
         </>
         

@@ -16,16 +16,23 @@ import Avatar from '@mui/material/Avatar';
 
 
 const Home: React.FC = () => {
+
+    const {showProfile, snack, setSnack} = useContext(StoreContext);
+
+    const snackHandler = () => {
+        setSnack(true)
+    }
+
+    
+
     return (
         <ul className={style.innerUl}>
             <li><Link to='/'>Общая информация</Link></li>
             <li><Link to='/'>Документы</Link></li>
             <li><Link to='/'>График</Link></li>
             <li><Link to='/'>Галерея</Link></li>
-            <li><Link to='/профиль'>Профиль</Link></li>
+            <li onClick={!showProfile ? snackHandler : () => {console.log('profile is showed')}}><Link to='/профиль'>Профиль</Link></li>
             <li><Link to='/'>Контакты</Link></li>
-            
-
         </ul>
     )
 }
@@ -107,7 +114,6 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                     <Link to='войти'>Войти</Link>
                     <Link to='регистрация'><span>Регистрация</span></Link>
                 </div>}
-                
             </header>
             <main className='container'>
                 <Outlet />
