@@ -81,7 +81,7 @@ const Login: React.FC<LoginType> = () => {
                 <Button variant='text' color='secondary' className={style.goHomeBtn}><ArrowBackIcon /> <Link to='/'>На главную</Link></Button>
                 <section className={`${style.regWin} regWin`}>
                     <form name='login'>
-                        <h1>Войти</h1>
+                        <h1>Авторизация</h1>
                         <div className={style.logDiv}>
                             <label htmlFor="username">Username</label>
                             <input type="text" name='username' placeholder='Username...' onChange={e => {usernameHandler(e)}}/>

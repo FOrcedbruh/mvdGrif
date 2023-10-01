@@ -137,6 +137,10 @@ html[data-theme = 'dark'] {
 .profile {
     color: var(--textColor);
 }
+.textReader {
+    background-color: var(--Color);
+    color: var(--textColor);
+}
 
 
 @media  only screen and (max-width: 800px) {
