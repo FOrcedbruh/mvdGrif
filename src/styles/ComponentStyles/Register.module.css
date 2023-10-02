@@ -149,7 +149,7 @@ a {
     align-items: center;
     align-self: start;
     font-size: 12px;
-    transform: translateX(-80vh);
+    transform: translateX(-500%);
 }
 .checkboxies {
     display: flex;

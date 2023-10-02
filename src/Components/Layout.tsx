@@ -191,6 +191,9 @@ const LayoutMobile: React.FC = () => {
                             </li>
                         </ul>
                     </nav>}
+                    <main className='container'>
+                <Outlet />
+            </main>
         </>
     )
 }

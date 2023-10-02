@@ -1,5 +1,5 @@
 import style from './../../styles/ComponentStyles/Register.module.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { Link } from 'react-router-dom';
@@ -40,7 +40,10 @@ const Register: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMatch, setPasswordMatch] = useState<boolean>(false);
     const [passwordMatchError, setPasswordMatchError] = useState<string>('Пароли не совпадают!');
+    const [inputError, setInputError] = useState<string>('Это поле обязательно к заполнению!');
+    const [inputDirty, setInputDirty] = useState<boolean>(false);
     const [formValid, setFormValid] = useState<boolean>(false);
+
 
 
     // согласия
@@ -52,15 +55,12 @@ const Register: React.FC = () => {
 
     const handlerCheck_1 = () => {
         setCheck_1(!check_1)
-        setFormValid(!formValid)
     }
     const handlerCheck_2 = () => {
         setCheck_2(!check_2)
-        setFormValid(!formValid)
     }
     const handlerCheck_3 = () => {
         setCheck_3(!check_3)
-        setFormValid(!formValid)
     }
 
     const [eye, setEye] = useState(true);
@@ -80,6 +80,12 @@ const Register: React.FC = () => {
 
     const schoolHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSchool(e.target.value);
+        if (e.target.value) {
+            setInputError('')
+        }
+        else {
+            setInputError('Это поле обязательно к заполнению!')
+        }
     }
 
 
@@ -91,28 +97,48 @@ const Register: React.FC = () => {
         }
         else {
             setEmailError('');
-            setFormValid(true);
         }
     }
 
     const regionHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setRegion(e.target.value);
+        if (e.target.value) {
+            setInputError('')
+        }
+        else {
+            setInputError('Это поле обязательно к заполнению!')
+        }
     }
 
     const cityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCity(e.target.value);
+        if (e.target.value) {
+            setInputError('')
+        }
+        else {
+            setInputError('Это поле обязательно к заполнению!')
+        }
     }
 
     const snilsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         var snilsValue: string = e.target.value;
         setSnils(snilsValue);
-        if (snilsValue.length === 3) {
-            snilsValue += '-';
+        if (snilsValue) {
+            setInputError('')
+        }
+        else {
+            setInputError('Это поле обязательно к заполнению!')
         }
     }
 
     const phoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPhone(e.target.value);
+        if (e.target.value) {
+            setInputError('')
+        }
+        else {
+            setInputError('Это поле обязательно к заполнению!')
+        }
     }
 
     const fnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,7 +146,6 @@ const Register: React.FC = () => {
         if (e.target.value.length > 0) {
             setNameDirty(true);
             setNameError('');
-            setFormValid(true);
         }
         if (!e.target.value) {
             setNameError('Имя не может быть пустой!');
@@ -132,7 +157,6 @@ const Register: React.FC = () => {
         if (e.target.value.length > 0) {
             setNameDirty(true);
             setNameError('');
-            setFormValid(true);
         }
         if (!e.target.value) {
             setNameError('Имя не может быть пустым!');
@@ -159,11 +183,9 @@ const Register: React.FC = () => {
         if (e.target.value === password) {
             setPasswordMatch(true);
             setPasswordMatchError('');
-            setFormValid(true);
         }
         else {
             setPasswordMatchError('Пароли не совпадают');
-            setFormValid(false);
         }
         
     }
@@ -185,11 +207,32 @@ const Register: React.FC = () => {
                 // @ts-ignore
             case 'username': 
                 setUsernameDirty(true);
+                // @ts-ignore
             case 'ConfirmPassword':
                 setPasswordMatch(true);
+                // @ts-ignore
+            case 'phone':
+                setInputDirty(true);
+                // @ts-ignore
+            case 'region':
+                setInputDirty(true);
+                // @ts-ignore
+            case 'school':
+                setInputDirty(true);
+            case 'city':
+                setInputDirty(true);
             break;
         }
     }
+
+    useEffect(() => {
+        if (passwordError || emailError || nameError || passwordMatchError || usernameError) {
+            setFormValid(false);
+        }
+        else {
+            setFormValid(true);
+        }
+    }, [passwordError, emailError, nameError, passwordMatchError, usernameError])
 
 
     
@@ -284,7 +327,8 @@ const Register: React.FC = () => {
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="school">Наименование учебного заведения</label>
-                                    <input type="text" value={school} name='school' onChange={e => {schoolHandle(e)}} placeholder='Ваше учебное заведение...'/>
+                                    <input type="text" value={school} name='school' onChange={e => {schoolHandle(e)}} placeholder='Ваше учебное заведение...' onBlur={e => blurHandler(e)}/>
+                                    {(inputError && inputDirty) && <section className={style.error}>{inputError}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="password">Придумайте пароль</label>
@@ -303,7 +347,8 @@ const Register: React.FC = () => {
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="phone">Номер телефона</label>
-                                    <input type="tel" name='phone' value={phone} placeholder='Ваш телефон...' onChange={e => phoneHandler(e)}/>
+                                    <input type="tel" name='phone' value={phone} placeholder='Ваш телефон...' onChange={e => phoneHandler(e)} onBlur={e => blurHandler(e)}/>
+                                    {(inputError && inputDirty) && <section className={style.error}>{inputError}</section>}
                                 </div>
                             </section>
                     </section>
