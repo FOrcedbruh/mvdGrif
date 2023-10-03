@@ -10,7 +10,7 @@ import TopButton from "./TopButton";
 import Profile from "./Pages/Profile";
 import { StoreContext } from "../contexts/storeContext";
 import TextReader from "./Pages/TextReader";
-
+import InstructionPage from "./Pages/InstructionPage";
 
 
 
@@ -80,8 +80,9 @@ const App: React.FC = () => {
                             <Routes>
                                 <Route  path="/" element={<Layout />}>
                                     <Route path="/" index element={<Home />}/>
+                                    <Route path="/Инструкция к олимпиаде" element={<InstructionPage />}/>
                                 </Route>
-                                <Route path="PDFReader" element={<TextReader />}/>
+                                <Route path="/PDFReader" element={<TextReader />}/>
                                 <Route path="/Профиль" element={showProfile ? <Profile /> : <Login/>} />
                                 <Route path='/Войти' element={<Login showProfile={showProfile} setShowProfile={setShowProfile}/>}/>
                                 <Route path='/Регистрация' element={<Register />}/>

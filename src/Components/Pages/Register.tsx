@@ -10,6 +10,10 @@ import Checkbox from '@mui/material/Checkbox';
 import mainGrif from './../../images/main-grif.svg';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { State } from 'react-phone-number-input';
+import { Statement } from 'typescript';
 
 
 const Register: React.FC = () => {
@@ -226,13 +230,13 @@ const Register: React.FC = () => {
     }
 
     useEffect(() => {
-        if (passwordError || emailError || nameError || passwordMatchError || usernameError) {
+        if ((passwordError || emailError || nameError || passwordMatchError || usernameError) && (check_1===false || check_2===false || check_3===false)) {
             setFormValid(false);
         }
         else {
             setFormValid(true);
         }
-    }, [passwordError, emailError, nameError, passwordMatchError, usernameError])
+    }, [passwordError, emailError, nameError, passwordMatchError, usernameError, check_1, check_2, check_3])
 
 
     
@@ -249,12 +253,26 @@ const Register: React.FC = () => {
     }
 
 
+    const [succesBar, setSuccesBar] = useState<boolean>(false)
+        
 
+
+    const handleSuccessBar = () => {
+        setSuccesBar(true);
+    }
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setSuccesBar(false);
+      };
 
     // отправка данных на сервер
 
       const handleRegister = () => {
         authAPI.create(username, first_name, last_name, email, region, city, password).then(data => {console.log(data)});
+       
       }
 
 
@@ -262,6 +280,7 @@ const Register: React.FC = () => {
         <>
         <img src={mainGrif} className={style.mainGrif}/>
         <section className={style.aura}>
+        
             <Button variant='text' color='secondary' className={style.goHomeBtn}><ArrowBackIcon /> <Link to='/'>На главную</Link></Button>
             <section className={`${style.regWin} regWin`}>
                 <form name='register'>
@@ -357,10 +376,18 @@ const Register: React.FC = () => {
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_2} onClick={handlerCheck_2}/><p>Cогласен получать информацию об этапах олимпиады, публикации заданий и результатов на e-mail.</p></div>
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_3} onClick={handlerCheck_3}/><p>Даю <Link to='/PDFReader'>согласие</Link> на обработку персональных данных.</p></div>
                     </section>
-                    <button form='register' type='submit' className={style.regBtn} disabled={!formValid} onClick={handleRegister}>Зарегистрироваться</button>
+                    <button form='register' type='submit' className={style.regBtn} disabled={!formValid}  onClick={handleRegister} onMouseDown={handleSuccessBar}>Зарегистрироваться</button>
+                    
+                    
                 </form>
                 <p>У вас уже есть аккаунт?<Link to='/войти'>Войти</Link></p>
+                
             </section>
+            <Snackbar open={succesBar} autoHideDuration={4000} onClose={handleClose}>
+                <MuiAlert severity='success'>
+                    Ваши данные отправлены, регистрация завершена!
+                </MuiAlert>
+            </Snackbar>
         </section>
         </>
         

@@ -1,9 +1,17 @@
+
+@media only screen and (max-width: 776px) {
+    .regWin {
+        width: 100%;
+    }
+}
+
 .aura {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: start;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     background-color: transparent;
     backdrop-filter: blur(20px);
     z-index: 3;
@@ -149,7 +157,6 @@ a {
     align-items: center;
     align-self: start;
     font-size: 12px;
-    transform: translateX(-500%);
 }
 .checkboxies {
     display: flex;

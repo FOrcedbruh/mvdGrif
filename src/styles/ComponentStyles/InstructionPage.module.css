@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+.window {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.stepper {
+    padding-top: 10vh;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: blueviolet;
+}
