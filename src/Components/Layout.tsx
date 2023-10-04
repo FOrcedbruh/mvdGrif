@@ -12,6 +12,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { StoreContext } from '../contexts/storeContext';
 import { useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
+import { Suspense } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Tooltip from '@mui/material/Tooltip';
+import FooterGerb from './../images/FooterGerb.svg';
+
 
 
 
@@ -28,11 +33,10 @@ const Home: React.FC = () => {
     return (
         <ul className={style.innerUl}>
             <li><Link to='/'>Общая информация</Link></li>
-            <li><Link to='/'>Документы</Link></li>
+            <li><Link to='/документы'>Документы</Link></li>
             <li><Link to='/'>График</Link></li>
             <li><Link to='/'>Галерея</Link></li>
             <li onClick={!showProfile ? snackHandler : () => {console.log('profile is showed')}}><Link to='/профиль'>Профиль</Link></li>
-            <li><Link to='/'>Контакты</Link></li>
         </ul>
     )
 }
@@ -104,10 +108,10 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                         </li>
                     </ul>
                 </nav>
-                <ThemeThumb />
+                    <ThemeThumb />
                 {showProfile ?
                     <div className={style.profileInf}>
-                        <NavLink to='/профиль' className={style.profileLink}>{first_name} {last_name}</NavLink> <Avatar src={preview}/>
+                        <Tooltip title='Перейти к профилю'><NavLink to='/профиль' className={style.profileLink}>{first_name} {last_name}</NavLink></Tooltip> <Avatar src={preview}/>
                     </div>
                  : 
                 <div className={style.profile}>
@@ -116,8 +120,27 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                 </div>}
             </header>
             <main className='container'>
-                <Outlet />
+                <Suspense fallback={<CircularProgress />}>
+                    <Outlet />
+                </Suspense>
             </main>
+            <section className={style.footerAura}>
+                <footer className={style.footer}>
+                    <img src={FooterGerb}/>
+                    <ul>
+                        <li><h4>Документы</h4></li>
+                        <li><Link to='/PDFReader'>Согласие на обработку персональных данных</Link></li>
+                        <li><Link to='/PDFReader'>Положение</Link></li>
+                        <li><Link to='/PDFReader'>Регламент</Link></li>
+                    </ul>
+                    <ul>
+                        <li><h4>Контакты</h4></li>
+                        <li>Почта: <a href="mailto: olimpiada.mosu@mail.ru">olimpiada.mosu@mail.ru</a></li>
+                        <li></li>
+                    </ul>
+                </footer>
+            </section>
+            
         </>
     )
 }
@@ -192,8 +215,27 @@ const LayoutMobile: React.FC = () => {
                         </ul>
                     </nav>}
                     <main className='container'>
-                <Outlet />
+                    <Suspense fallback={<CircularProgress />}>
+                        <Outlet />
+                    </Suspense>
+                
             </main>
+            <section className={style.footerAura}>
+                <footer className={style.footer}>
+                    <img src={FooterGerb}/>
+                    <ul>
+                        <li><h4>Документы</h4></li>
+                        <li><Link to='/PDFReader'>Согласие на обработку персональных данных</Link></li>
+                        <li><Link to='/PDFReader'>Положение</Link></li>
+                        <li><Link to='/PDFReader'>Регламент</Link></li>
+                    </ul>
+                    <ul>
+                        <li><h4>Контакты</h4></li>
+                        <li>Почта: <a href="mailto: olimpiada.mosu@mail.ru">olimpiada.mosu@mail.ru</a></li>
+                        <li></li>
+                    </ul>
+                </footer>
+            </section>
         </>
     )
 }

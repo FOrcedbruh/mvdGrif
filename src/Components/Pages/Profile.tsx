@@ -11,7 +11,7 @@ import AddingAvatar from '../AddingAvatar';
 import Avatar from '@mui/material/Avatar';
 import { useContext } from 'react';
 import { StoreContext } from '../../contexts/storeContext';
-
+import Tooltip from '@mui/material/Tooltip';
 
 
 
@@ -114,7 +114,7 @@ return (
                 <div className={style.userData}>
                     <h2> <span>Личные</span> данные</h2>
                     <div className={style.avatar}>
-                    <Avatar src={preview} />  {correctProfile && <Fab style={{'width': 40, 'height': 30}} onClick={renderChoosePhotoHandler}><AddIcon /></Fab>}
+                    <Avatar src={preview} />  {correctProfile && <Tooltip followCursor title='Сменить аватар'><Fab style={{'width': 40, 'height': 30}} onClick={renderChoosePhotoHandler}><AddIcon /></Fab></Tooltip>}
                     </div>
                     <ul>
                         <li> <p>Имя:  {first_name  ? <span>{first_name}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>

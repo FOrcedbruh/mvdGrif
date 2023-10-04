@@ -95,7 +95,6 @@
     padding: 10%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-
 }
 .mobileNav  ul {
     gap: 30px;
@@ -118,6 +117,7 @@
 }
 .profileInf a {
     transition: transform .3s ease;
+    text-decoration: none;
 }
 .profileInf a:hover {
     transform: scale(1.2);
@@ -125,4 +125,34 @@
 .profileLink {
     padding-right: 4%;
     color: #fff;
+}
+.footerAura {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.footer {
+    user-select: none;
+    width: 100%;
+    height: 30vh;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 4;
+}
+.footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.footer ul a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #8437c2;
 }

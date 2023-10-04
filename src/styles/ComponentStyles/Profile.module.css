@@ -107,7 +107,6 @@ h2 {
 }
 
 .backBtn {
-    position: absolute;
     align-self: start;
     transform: translateX(40px);
     font-size: 12px;

@@ -12,8 +12,6 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import { State } from 'react-phone-number-input';
-import { Statement } from 'typescript';
 
 
 const Register: React.FC = () => {
@@ -27,14 +25,16 @@ const Register: React.FC = () => {
     const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
     const [emailError, setEmailError] = useState<string>('Email не может быть пустым!');
     const [passwordError, setPasswordError] = useState<string>('Пароль не может быть пустым!');
-    const [clas, setClas] = useState<string>('');
+    const [clas, setClas] = useState<string>('9');
+    const [course, setCourse] = useState<string>('2');
+    const [schoolCategory, setSchoolCategory] = useState<string>('Школа');
     const [snils, setSnils] = useState<string>('');
-    const [phone, setPhone] = useState<string | undefined>('');
+    const [phone, setPhone] = useState('');
     const [nameError, setNameError] = useState<string>('Имя не может быть пустым!');
     const [nameDirty, setNameDirty] = useState<boolean>(false);
     const [usernameDirty, setUsernameDirty] = useState<boolean>(false);
     const [username, setUsername] = useState<string>('');
-    const [gender, setGender] = useState<string>('');
+    const [gender, setGender] = useState<string>('Мужской');
     const [usernameError, setUsernameError] = useState<string>('Username не может быть пустым!');
     const [region, setRegion] = useState<string>('');
     const [city, setCity] = useState<string>('');
@@ -92,6 +92,8 @@ const Register: React.FC = () => {
         }
     }
 
+    
+
 
     const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -137,12 +139,6 @@ const Register: React.FC = () => {
 
     const phoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPhone(e.target.value);
-        if (e.target.value) {
-            setInputError('')
-        }
-        else {
-            setInputError('Это поле обязательно к заполнению!')
-        }
     }
 
     const fnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -246,10 +242,17 @@ const Register: React.FC = () => {
         setClas(e.target.value as string)
     }
 
+    const handleCourse = (e: SelectChangeEvent) => {
+        setCourse(e.target.value as string);
+    }
     
 
     const handleGender = (e: SelectChangeEvent) => {
         setGender(e.target.value as string);
+    }
+
+    const handleSchoolCategory = (e: SelectChangeEvent) => {
+        setSchoolCategory(e.target.value as string);
     }
 
 
@@ -287,6 +290,7 @@ const Register: React.FC = () => {
                     <h1>Регистрация</h1>
                     <section className={style.inputWindows}>
                             <section className={style.inputs}>
+                                <h4>Информация о себе</h4>
                                 <div className={style.regDiv}>
                                     <label htmlFor="firts_name">Имя</label>
                                     <input type="text" placeholder='Иван...' name='firts_name' value={first_name} onChange={e => {fnameHandler(e)}} onBlur={e => {blurHandler(e)}}/>
@@ -308,29 +312,47 @@ const Register: React.FC = () => {
                                     {(emailDirty && emailError) && <section className={style.error}>{emailError}</section>}
                                 </div>
                                 <div className={style.regDiv}>
-                                    <label htmlFor="region">Регион</label>
-                                    <input type="text" name='region' value={region} placeholder='Ваш Регион...' onChange={e => {regionHandler(e)}}/>
+                                    <label htmlFor="phone">Номер телефона</label>
+                                    <input type="tel" name='phone' value={phone} placeholder='Ваш телефон...' onChange={e => phoneHandler(e)} onBlur={e => blurHandler(e)}/>
+                                    {(inputError && inputDirty) && <section className={style.error}>{inputError}</section>}
                                 </div>
+                                
                                 <div className={style.regDiv}>
                                     <label htmlFor="city">Населенный пункт</label>
                                     <input type="text" name='city' value={city} placeholder='Ваш Город...' onChange={e => {cityHandler(e)}}/>
                                 </div>
                                 <div className={style.regDiv}>
-                                    <label htmlFor="snils">Ваш СНИЛС</label>
+                                    <label htmlFor="snils">СНИЛС</label>
                                     <input type="number" name='snils' placeholder='xxx-xxx-xxx yy' value={snils} onChange={e => snilsHandler(e)}/>
                                 </div>
-                            </section>
-                            <section className={style.inputs}>
+                                <div className={style.regDiv}>
+                                    <label htmlFor="date">Дата рождения</label>
+                                    <input type="date" placeholder='Дата рождения'/>
+                                </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="gender">Пол</label>
-                                    <Select label="Ваш пол" color='secondary' value={gender} onChange={handleGender} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
+                                    <Select  color='secondary' value={gender} onChange={handleGender} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                         <MenuItem value={"Мужской"}>Мужской</MenuItem>
                                         <MenuItem value={"Женский"}>Женский</MenuItem>
                                     </Select>
                                 </div>
+                            </section>
+                            <section className={style.inputs}>
+                                <h4>Информация об образовательной огранизации</h4>
                                 <div className={style.regDiv}>
+                                    <label htmlFor="region">Регион</label>
+                                    <input type="text" name='region' value={region} placeholder='Ваш Регион...' onChange={e => {regionHandler(e)}}/>
+                                </div>
+                                <div className={style.regDiv}>
+                                    <label htmlFor="SchoolOrCollege">Школа/Колледж</label>
+                                    <Select value={schoolCategory} style={{width: 200}} color='secondary' onChange={handleSchoolCategory}>
+                                        <MenuItem value={"Школа"}>Школа</MenuItem>
+                                        <MenuItem value={"Колледж/Техникум"}>Колледж/Техникум</MenuItem>
+                                    </Select>
+                                </div>
+                                {schoolCategory==='Школа' ? <div className={style.regDiv}>
                                     <label htmlFor="class">Класс обучения</label>
-                                    <Select label="Ваш класс" color='secondary' value={clas} onChange={handleClass} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
+                                    <Select  color='secondary' value={clas} onChange={handleClass} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                         <MenuItem value={1}>1</MenuItem>
                                         <MenuItem value={2}>2</MenuItem>
                                         <MenuItem value={3}>3</MenuItem>
@@ -343,7 +365,17 @@ const Register: React.FC = () => {
                                         <MenuItem value={10}>10</MenuItem>
                                         <MenuItem value={11}>11</MenuItem>
                                     </Select>
-                                </div>
+                                </div> : <div className={style.regDiv}>
+                                        <label htmlFor="course">Курс обучения</label>
+                                        <Select value={course} style={{width: 100}} onChange={handleCourse} color='secondary'>
+                                            <MenuItem value={1}>1</MenuItem>
+                                            <MenuItem value={2}>2</MenuItem>
+                                            <MenuItem value={3}>3</MenuItem>
+                                            <MenuItem value={4}>4</MenuItem>
+                                        </Select>
+                                    </div>}
+                                
+                                
                                 <div className={style.regDiv}>
                                     <label htmlFor="school">Наименование учебного заведения</label>
                                     <input type="text" value={school} name='school' onChange={e => {schoolHandle(e)}} placeholder='Ваше учебное заведение...' onBlur={e => blurHandler(e)}/>
@@ -359,15 +391,6 @@ const Register: React.FC = () => {
                                     <label htmlFor="ConfirmPassword">Подтвердите пароль</label>
                                     <input type="password" name='ConfirmPassword' value={confirmPassword} onBlur={e => blurHandler(e)} onChange={e => {confirmPasswordHandler(e)}} placeholder='Ваш пароль...'/>
                                     {(passwordMatchError && passwordMatch) && <section className={style.error}>{passwordMatchError}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="date">Дата рождения</label>
-                                    <input type="date" placeholder='Дата рождения'/>
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="phone">Номер телефона</label>
-                                    <input type="tel" name='phone' value={phone} placeholder='Ваш телефон...' onChange={e => phoneHandler(e)} onBlur={e => blurHandler(e)}/>
-                                    {(inputError && inputDirty) && <section className={style.error}>{inputError}</section>}
                                 </div>
                             </section>
                     </section>

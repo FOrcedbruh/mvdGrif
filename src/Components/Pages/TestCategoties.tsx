@@ -55,4 +55,4 @@ const TestCategories: React.FC = () => {
 
 
 
-export {TestCategories};
+export default TestCategories;

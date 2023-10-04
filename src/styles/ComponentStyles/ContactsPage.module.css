@@ -1,0 +1,27 @@
+
+.window {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+.window div.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    width: fit-content;
+    height: fit-content;
+    max-width: 50%;
+}
+.window div.contact p {
+    font-size: 24px;
+    font-weight: 500;
+}
+.window div.contact p a {
+    font-style: italic;
+    color: blueviolet;
+    text-decoration: none;
+}

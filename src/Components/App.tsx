@@ -1,17 +1,21 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./Layout";
-import Register from "./Pages/Register";
-import Login from "./Pages/Login";
-import { TestCategories }from "./Pages/TestCategoties";
-import Quiz from "./Quiz";
-import Home from "./Pages/Home";
 import { useState, useEffect } from "react";
-import TopButton from "./TopButton";
-import Profile from "./Pages/Profile";
 import { StoreContext } from "../contexts/storeContext";
-import TextReader from "./Pages/TextReader";
-import InstructionPage from "./Pages/InstructionPage";
+import TopButton from "./TopButton";
+import Layout from "./Layout";
+import CircularProgress from '@mui/material/CircularProgress';
 
+const Register = lazy(() => import("./Pages/Register"));
+const Login = lazy(() => import("./Pages/Login"));
+const TestCategories = lazy(() => import("./Pages/TestCategoties"));
+const Quiz = lazy(() => import("./Quiz"));
+const Home = lazy(() => import("./Pages/Home"));
+const Profile = lazy(() => import("./Pages/Profile"));
+const TextReader = lazy(() => import("./Pages/TextReader"));
+const InstructionPage = lazy(() => import("./Pages/InstructionPage"));
+const ContactsPage = lazy(() => import("./Pages/ContactsPage"));
+const DocumentsPage = lazy(() => import("./Pages/DocumentsPage"));
 
 
 
@@ -81,13 +85,15 @@ const App: React.FC = () => {
                                 <Route  path="/" element={<Layout />}>
                                     <Route path="/" index element={<Home />}/>
                                     <Route path="/Инструкция к олимпиаде" element={<InstructionPage />}/>
+                                    <Route path="/Поддержка" element={<Suspense fallback={<CircularProgress color="secondary"/>}><ContactsPage /></Suspense>}/>
+                                    <Route path="/Документы" element={<Suspense fallback={<CircularProgress color="secondary"/>}><DocumentsPage /></Suspense>}/>
                                 </Route>
-                                <Route path="/PDFReader" element={<TextReader />}/>
-                                <Route path="/Профиль" element={showProfile ? <Profile /> : <Login/>} />
-                                <Route path='/Войти' element={<Login showProfile={showProfile} setShowProfile={setShowProfile}/>}/>
-                                <Route path='/Регистрация' element={<Register />}/>
-                                <Route path="Тесты/:title" element={<Quiz />}/>
-                                <Route path='/Тесты' element={<TestCategories />}/>
+                                <Route path="/PDFReader" element={<Suspense fallback={<CircularProgress color="secondary"/>}><TextReader /></Suspense>}/>
+                                <Route path="/Профиль" element={showProfile ? <Suspense fallback={<CircularProgress color="secondary"/>}><Profile /></Suspense> : <Suspense fallback={<CircularProgress color="secondary"/>}><Login/></Suspense>} />
+                                <Route path='/Войти' element={<Suspense fallback={<CircularProgress color="secondary"/>}><Login showProfile={showProfile} setShowProfile={setShowProfile}/></Suspense>}/>
+                                <Route path='/Регистрация' element={<Suspense fallback={<CircularProgress color="secondary"/>}><Register /></Suspense>}/>
+                                <Route path="Тесты/:title" element={<Suspense fallback={<CircularProgress color="secondary"/>}><Quiz /></Suspense>}/>
+                                <Route path='/Тесты' element={<Suspense fallback={<CircularProgress color="secondary"/>}><TestCategories /></Suspense>}/>
                             </Routes>
                         <TopButton />
                 </section>

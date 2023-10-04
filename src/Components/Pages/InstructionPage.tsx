@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import style from './../../styles/ComponentStyles/InstructionPage.module.css';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
@@ -8,6 +8,15 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+import  Alert  from '@mui/material/Alert';
+import { StoreContext } from '../../contexts/storeContext';
+import Tooltip from '@mui/material/Tooltip';
+
+
+interface State extends SnackbarOrigin {
+    open: boolean,
+}
 
 
 
@@ -60,6 +69,23 @@ const InstructionPage: React.FC = () => {
         setActiveStep(0);
     };
 
+
+
+    // snackBar logics
+
+    const {showProfile} = useContext(StoreContext);
+
+
+    const [SnackOpen, setSnackOpen] = useState<boolean>(false);
+
+    const handleClick = () => {
+        setSnackOpen(true);
+    }
+
+    const handleClose = () => {
+        setSnackOpen(false)
+    }
+
     return (
         <section className={style.window}>
             <div className={style.stepper}>
@@ -85,19 +111,19 @@ const InstructionPage: React.FC = () => {
                                 );
                                 })}
                             </Stepper>
-                            {activeStep === steps.length - 3 && <Typography fontSize={20} mt={'40px'}>Создайте аккаунт, если у вас его еще нет, иначе войдите в уже имеющийся.</Typography>}
-                            {activeStep === steps.length - 2 && <Typography fontSize={20} mt={'40px'}>Ознакомьтесь с регламентом, <Link to='/PDFReader' style={{'textDecoration': 'underline'}}>согласием</Link> на обработку персональных данных и правилами проведения онлайн олимпиады.</Typography>}
-                            {activeStep === steps.length - 1 && <Typography fontSize={20} mt={'40px'}>Вы готовы учавствовать в олимпиаде и получать наивысшие баллы! Вперед к победам!!!</Typography>}
+                            {activeStep === steps.length - 3 && <div className={style.info}><Typography fontSize={20} >Создайте {showProfile ? <a  href='#' onClick={handleClick}>аккаунт</a> : <Tooltip title='Перейти к регистрации'><Link to='/регистрация'>аккаунт</Link></Tooltip>}, если у вас его еще нет, иначе войдите в уже имеющийся.</Typography></div>}
+                            {activeStep === steps.length - 2 && <div className={style.info}><Typography fontSize={20} >Ознакомьтесь с регламентом, <Tooltip title='Перейти к документу'><Link to='/PDFReader'>согласием</Link></Tooltip> на обработку персональных данных и правилами проведения онлайн олимпиады.</Typography></div>}
+                            {activeStep === steps.length - 1 && <div className={style.info}><Typography fontSize={20} >Вы готовы учавствовать в олимпиаде и получать наивысшие баллы! Вперед к победам!!!</Typography></div>}
 
                             
                             {activeStep === steps.length ? (
                                 <React.Fragment>
-                                <Typography sx={{ mt: 2, mb: 1 }} component='p'>
+                                <div className={style.info}><Typography sx={{ mt: 2, mb: 1 }} component='p' fontSize={30}>
                                    За работу!
-                                </Typography>
+                                </Typography></div>
                                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                     <Box sx={{ flex: '1 1 auto' }} />
-                                    <Button onClick={handleReset} color='secondary' variant='outlined'>Сброс</Button>
+                                    <Button onClick={handleReset} color='secondary' variant='contained'>Сброс</Button>
                                 </Box>
                                 </React.Fragment>
                             ) : (
@@ -109,7 +135,7 @@ const InstructionPage: React.FC = () => {
                                     disabled={activeStep === 0}
                                     onClick={handleBack}
                                     sx={{ mr: 1 }}
-                                    variant='outlined'
+                                    variant='contained'
                                     >
                                     Назад
                                     </Button>
@@ -119,15 +145,19 @@ const InstructionPage: React.FC = () => {
                                         Пропустить
                                     </Button>
                                     )}
-                                    <Button onClick={handleNext} color='secondary' variant='outlined'>
+                                    <Button onClick={handleNext} color='secondary' variant='contained'>
                                     {activeStep === steps.length - 1 ? 'Завершить' : 'Дальше'}
                                     </Button>
                                 </Box>
                                 </React.Fragment>
                             )}
                 </Box>
-            </div>
-                    
+            </div>     
+            <Snackbar open={SnackOpen}  onClose={handleClose} autoHideDuration={4000}>
+                <Alert severity='error'>
+                    Вам не доступна страница регистрации, так как вы уже вошли в аккаунт!
+                </Alert>
+            </Snackbar>
         </section>
     )
 }

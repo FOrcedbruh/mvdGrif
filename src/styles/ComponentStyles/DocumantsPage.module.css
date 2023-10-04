@@ -1,0 +1,39 @@
+.window {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    min-height: 100vh;
+    padding: 100px;
+    gap: 10vh;
+}
+.window h1 {
+    font-size: 38px;
+    align-self: flex-start;
+    font-weight: 800;
+}
+.documents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}
+.accordion {
+    width: 50%;
+}
+.documents ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 80%;
+    gap: 20px;
+}
+.documents ul a {
+    text-decoration: none;
+    color: blueviolet;
+}
