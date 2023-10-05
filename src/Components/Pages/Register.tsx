@@ -40,6 +40,7 @@ const Register: React.FC = () => {
     const [city, setCity] = useState<string>('');
     const [first_name,  setFirst_name] = useState<string>('');
     const [last_name,  setLast_name] = useState<string>('');
+    const [surname, setSurname] = useState<string>('');
     const [school, setSchool] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMatch, setPasswordMatch] = useState<boolean>(false);
@@ -90,6 +91,10 @@ const Register: React.FC = () => {
         else {
             setInputError('Это поле обязательно к заполнению!')
         }
+    }
+
+    const surnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSurname(e.target.value);
     }
 
     
@@ -300,6 +305,10 @@ const Register: React.FC = () => {
                                     <label htmlFor="last_name">Фамилия</label>
                                     <input type="text" placeholder='Иванов...' name='last_name' onChange={e => {lnameHandler(e)}} onBlur={e => {blurHandler(e)}}/>
                                     {(nameDirty && nameError) && <section className={style.error}>{nameError}</section>}
+                                </div>
+                                <div className={style.regDiv}>
+                                    <label htmlFor="surname">Отчество</label>
+                                    <input type="text" placeholder='Ваше отчество...' name='surname' onChange={e => {surnameHandler(e)}} />
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="username">Username</label>

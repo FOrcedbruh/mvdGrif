@@ -12,20 +12,21 @@ import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import  Alert  from '@mui/material/Alert';
 import { StoreContext } from '../../contexts/storeContext';
 import Tooltip from '@mui/material/Tooltip';
+import { useMediaQuery } from 'react-responsive';
+import  Paper  from '@mui/material/Paper';
+import StepContent from '@mui/material/StepContent';
 
 
-interface State extends SnackbarOrigin {
-    open: boolean,
-}
 
 
 
-const steps: Array<string> = ['Знакомство', 'Ваша осведомленность', 'Приступайте к решению тестовых заданий'];
 
 
-const InstructionPage: React.FC = () => {
+const InstructionDesktopPage: React.FC = () => {
 
+    const steps: Array<string> = ['Знакомство', 'Ваша осведомленность', 'Приступайте к решению тестовых заданий'];
 
+    
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set<number>());
 
@@ -159,6 +160,143 @@ const InstructionPage: React.FC = () => {
                 </Alert>
             </Snackbar>
         </section>
+    )
+}
+
+
+
+
+const InstructionMobilePage: React.FC = () => {
+
+
+    const {showProfile} = useContext(StoreContext);
+
+    const [SnackOpen, setSnackOpen] = useState<boolean>(false);
+
+    const handleClick = () => {
+        setSnackOpen(true);
+    }
+
+    const handleClose = () => {
+        setSnackOpen(false)
+    }
+
+    const mobileSteps = [
+        {
+          label: 'Знакомство',
+          description: `For each ad campaign that you create, you can control how much
+                    you're willing to spend on clicks and conversions, which networks
+                    and geographical locations you want your ads to show on, and more.`,
+        },
+        {
+          label: 'Ваша осведомленность',
+          description:
+            'An ad group contains one or more ads which target a shared set of keywords.',
+        },
+        {
+          label: 'Приступайте к решению тестовых заданий',
+          description: `Try out different ad text to see what brings in the most customers,
+                    and learn how to enhance your ads using features like ad extensions.
+                    If you run into any problems with your ads, find out how to tell if
+                    they're running and how to resolve approval issues.`,
+        },
+      ];
+
+    const [activeStep, setActiveStep] = React.useState(0);
+
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const handleReset = () => {
+    setActiveStep(0);
+  };
+
+
+    return (
+        <section className={style.window}>
+            <div className={style.stepper}>
+            <Box sx={{ maxWidth: 400 }}>
+                <Stepper activeStep={activeStep} orientation="vertical">
+                    {mobileSteps.map((step, index) => (
+                    <Step key={step.label}>
+                        <StepLabel
+                        optional={
+                            index === 2 ? (
+                            <Typography variant="caption">Last step</Typography>
+                            ) : null
+                        }
+                        >
+                        {step.label}
+                        </StepLabel>
+                        <StepContent>
+                            <div className={style.mobileInfo}>
+                                {activeStep === mobileSteps.length - 3 && <Typography fontSize={20} >Создайте {showProfile ? <a  href='#' onClick={handleClick}>аккаунт</a> : <Tooltip title='Перейти к регистрации'><Link to='/регистрация'>аккаунт</Link></Tooltip>}, если у вас его еще нет, иначе войдите в уже имеющийся.</Typography>}
+                                {activeStep === mobileSteps.length - 2 && <Typography fontSize={20} >Ознакомьтесь с регламентом, <Tooltip title='Перейти к документу'><Link to='/PDFReader'>согласием</Link></Tooltip> на обработку персональных данных и правилами проведения онлайн олимпиады.</Typography>}
+                                {activeStep === mobileSteps.length - 1 && <Typography fontSize={20} >Вы готовы учавствовать в олимпиаде и получать наивысшие баллы! Вперед к победам!!!</Typography>}
+                            </div>
+                            <Box sx={{ mb: 2 }}>
+                                <div>
+                                <Button
+                                    color='secondary'
+                                    variant="contained"
+                                    onClick={handleNext}
+                                    sx={{ mt: 1, mr: 1 }}
+                                >
+                                    {index === mobileSteps.length - 1 ? 'Finish' : 'Continue'}
+                                </Button>
+                                <Button
+                                color='secondary'
+                                    disabled={index === 0}
+                                    onClick={handleBack}
+                                    sx={{ mt: 1, mr: 1 }}
+                                >
+                                    Back
+                                </Button>
+                                </div>
+                            </Box>
+                        </StepContent>
+                    </Step>
+                    ))}
+                </Stepper>
+                {activeStep === mobileSteps.length && (
+                    <Paper square elevation={8} sx={{ p: 3 }} style={{'backgroundColor': 'black', 'borderRadius': 20}}>
+                    <Typography color={'white'}> За работу!</Typography>
+                    <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }} color='secondary'>
+                        Reset
+                    </Button>
+                    </Paper>
+                )}
+                </Box>
+            </div>
+            <Snackbar open={SnackOpen}  onClose={handleClose} autoHideDuration={4000}>
+                <Alert severity='error'>
+                    Вам не доступна страница регистрации, так как вы уже вошли в аккаунт!
+                </Alert>
+            </Snackbar>
+        </section>
+    )
+}
+
+
+
+
+const InstructionPage: React.FC = () => {
+
+
+    const isMobile = useMediaQuery({
+        query: "(max-width: 800px)"
+      });
+   
+
+    return (
+        <>
+        {isMobile ?<InstructionMobilePage/> : <InstructionDesktopPage />}
+        </>
     )
 }
 

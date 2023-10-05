@@ -43,6 +43,8 @@ const Quiz: React.FC = () => {
     const [correct, setCorrect] = useState<number>(0);
     const question = Web[step];
 
+
+    
     const OnClickVariant = (index: number) => {
         console.log(step, index);
         setStep(step + 1);

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { StoreContext } from "../contexts/storeContext";
 import TopButton from "./TopButton";
 import Layout from "./Layout";
-import CircularProgress from '@mui/material/CircularProgress';
+import { Loader } from "./Loader";
+import { useMediaQuery } from 'react-responsive';
 
 const Register = lazy(() => import("./Pages/Register"));
 const Login = lazy(() => import("./Pages/Login"));
@@ -16,8 +17,8 @@ const TextReader = lazy(() => import("./Pages/TextReader"));
 const InstructionPage = lazy(() => import("./Pages/InstructionPage"));
 const ContactsPage = lazy(() => import("./Pages/ContactsPage"));
 const DocumentsPage = lazy(() => import("./Pages/DocumentsPage"));
-
-
+const OlimpicPreview = lazy(() => import("./Pages/OlimpicPreview"));
+const Olimpics = lazy(() => import("./Pages/Olimpics"));
 
 
 const App: React.FC = () => {
@@ -75,6 +76,20 @@ const App: React.FC = () => {
         setSnack(false);
     }
 
+    // responsive 
+
+    const isDesktop = useMediaQuery({
+        query: "(min-width: 1224px)"
+      });
+     
+      const isTablet = useMediaQuery({
+        query: "(max-width: 1224px) and (min-width: 787px)"
+      });
+     
+      const isMobile = useMediaQuery({
+        query: "(max-width: 786px)"
+      });
+
 
     return (
         <>
@@ -85,17 +100,19 @@ const App: React.FC = () => {
                                 <Route  path="/" element={<Layout />}>
                                     <Route path="/" index element={<Home />}/>
                                     <Route path="/Инструкция к олимпиаде" element={<InstructionPage />}/>
-                                    <Route path="/Поддержка" element={<Suspense fallback={<CircularProgress color="secondary"/>}><ContactsPage /></Suspense>}/>
-                                    <Route path="/Документы" element={<Suspense fallback={<CircularProgress color="secondary"/>}><DocumentsPage /></Suspense>}/>
+                                    <Route path="/Поддержка" element={<Suspense fallback={<Loader />}><ContactsPage /></Suspense>}/>
+                                    <Route path="/Документы" element={<Suspense fallback={<Loader />}><DocumentsPage /></Suspense>}/>
+                                    <Route path="/Олимпиада" element={<Suspense fallback={<Loader />}><OlimpicPreview /></Suspense>}/>
                                 </Route>
-                                <Route path="/PDFReader" element={<Suspense fallback={<CircularProgress color="secondary"/>}><TextReader /></Suspense>}/>
-                                <Route path="/Профиль" element={showProfile ? <Suspense fallback={<CircularProgress color="secondary"/>}><Profile /></Suspense> : <Suspense fallback={<CircularProgress color="secondary"/>}><Login/></Suspense>} />
-                                <Route path='/Войти' element={<Suspense fallback={<CircularProgress color="secondary"/>}><Login showProfile={showProfile} setShowProfile={setShowProfile}/></Suspense>}/>
-                                <Route path='/Регистрация' element={<Suspense fallback={<CircularProgress color="secondary"/>}><Register /></Suspense>}/>
-                                <Route path="Тесты/:title" element={<Suspense fallback={<CircularProgress color="secondary"/>}><Quiz /></Suspense>}/>
-                                <Route path='/Тесты' element={<Suspense fallback={<CircularProgress color="secondary"/>}><TestCategories /></Suspense>}/>
+                                <Route path="/Тесты олимпиады" element={<Suspense fallback={<Loader />}><Olimpics /></Suspense>}/>
+                                <Route path="/PDFReader" element={<Suspense fallback={<Loader />}><TextReader /></Suspense>}/>
+                                <Route path="/Профиль" element={showProfile ? <Suspense fallback={<Loader />}><Profile /></Suspense> : <Suspense fallback={<Loader />}><Login/></Suspense>} />
+                                <Route path='/Войти' element={<Suspense fallback={<Loader />}><Login showProfile={showProfile} setShowProfile={setShowProfile}/></Suspense>}/>
+                                <Route path='/Регистрация' element={<Suspense fallback={<Loader />}><Register /></Suspense>}/>
+                                <Route path="Тесты/:title" element={<Suspense fallback={<Loader />}><Quiz /></Suspense>}/>
+                                <Route path='/Тесты' element={<Suspense fallback={<Loader />}><TestCategories /></Suspense>}/>
                             </Routes>
-                        <TopButton />
+                        {(isDesktop || isTablet)  && <TopButton />}
                 </section>
             </StoreContext.Provider>
         </>

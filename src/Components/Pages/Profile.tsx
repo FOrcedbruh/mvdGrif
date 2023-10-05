@@ -12,6 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import { useContext } from 'react';
 import { StoreContext } from '../../contexts/storeContext';
 import Tooltip from '@mui/material/Tooltip';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 
@@ -103,6 +104,12 @@ const Profile: React.FC = () => {
     ];
 
 
+    const handleLogout = () => {
+        localStorage.clear();
+        window.location.reload();
+    };
+
+
 
 
 return (
@@ -143,6 +150,7 @@ return (
                         </li>
                     </ul>
                     <Button variant='outlined' color='secondary' onClick={correctProfileHandler} >{correctProfile ? <p>Подтвердить изменения</p> : <p>Редактировать профиль</p>}</Button>
+                    <Button variant='contained' color='secondary' className={style.logoutBtn} onClick={handleLogout}>Выйти  <LogoutIcon /></Button>
                 </div>
                 <div className={style.newsWin}>
                     <article>

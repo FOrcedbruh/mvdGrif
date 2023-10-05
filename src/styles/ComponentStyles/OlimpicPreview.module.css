@@ -1,0 +1,23 @@
+.window {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.window img {
+    position: absolute;
+    height: 90%;
+}
+
+.goToOlimpicsBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.window a {
+    text-decoration: none;
+}

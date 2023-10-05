@@ -11,7 +11,7 @@ const DocumentsPage: React.FC = () => {
 
 
     return (
-        <section className={style.window}>
+        <section className={`${style.window} documentsWindow`}>
             <h1>Документы</h1>
             <div  className={style.documents}>
                 <Accordion className={style.accordion}>

@@ -1,5 +1,5 @@
 import { Carousel } from 'react-responsive-carousel';
-import style from './../styles/Carousel.module.css';
+import style from './../styles/ComponentStyles/Carousel.module.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import fimage from './../images/vuz-4.jpg';
 import timage from './../images/timage.jpg';
