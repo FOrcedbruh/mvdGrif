@@ -19,7 +19,7 @@ const ContactsPage = lazy(() => import("./Pages/ContactsPage"));
 const DocumentsPage = lazy(() => import("./Pages/DocumentsPage"));
 const OlimpicPreview = lazy(() => import("./Pages/OlimpicPreview"));
 const Olimpics = lazy(() => import("./Pages/Olimpics"));
-
+const MaterialsPage = lazy(() => import("./Pages/MaterialsPage"));
 
 const App: React.FC = () => {
     
@@ -43,8 +43,8 @@ const App: React.FC = () => {
 
     // отображение в header имени и фамилии
 
-    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
-    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
+    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || 'Илья');
+    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || 'Чапля');
     
     // состоние для логики рендера профиля
 
@@ -103,6 +103,7 @@ const App: React.FC = () => {
                                     <Route path="/Поддержка" element={<Suspense fallback={<Loader />}><ContactsPage /></Suspense>}/>
                                     <Route path="/Документы" element={<Suspense fallback={<Loader />}><DocumentsPage /></Suspense>}/>
                                     <Route path="/Олимпиада" element={<Suspense fallback={<Loader />}><OlimpicPreview /></Suspense>}/>
+                                    <Route path="/Материалы" element={<Suspense fallback={<Loader />}><MaterialsPage /></Suspense>}/>
                                 </Route>
                                 <Route path="/Тесты олимпиады" element={<Suspense fallback={<Loader />}><Olimpics /></Suspense>}/>
                                 <Route path="/PDFReader" element={<Suspense fallback={<Loader />}><TextReader /></Suspense>}/>

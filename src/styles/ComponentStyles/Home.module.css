@@ -74,16 +74,6 @@
     font-weight: 800;
     line-height: normal;
 }
-
-@media only screen and (max-width: 1200px) {
-    .welcome p{
-       font-size: 30px;
-    }
-    .welcome p span {
-        font-size: 60px;
-     }
-}
-
 .mainGrif {
     position: absolute;
     width: 50%;
@@ -94,4 +84,34 @@
 }
 .activeMainGrif {
     transform: scale(0.7) translateX(30%) translateY(-20%);
+}
+
+@media only screen and (max-width: 1224px) {
+    .welcome p{
+       font-size: 30px;
+    }
+    .welcome p span {
+        font-size: 60px;
+     }
+}
+@media only screen and (max-width: 776px) and (min-width: 401px) {
+    .welcome {
+        margin-right: 30%;
+    }
+    .mainGrif {
+        margin-left: 10%;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .welcome {
+        margin-right: 0;
+    }
+    .mainGrif {
+        margin-left: 0;
+        width: 70%;
+        height: 90%;
+    }
+    .activeMainGrif {
+        transform: scale(0.8);
+    }
 }

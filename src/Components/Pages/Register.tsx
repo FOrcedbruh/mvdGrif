@@ -34,7 +34,7 @@ const Register: React.FC = () => {
     const [nameDirty, setNameDirty] = useState<boolean>(false);
     const [usernameDirty, setUsernameDirty] = useState<boolean>(false);
     const [username, setUsername] = useState<string>('');
-    const [gender, setGender] = useState<string>('Мужской');
+    const [sex, setSex] = useState<string>('Мужской');
     const [usernameError, setUsernameError] = useState<string>('Username не может быть пустым!');
     const [region, setRegion] = useState<string>('');
     const [city, setCity] = useState<string>('');
@@ -253,7 +253,7 @@ const Register: React.FC = () => {
     
 
     const handleGender = (e: SelectChangeEvent) => {
-        setGender(e.target.value as string);
+        setSex(e.target.value as string);
     }
 
     const handleSchoolCategory = (e: SelectChangeEvent) => {
@@ -279,7 +279,7 @@ const Register: React.FC = () => {
     // отправка данных на сервер
 
       const handleRegister = () => {
-        authAPI.create(username, first_name, last_name, email, region, city, password).then(data => {console.log(data)});
+        authAPI.create(username, first_name, last_name, email, region, city, password, sex, clas, course, phone, snils).then(data => {console.log(data)});
        
       }
 
@@ -340,7 +340,7 @@ const Register: React.FC = () => {
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="gender">Пол</label>
-                                    <Select  color='secondary' value={gender} onChange={handleGender} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
+                                    <Select  color='secondary' value={sex} onChange={handleGender} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                         <MenuItem value={"Мужской"}>Мужской</MenuItem>
                                         <MenuItem value={"Женский"}>Женский</MenuItem>
                                     </Select>

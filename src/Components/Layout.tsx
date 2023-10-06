@@ -45,8 +45,6 @@ const Home: React.FC = () => {
         <ul className={style.innerUl}>
             <li><Link to='/'>Общая информация</Link></li>
             <li><Link to='/документы'>Документы</Link></li>
-            <li><Link to='/'>График</Link></li>
-            <li><Link to='/'>Галерея</Link></li>
             <li onClick={!showProfile ? snackHandler : () => {console.log('profile is showed')}}><Link to='/профиль'>Профиль</Link></li>
         </ul>
     )
@@ -160,31 +158,9 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
 
 const LayoutMobile: React.FC = () => {
 
-    const {last_name, first_name, showProfile} = useContext(StoreContext);
+    const {showProfile} = useContext(StoreContext);
 
-    const [home, setHome] = useState<boolean>(false);
-    const [materials, setMaterials] = useState<boolean>(false);
-
-
-    const [menuCross, setMenuCross] = useState<boolean>(false);
-
-    const homeHandler = (e: MouseEvent<HTMLLIElement>) => {
-        setHome(true);
-    }
-    const homeOutHandler = (e: MouseEvent<HTMLLIElement>) => {
-        setHome(false);
-    }
-    const matHandler = (e: MouseEvent<HTMLLIElement>) => {
-        setMaterials(true);
-    }
-    const matOutHandler = (e: MouseEvent<HTMLLIElement>) => {
-        setMaterials(false);
-    }
-
-
-    const menuHandler = () => {
-        setMenuCross(!menuCross);
-    }
+    
 
     // Navigation panel Drawer
 

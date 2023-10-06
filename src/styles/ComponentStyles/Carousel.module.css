@@ -13,3 +13,11 @@
 .carousel div{
     width: 100%;
 }
+@media only screen and (max-width: 400px) {
+    .window {
+        margin-top: 50vh;
+    }
+    .carousel {
+        width: 80%;
+    }
+}

@@ -10,7 +10,7 @@ const instance = axios.create({
 })
 
 const authAPI = {
-    create(username: string, first_name: string, last_name: string, email: string, region: string, city: string, password: string) {
+    create(username: string, first_name: string, last_name: string, email: string, region: string, city: string, password: string, sex: string, phone: string, snils: string, date: string, school: string, clas?: string, course?: string) {
         return  instance.post(`user/register/`, {username, first_name, last_name, email, region, city, password})
             .then(response => {
                 return response.data

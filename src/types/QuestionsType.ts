@@ -10,5 +10,6 @@ export default interface QuestionsType {
     id: number,
     question_text: string,
     value: number,
-    answers: Answers
+    answers: Answers,
+    image: string,
 }
