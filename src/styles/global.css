@@ -147,6 +147,9 @@ html[data-theme = 'dark'] {
 .documentsWindow  h1 {
     color: var(--textColor);
 }
+.materialWindow  {
+    color: var(--textColor);
+}
 
 
 .nav a {

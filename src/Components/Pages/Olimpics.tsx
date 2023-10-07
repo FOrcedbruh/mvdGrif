@@ -13,10 +13,11 @@ import { Alert, Button, Modal, Tooltip, Box, Snackbar } from '@mui/material';
 
 interface ResultType {
     correct: number,
-    Questions: Array<QuestionsType>
+    Questions: Array<QuestionsType>,
+    points: number
 }
 
-const Result: React.FC<ResultType> = ({correct, Questions}) => {
+const Result: React.FC<ResultType> = ({correct, Questions, points}) => {
 
     const [open, setOpen] = useState<boolean>(true);
 
@@ -31,6 +32,7 @@ const Result: React.FC<ResultType> = ({correct, Questions}) => {
         <section className={style.result}>
             <div className={style.resultInfo}>
                 <p>Ваш результат: <span><span>{correct}</span> / {Questions.length - 1}</span></p>
+                <p>Количество баллов: <span style={{'color': 'chartreuse'}}>{points}</span></p>
             </div>
             <Link to='/'>
                 <Button variant='contained' color='secondary'> <ArrowBackIcon/> Вернуться на главную </Button>
@@ -141,20 +143,18 @@ const Olimpics: React.FC = () => {
     
 
     const ClickBtnHandler = () => {
-        console.log("балы", points);
         setStep(step + 1);
         setPressed(false);
         if (correctClick === true) {
-            setCorrect(correct + 1)
+            setCorrect(correct + 1);
+            setPoints(points + question.value);
         }
         else if (correctClick === false) {
-            setCorrect(correct + 0)
+            setCorrect(correct + 0);
+            setPoints(points + 0);
         }
-        
-        console.log('правильные ответы', correct);
-        console.log(correctClick);
         setCorrectClick(false);
-        console.log(step)
+        console.log("балы", points);
     }
 
 
@@ -205,7 +205,7 @@ const Olimpics: React.FC = () => {
 
     
     if (step > Questions.length - 2) {
-        return <Result correct={correct} Questions={Questions}/>
+        return <Result correct={correct} Questions={Questions} points={points}/>
     }
     else {
 

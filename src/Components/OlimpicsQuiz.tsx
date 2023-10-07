@@ -12,23 +12,6 @@ const OlimpicsQuiz: React.FC<QuizType> = ({Questions, correct, setCorrect, point
 
 
 
-    
-
-    const OnclickHandler = (index: number) => {
-        setPressed(true)
-        if (index === correctValue) {
-            setCorrectClick(true);
-        }
-        else if (index !== correctValue) {
-            setCorrectClick(false);
-        }
-        else {
-            setCorrectClick(false);
-        }
-    }
-
-
-
     const ListButton = styled(Button)({
         boxShadow: 'none',
         textTransform: 'none',
@@ -64,6 +47,20 @@ const OlimpicsQuiz: React.FC<QuizType> = ({Questions, correct, setCorrect, point
           boxShadow: '0 0 0 0.2rem #fff',
         },
       });
+
+      const OnclickHandler = (index: number) => {
+        setPressed(true)
+        if (index === correctValue) {
+            setCorrectClick(true);
+            
+        }
+        else if (index !== correctValue) {
+            setCorrectClick(false);
+        }
+        else {
+            setCorrectClick(false);
+        }
+    }
    
 
 

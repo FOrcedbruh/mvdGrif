@@ -6,8 +6,10 @@
     justify-content: start;
     align-items: center;
     gap: 10vh;
+    text-align: center;
 }
 .article {
+    width: 100%;
     text-align: start;
     line-height: 26px;
     background-color: rgb(225, 200, 250);
@@ -15,6 +17,28 @@
     border-radius: 20px;
     color: #000;
 }
+
 .backBtn {
     align-self: start;
+}
+
+@media only screen and (max-width: 1224px) {
+    .window {
+        padding: 5vh 10vh;
+    }
+}
+
+@media only screen and (max-width: 776px) {
+    .window {
+        padding: 5vh 2vh;
+    }
+} 
+@media only screen and (max-width: 400px) {
+    .window {
+        padding: 0;
+    }
+    .article {
+        padding: 20px;
+        text-align: justify;
+    }
 }
