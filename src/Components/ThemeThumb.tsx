@@ -1,4 +1,4 @@
-import { useTheme } from "./hooks/useTheme";
+import { useTheme } from "../hooks/useTheme";
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import LightModeIcon from '@mui/icons-material/LightMode';

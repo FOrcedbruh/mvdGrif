@@ -8,7 +8,7 @@ import { QuizType } from '../types/QuizType';
 
 
 
-const OlimpicsQuiz: React.FC<QuizType> = ({Questions, correct, setCorrect, points, setPoints,correctValue, question, answers, pressed, setPressed, setCorrectClick, correctClick}) => {
+const OlimpicsQuiz: React.FC<QuizType> = ({correctValue, question, answers,  setPressed, setCorrectClick}) => {
 
 
 

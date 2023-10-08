@@ -13,6 +13,7 @@ import { useContext } from 'react';
 import { StoreContext } from '../../contexts/storeContext';
 import Tooltip from '@mui/material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useAppSelector } from '../../hooks/reducerHooks';
 
 
 
@@ -104,6 +105,9 @@ const Profile: React.FC = () => {
     ];
 
 
+    const {correct, points }= useAppSelector(state => state.correctSlice);
+
+
     const handleLogout = () => {
         localStorage.clear();
         window.location.reload();
@@ -152,6 +156,12 @@ return (
                     <Button variant='outlined' color='secondary' onClick={correctProfileHandler} >{correctProfile ? <p>Подтвердить изменения</p> : <p>Редактировать профиль</p>}</Button>
                     <Button variant='contained' color='secondary' className={style.logoutBtn} onClick={handleLogout}>Выйти  <LogoutIcon /></Button>
                 </div>
+                <div className={style.resultInfo}>
+                    {correct > 0 && <p className={style.result}>Правильные ответы за олимпиаду: <span>{correct}</span></p>}
+                    {points > 0 && <p className={style.result}>Баллы за олимпиаду: <span>{points}</span></p>}
+                </div>
+                    
+                    
                 <div className={style.newsWin}>
                     <article>
                         НОВОСТИ

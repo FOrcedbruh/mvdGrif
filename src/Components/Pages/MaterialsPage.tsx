@@ -28,7 +28,7 @@ const technologies: Array<string> = [
     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png',
     'https://web-creator.ru/technologies/css3.png',
     'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/TypeScript_Logo_%28Blue%29.svg/2560px-TypeScript_Logo_%28Blue%29.svg.png',
-    'https://assets.stickpng.com/images/62a74dd1223343fbc2207d00.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png',
     'https://mui.com/static/logo.png',
     'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Axios_%28computer_library%29_logo.svg/1280px-Axios_%28computer_library%29_logo.svg.png',
     'https://git-scm.com/images/logos/downloads/Git-Logo-2Color.png',

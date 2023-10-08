@@ -8,16 +8,18 @@ import Grif from './../../images/testGrif.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, Link } from 'react-router-dom';
 import { Alert, Button, Modal, Tooltip, Box, Snackbar } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
+import { nothing, increment, incrementPoints, decrementPoints } from '../../Store/reducers/correctSlice';
+
 
 
 
 interface ResultType {
-    correct: number,
     Questions: Array<QuestionsType>,
     points: number
 }
 
-const Result: React.FC<ResultType> = ({correct, Questions, points}) => {
+const Result: React.FC<ResultType> = ({ Questions, points}) => {
 
     const [open, setOpen] = useState<boolean>(true);
 
@@ -27,6 +29,8 @@ const Result: React.FC<ResultType> = ({correct, Questions, points}) => {
         }
         setOpen(false);
     }
+
+    const correct = useAppSelector(state => state.correctSlice.correct)
 
     return (
         <section className={style.result}>
@@ -51,6 +55,10 @@ const Result: React.FC<ResultType> = ({correct, Questions, points}) => {
 const Olimpics: React.FC = () => {
 
 
+
+    const dispatch = useAppDispatch();
+
+    const {correct, points} = useAppSelector(state => state.correctSlice)
     
 
     const Questions: Array<QuestionsType> = [
@@ -121,10 +129,9 @@ const Olimpics: React.FC = () => {
 
 
     const [step, setStep] = useState<number>(0);
-    const [correct, setCorrect] = useState<number>(0);
-    const [points, setPoints] = useState<number>(0);
 
     const [pressed, setPressed] = useState<boolean>(false);
+
 
 
 
@@ -146,12 +153,12 @@ const Olimpics: React.FC = () => {
         setStep(step + 1);
         setPressed(false);
         if (correctClick === true) {
-            setCorrect(correct + 1);
-            setPoints(points + question.value);
+            dispatch(increment());
+            dispatch(incrementPoints(question.value))
         }
         else if (correctClick === false) {
-            setCorrect(correct + 0);
-            setPoints(points + 0);
+            dispatch(nothing())
+            dispatch(decrementPoints())
         }
         setCorrectClick(false);
         console.log("балы", points);
@@ -205,7 +212,7 @@ const Olimpics: React.FC = () => {
 
     
     if (step > Questions.length - 2) {
-        return <Result correct={correct} Questions={Questions} points={points}/>
+        return <Result   Questions={Questions} points={points}/>
     }
     else {
 
@@ -234,7 +241,7 @@ const Olimpics: React.FC = () => {
                                 </div>
                                 <div className={style.testAura}>
                                     <div className={style.test}>
-                                        <OlimpicsQuiz correctClick={correctClick} setCorrectClick={setCorrectClick} Questions={Questions} question={question}  correct={correct} setCorrect={setCorrect} points={points} setPoints={setPoints} answers={answers} correctValue={correctValue} pressed={pressed} setPressed={setPressed}/>
+                                        <OlimpicsQuiz  setCorrectClick={setCorrectClick}  question={question}   answers={answers} correctValue={correctValue}  setPressed={setPressed}/>
                                     </div>
                                     <Button color='secondary' variant='contained' onClick={ClickBtnHandler} disabled={!pressed} style={{'zIndex': 1, 'alignSelf': 'center'}}>Дальше <ArrowForwardIcon /></Button>
                                 </div>
