@@ -2,13 +2,15 @@
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: start;
     align-items: center;
     gap: 10%;
     padding: 50px 80px;
 }
 .grif {
-    width: 100%;
+    width: fit-content;
+    position: absolute;
 }
 .grif img {
     width: 800px;
@@ -21,15 +23,16 @@
     justify-content: space-around;
     align-items: center;
     gap: 40px;
+    z-index: 2;
 }
 h1.title {
-    position: absolute;
     align-self: start;
     font-size: 60px;
     font-weight: 800;
     font-style: normal;
     line-height: normal;
     padding-top: 80px;
+    z-index: 2;
 }
 .categories {
     width: 100%;
@@ -75,4 +78,17 @@ h1.title {
     align-self: start;
     z-index: 1;
     font-size: 12px;
+}
+
+@media only screen and (max-width: 1224px) {
+    .tests {
+        width: 40%;
+        gap: 20px;
+    }
+}
+@media only screen and (max-width: 776px) {
+    .tests {
+        width: 40%;
+        flex-direction: column;
+    }
 }

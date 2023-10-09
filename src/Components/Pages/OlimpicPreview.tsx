@@ -6,15 +6,20 @@ import { Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { StoreContext } from '../../contexts/storeContext';
 import { Snackbar, Alert, Tooltip } from '@mui/material';
-
+import { useAppDispatch } from '../../hooks/reducerHooks';
+import { reset } from '../../Store/reducers/correctSlice';
 
 
 const OlimpicPreview: React.FC = () => {
+
+
+    const dispatch = useAppDispatch();
 
     const [open, setOpen] = useState<boolean>(false);
 
     const onClick = () => {
         setOpen(true);
+        dispatch(reset(0))
     }
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -42,7 +47,7 @@ const OlimpicPreview: React.FC = () => {
     return (
         <section className={style.window}>
             <img src={Grif}/>
-            {showProfile ? <Link to='/Тесты олимпиады'><Button variant='contained' color='secondary' className={style.goToOlimpicsBtn}>Перейти к олимпиаде <ArrowOutwardIcon /></Button></Link>
+            {showProfile ? <Link to='/Тесты олимпиады'><Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={() => dispatch(reset(0))}>Перейти к олимпиаде <ArrowOutwardIcon /></Button></Link>
              : <Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={onClick}>Перейти к олимпиаде <ArrowOutwardIcon /></Button>}
              <Snackbar open={open}  onClose={handleClose} autoHideDuration={4000}>
                 <Alert severity='error'>

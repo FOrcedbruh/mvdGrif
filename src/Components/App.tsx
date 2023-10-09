@@ -43,8 +43,8 @@ const App: React.FC = () => {
 
     // отображение в header имени и фамилии
 
-    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || 'Илья');
-    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || 'Чапля');
+    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
+    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
     
     // состоние для логики рендера профиля
 

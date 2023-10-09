@@ -27,10 +27,15 @@ const correctSlice = createSlice({
         },
         decrementPoints(state) {
             state.points -= 0
+        },
+        reset(state, action: PayloadAction<number>) {
+            state.correct = action.payload;
+            state.points = action.payload;
+            console.log(state.correct, state.points);
         }
     }
 })
 
 
-export const {increment, nothing, incrementPoints, decrementPoints} = correctSlice.actions;
+export const {increment, nothing, incrementPoints, decrementPoints, reset} = correctSlice.actions;
 export default correctSlice.reducer;

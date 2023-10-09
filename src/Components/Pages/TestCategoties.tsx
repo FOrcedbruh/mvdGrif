@@ -43,7 +43,7 @@ const TestCategories: React.FC = () => {
             <h1 className={style.title}>Тесты</h1>
             <div className={style.tests}>
                 {categories.map(category => {
-                    return (<TestItem category={category}/>)
+                    return (<TestItem key={category} category={category}/>)
                 })}
             </div>
             <div className={style.grif}>
