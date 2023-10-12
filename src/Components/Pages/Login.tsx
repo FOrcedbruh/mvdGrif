@@ -70,6 +70,9 @@ const Login: React.FC<LoginType> = () => {
 
     const loginHandler = () => {
         authAPI.login(username, password).then(data => {console.log(data)});
+        const token = localStorage.getItem('authToken');
+        console.log(token);
+        authAPI.me(token).then(data => {console.log(data)})
     }
 
 

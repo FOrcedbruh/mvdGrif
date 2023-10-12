@@ -5,13 +5,13 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://abf5-154-47-24-154.ngrok-free.app',
+    baseURL: 'https://6264-46-188-120-131.ngrok-free.app',
     // Authorization: 'Token 3ae7399c2fb938265eb2c46438e8f5862ac3f776'
 })
 
 const authAPI = {
-    create(username: string, first_name: string, last_name: string, email: string, region: string, city: string, password: string, sex: string, phone: string, snils: string, date: string, school: string, clas?: string, course?: string) {
-        return  instance.post(`user/register/`, {username, first_name, last_name, email, region, city, password})
+    create(username: string, first_name: string, last_name: string, email: string, region: string, city: string, password: string, sex: string, phone: string, snils: string, middle_name: string,  date_birthday: string, school: string, grade: string) {
+        return  instance.post<string>(`user/register/`, {username, first_name, last_name, email, region, city, password, sex, phone, snils, middle_name, date_birthday, school, grade})
             .then(response => {
                 return response.data
             })
@@ -28,7 +28,7 @@ const authAPI = {
                 console.error("Error:", error);
             });
     },
-    me(token: string) {
+    me(token: string | null) {
         //  const token = localStorage.getItem('token')
         return instance.get('user/profile/', {
             headers: {
@@ -36,6 +36,10 @@ const authAPI = {
             }
         })
             .then(response => {
+                const phone = response.data.phone;
+                localStorage.setItem('phone', phone)
+                const middle_name = response.data.middle_name
+                localStorage.setItem('middle_name', middle_name);
                 const city = response.data.city
                 localStorage.setItem('city', city)
                 const date_birthday = response.data.date_birthday
@@ -60,11 +64,18 @@ const authAPI = {
                 localStorage.setItem('sex', sex)
                 const username = response.data.username
                 localStorage.setItem('username', username)
-
+                const snils = response.data.snils;
+                localStorage.setItem('snils', snils);
             })
             .catch(error => {
                 console.error("Error:", error);
-            });;
+            });
+    },
+    ResultPost(points: number) {
+        const token: string | null = localStorage.getItem('authToken')
+        return instance.post('task/result/', {points}, {headers: {
+            'Authorization': `bearer ${token}`
+        }}).then(res => res.data)
     }
 }
 

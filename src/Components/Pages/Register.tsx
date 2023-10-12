@@ -12,24 +12,26 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
+import format from 'date-fns/format';
 
 const Register: React.FC = () => {
 
 
     // values для валидации и отправки на сервер
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const currentDate = new Date();
+
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [emailDirty, setEmailDirty] = useState<boolean>(false);
     const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
     const [emailError, setEmailError] = useState<string>('Email не может быть пустым!');
     const [passwordError, setPasswordError] = useState<string>('Пароль не может быть пустым!');
-    const [clas, setClas] = useState<string>('9');
-    const [course, setCourse] = useState<string>('2');
+    const [grade, setGrade] = useState<string>('11');
     const [schoolCategory, setSchoolCategory] = useState<string>('Школа');
     const [snils, setSnils] = useState<string>('');
-    const [phone, setPhone] = useState('');
+    const [date_birthday, setDate_birthday] = useState<string>(format(currentDate, 'yyyy-MM-dd'))
+    const [phone, setPhone] = useState<string>('');
     const [nameError, setNameError] = useState<string>('Имя не может быть пустым!');
     const [nameDirty, setNameDirty] = useState<boolean>(false);
     const [usernameDirty, setUsernameDirty] = useState<boolean>(false);
@@ -40,7 +42,7 @@ const Register: React.FC = () => {
     const [city, setCity] = useState<string>('');
     const [first_name,  setFirst_name] = useState<string>('');
     const [last_name,  setLast_name] = useState<string>('');
-    const [surname, setSurname] = useState<string>('');
+    const [middle_name, setMiddle_name] = useState<string>('');
     const [school, setSchool] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMatch, setPasswordMatch] = useState<boolean>(false);
@@ -93,8 +95,8 @@ const Register: React.FC = () => {
         }
     }
 
-    const surnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSurname(e.target.value);
+    const middle_nameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setMiddle_name(e.target.value);
     }
 
     
@@ -183,6 +185,10 @@ const Register: React.FC = () => {
         }
     }
 
+    const date_birthdayHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDate_birthday(e.target.value)
+    }
+
     const confirmPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setConfirmPassword(e.target.value);
         if (e.target.value === password) {
@@ -244,11 +250,11 @@ const Register: React.FC = () => {
 
 
     const handleClass = (e: SelectChangeEvent) => {
-        setClas(e.target.value as string)
+        setGrade(e.target.value)
     }
 
     const handleCourse = (e: SelectChangeEvent) => {
-        setCourse(e.target.value as string);
+        setGrade(e.target.value);
     }
     
 
@@ -259,6 +265,7 @@ const Register: React.FC = () => {
     const handleSchoolCategory = (e: SelectChangeEvent) => {
         setSchoolCategory(e.target.value as string);
     }
+
 
 
     const [succesBar, setSuccesBar] = useState<boolean>(false)
@@ -279,7 +286,7 @@ const Register: React.FC = () => {
     // отправка данных на сервер
 
       const handleRegister = () => {
-        authAPI.create(username, first_name, last_name, email, region, city, password, sex, clas, course, phone, snils).then(data => {console.log(data)});
+        authAPI.create(username, first_name, last_name, email, region, city, password, sex, grade, phone, snils, middle_name, date_birthday, school).then(data => {console.log(data)});
        
       }
 
@@ -288,7 +295,6 @@ const Register: React.FC = () => {
         <>
         <img src={mainGrif} className={style.mainGrif}/>
         <section className={style.aura}>
-        
             <Button variant='text' color='secondary' className={style.goHomeBtn}><ArrowBackIcon /> <Link to='/'>На главную</Link></Button>
             <section className={`${style.regWin} regWin`}>
                 <form name='register'>
@@ -307,8 +313,8 @@ const Register: React.FC = () => {
                                     {(nameDirty && nameError) && <section className={style.error}>{nameError}</section>}
                                 </div>
                                 <div className={style.regDiv}>
-                                    <label htmlFor="surname">Отчество</label>
-                                    <input type="text" placeholder='Ваше отчество...' name='surname' onChange={e => {surnameHandler(e)}} />
+                                    <label htmlFor="middle_name">Отчество</label>
+                                    <input type="text" placeholder='Ваше отчество...' value={middle_name} name='middle_name' onChange={e => {middle_nameHandler(e)}} />
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="username">Username</label>
@@ -322,7 +328,7 @@ const Register: React.FC = () => {
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="phone">Номер телефона</label>
-                                    <input type="tel" name='phone' value={phone} placeholder='Ваш телефон...' onChange={e => phoneHandler(e)} onBlur={e => blurHandler(e)}/>
+                                    <input type="text" name='phone' value={phone} placeholder='Ваш телефон...' onChange={e => phoneHandler(e)} onBlur={e => blurHandler(e)}/>
                                     {(inputError && inputDirty) && <section className={style.error}>{inputError}</section>}
                                 </div>
                                 
@@ -332,15 +338,15 @@ const Register: React.FC = () => {
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="snils">СНИЛС</label>
-                                    <input type="number" name='snils' placeholder='xxx-xxx-xxx yy' value={snils} onChange={e => snilsHandler(e)}/>
+                                    <input type="text" name='snils' placeholder='xxx-xxx-xxx yy' value={snils} onChange={e => snilsHandler(e)}/>
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="date">Дата рождения</label>
-                                    <input type="date" placeholder='Дата рождения'/>
+                                    <input type="date" placeholder='Дата рождения' value={date_birthday} onChange={e => date_birthdayHandler(e)}/>
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="gender">Пол</label>
-                                    <Select  color='secondary' value={sex} onChange={handleGender} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
+                                    <Select  color='secondary' value={sex} onChange={e => handleGender(e)} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                         <MenuItem value={"Мужской"}>Мужской</MenuItem>
                                         <MenuItem value={"Женский"}>Женский</MenuItem>
                                     </Select>
@@ -354,14 +360,14 @@ const Register: React.FC = () => {
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="SchoolOrCollege">Школа/Колледж</label>
-                                    <Select value={schoolCategory} style={{width: 200}} color='secondary' onChange={handleSchoolCategory}>
+                                    <Select value={schoolCategory} style={{width: 200}} color='secondary' onChange={e => handleSchoolCategory(e)}>
                                         <MenuItem value={"Школа"}>Школа</MenuItem>
                                         <MenuItem value={"Колледж/Техникум"}>Колледж/Техникум</MenuItem>
                                     </Select>
                                 </div>
                                 {schoolCategory==='Школа' ? <div className={style.regDiv}>
                                     <label htmlFor="class">Класс обучения</label>
-                                    <Select  color='secondary' value={clas} onChange={handleClass} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
+                                    <Select  color='secondary' value={grade} onChange={e => handleClass(e)} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                         <MenuItem value={1}>1</MenuItem>
                                         <MenuItem value={2}>2</MenuItem>
                                         <MenuItem value={3}>3</MenuItem>
@@ -376,7 +382,7 @@ const Register: React.FC = () => {
                                     </Select>
                                 </div> : <div className={style.regDiv}>
                                         <label htmlFor="course">Курс обучения</label>
-                                        <Select value={course} style={{width: 100}} onChange={handleCourse} color='secondary'>
+                                        <Select value={grade} style={{width: 100}} onChange={e => handleCourse(e)} color='secondary'>
                                             <MenuItem value={1}>1</MenuItem>
                                             <MenuItem value={2}>2</MenuItem>
                                             <MenuItem value={3}>3</MenuItem>

@@ -1,8 +1,7 @@
 import style from './../../styles/ComponentStyles/Olimpics.module.css';
-import photo from './../../images/photo.webp';
 import QuestionsType from '../../types/QuestionsType';
 import { OlimpicsQuiz } from '../OlimpicsQuiz';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Grif from './../../images/testGrif.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -10,7 +9,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Alert, Button, Modal, Tooltip, Box, Snackbar } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
 import { nothing, increment, incrementPoints, decrementPoints } from '../../Store/reducers/correctSlice';
-
+import { authAPI } from '../AuthorizationData';
 
 
 
@@ -32,6 +31,10 @@ const Result: React.FC<ResultType> = ({ Questions, points}) => {
 
     const correct = useAppSelector(state => state.correctSlice.correct)
 
+    const ResultPost = () => {
+        authAPI.ResultPost(points).then((data) => {console.log(data)})
+    }
+
     return (
         <section className={style.result}>
             <div className={style.resultInfo}>
@@ -39,7 +42,7 @@ const Result: React.FC<ResultType> = ({ Questions, points}) => {
                 <p>Количество баллов: <span style={{'color': 'chartreuse'}}>{points}</span></p>
             </div>
             <Link to='/'>
-                <Button variant='contained' color='secondary'> <ArrowBackIcon/> Вернуться на главную </Button>
+                <Button variant='contained' color='secondary' onClick={ResultPost}> <ArrowBackIcon/> Вернуться на главную </Button>
             </Link>
 
             <Snackbar open={open} onClose={handleClose} autoHideDuration={5000}>

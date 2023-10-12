@@ -37,6 +37,7 @@ const Profile: React.FC = () => {
     const [region, setRegion] = useState<string>(localStorage.getItem('region') || '');
     const [city, setCity] = useState<string>(localStorage.getItem('city') || '');
     const [school, setSchool] = useState<string>(localStorage.getItem('school') || '');
+    const [date_birthday, setDate_birthday] = useState<string>(localStorage.getItem('date_birthday') || '')
 
 
 
@@ -73,6 +74,9 @@ const Profile: React.FC = () => {
     }
     const schoolHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSchool(e.target.value);
+    }
+    const date_birthdayHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDate_birthday(e.target.value);
     }
 
 
@@ -147,10 +151,10 @@ return (
                             {correctProfile && <input type="city" value={city} onChange={e => {cityHandler(e)}} name='city'/>}
                         </li>
                         <li> <p>Школа: {school ? <span>{school}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
-                            {correctProfile && <input type="school" value={school} onChange={e => {schoolHandler(e)}} name='city'/>}
+                            {correctProfile && <input type="school" value={school} onChange={e => {schoolHandler(e)}} name='school'/>}
                         </li>
-                        <li>Дата рождения: 
-
+                        <li> <p>Дата рождения: {date_birthday ? <span>{date_birthday}</span> : <Skeleton variant='text' width={180} height={40}/>}</p>
+                            {correctProfile && <input type="date_birthday" value={date_birthday} onChange={e => {date_birthdayHandler(e)}} name='date_birthday'/>}
                         </li>
                     </ul>
                     <Button variant='outlined' color='secondary' onClick={correctProfileHandler} >{correctProfile ? <p>Подтвердить изменения</p> : <p>Редактировать профиль</p>}</Button>
