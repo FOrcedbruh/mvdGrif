@@ -12,44 +12,39 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import format from 'date-fns/format';
+import { useForm } from 'react-hook-form';
 
 const Register: React.FC = () => {
 
 
-    // values для валидации и отправки на сервер
+    // валидация формы и отправка данных
 
-    const currentDate = new Date();
+    type Inputs = {
+        username: string,
+        passsord: string,
+        first_name: string,
+        last_name: string,
+        middle_name: string,
+        email: string,
+        region: string,
+        city: string,
+        phone: string,
+        snils: string,
+        date_birthday: string,
+        school: string,
+    }
 
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [emailDirty, setEmailDirty] = useState<boolean>(false);
-    const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
-    const [emailError, setEmailError] = useState<string>('Email не может быть пустым!');
-    const [passwordError, setPasswordError] = useState<string>('Пароль не может быть пустым!');
-    const [grade, setGrade] = useState<string>('11');
-    const [schoolCategory, setSchoolCategory] = useState<string>('Школа');
-    const [snils, setSnils] = useState<string>('');
-    const [date_birthday, setDate_birthday] = useState<string>(format(currentDate, 'yyyy-MM-dd'))
-    const [phone, setPhone] = useState<string>('');
-    const [nameError, setNameError] = useState<string>('Имя не может быть пустым!');
-    const [nameDirty, setNameDirty] = useState<boolean>(false);
-    const [usernameDirty, setUsernameDirty] = useState<boolean>(false);
-    const [username, setUsername] = useState<string>('');
-    const [sex, setSex] = useState<string>('Мужской');
-    const [usernameError, setUsernameError] = useState<string>('Username не может быть пустым!');
-    const [region, setRegion] = useState<string>('');
-    const [city, setCity] = useState<string>('');
-    const [first_name,  setFirst_name] = useState<string>('');
-    const [last_name,  setLast_name] = useState<string>('');
-    const [middle_name, setMiddle_name] = useState<string>('');
-    const [school, setSchool] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [passwordMatch, setPasswordMatch] = useState<boolean>(false);
-    const [passwordMatchError, setPasswordMatchError] = useState<string>('Пароли не совпадают!');
-    const [inputError, setInputError] = useState<string>('Это поле обязательно к заполнению!');
-    const [inputDirty, setInputDirty] = useState<boolean>(false);
-    const [formValid, setFormValid] = useState<boolean>(false);
+    const {
+        register,
+        formState: {
+            errors,
+            isValid
+        },
+        handleSubmit,
+        reset
+    } = useForm<Inputs>({
+        mode: 'onBlur'
+    })
 
 
 
@@ -72,201 +67,29 @@ const Register: React.FC = () => {
 
     const [eye, setEye] = useState(true);
 
-    // handlers для контроля values
 
-    const usernameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(e.target.value);
+    const [sex, setSex] = useState<string>('Мужской')
 
-        if (!e.target.value) {
-            setUsernameError('Username не может быть пустым!');
-        }
-        else {
-            setUsernameError('');
-        }
+    const sexHandle = (e: SelectChangeEvent<string>) => {
+        setSex(e.target.value)
     }
 
-    const schoolHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSchool(e.target.value);
-        if (e.target.value) {
-            setInputError('')
-        }
-        else {
-            setInputError('Это поле обязательно к заполнению!')
-        }
+    // логика для выбора школы и колледжа
+
+    const [schoolCategory, setSchoolCategory] = useState<string>('Школа');
+
+    const SchoolOrCollegeHandle = (e: SelectChangeEvent<string>)  => {
+        setSchoolCategory(e.target.value);
     }
 
-    const middle_nameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMiddle_name(e.target.value);
-    }
+    const [grade, setGrade] = useState<string>('');
 
-    
-
-
-    const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        if (!re.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Некорректный email!');
-        }
-        else {
-            setEmailError('');
-        }
-    }
-
-    const regionHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setRegion(e.target.value);
-        if (e.target.value) {
-            setInputError('')
-        }
-        else {
-            setInputError('Это поле обязательно к заполнению!')
-        }
-    }
-
-    const cityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCity(e.target.value);
-        if (e.target.value) {
-            setInputError('')
-        }
-        else {
-            setInputError('Это поле обязательно к заполнению!')
-        }
-    }
-
-    const snilsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        var snilsValue: string = e.target.value;
-        setSnils(snilsValue);
-        if (snilsValue) {
-            setInputError('')
-        }
-        else {
-            setInputError('Это поле обязательно к заполнению!')
-        }
-    }
-
-    const phoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPhone(e.target.value);
-    }
-
-    const fnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFirst_name(e.target.value);
-        if (e.target.value.length > 0) {
-            setNameDirty(true);
-            setNameError('');
-        }
-        if (!e.target.value) {
-            setNameError('Имя не может быть пустой!');
-        }
-    }
-
-    const lnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLast_name(e.target.value);
-        if (e.target.value.length > 0) {
-            setNameDirty(true);
-            setNameError('');
-        }
-        if (!e.target.value) {
-            setNameError('Имя не может быть пустым!');
-        }
-    }
-
-    
-    const passworHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-        if(e.target.value.length < 3 || e.target.value.length > 15) {
-            setPasswordError('Пароль должен быть длиннее 3 и меннее 15 символов!');
-        }
-        else if (!e.target.value) {
-            setPasswordError('Пароль не должен быть пустым!');
-        }
-        else {
-            setPasswordError('');
-            setFormValid(true);
-        }
-    }
-
-    const date_birthdayHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDate_birthday(e.target.value)
-    }
-
-    const confirmPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(e.target.value);
-        if (e.target.value === password) {
-            setPasswordMatch(true);
-            setPasswordMatchError('');
-        }
-        else {
-            setPasswordMatchError('Пароли не совпадают');
-        }
-        
-    }
-    
-    
-
-
-    const blurHandler = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-        switch (e.target.name) {
-            // @ts-ignore
-            case 'password': 
-                setPasswordDirty(true);
-                // @ts-ignore
-            case 'email':
-                setEmailDirty(true);
-                // @ts-ignore
-            case 'firts_name':
-                setNameDirty(true);
-                // @ts-ignore
-            case 'username': 
-                setUsernameDirty(true);
-                // @ts-ignore
-            case 'ConfirmPassword':
-                setPasswordMatch(true);
-                // @ts-ignore
-            case 'phone':
-                setInputDirty(true);
-                // @ts-ignore
-            case 'region':
-                setInputDirty(true);
-                // @ts-ignore
-            case 'school':
-                setInputDirty(true);
-            case 'city':
-                setInputDirty(true);
-            break;
-        }
-    }
-
-    useEffect(() => {
-        if ((passwordError || emailError || nameError || passwordMatchError || usernameError) && (check_1===false || check_2===false || check_3===false)) {
-            setFormValid(false);
-        }
-        else {
-            setFormValid(true);
-        }
-    }, [passwordError, emailError, nameError, passwordMatchError, usernameError, check_1, check_2, check_3])
-
-
-    
-
-
-    const handleClass = (e: SelectChangeEvent) => {
-        setGrade(e.target.value)
-    }
-
-    const handleCourse = (e: SelectChangeEvent) => {
+    const GradeHandle = (e: SelectChangeEvent<string>) => {
         setGrade(e.target.value);
     }
     
 
-    const handleGender = (e: SelectChangeEvent) => {
-        setSex(e.target.value as string);
-    }
-
-    const handleSchoolCategory = (e: SelectChangeEvent) => {
-        setSchoolCategory(e.target.value as string);
-    }
-
-
+    // success bar
 
     const [succesBar, setSuccesBar] = useState<boolean>(false)
         
@@ -283,12 +106,40 @@ const Register: React.FC = () => {
         setSuccesBar(false);
       };
 
+    const onSubmit = (data: any) => {
+        alert(JSON.stringify(data))
+        const username: string = data.username;
+        const first_name: string = data.first_name;
+        const last_name: string = data.last_name;
+        const middle_name: string = data.middle_name;
+        const email: string = data.email;
+        const region: string = data.region;
+        const phone: string = data.phone;
+        const snils: string = data.snils;
+        const date_birthday: string = data.date_birthday;
+        const school: string = data.school;
+        console.log(
+            username,
+            first_name,
+            last_name,
+            middle_name,
+            email,
+            region,
+            phone,
+            snils,
+            date_birthday,
+            school,
+            data
+        )
+        reset();
+    }
+
     // отправка данных на сервер
 
-      const handleRegister = () => {
-        authAPI.create(username, first_name, last_name, email, region, city, password, sex, grade, phone, snils, middle_name, date_birthday, school).then(data => {console.log(data)});
+    //  const handleRegister = () => {
+       // authAPI.create(username, first_name, last_name, email, region, city, password, sex, grade, phone, snils, middle_name, date_birthday, school).then(data => {console.log(data)});
        
-      }
+    //  }
 
 
     return (
@@ -297,56 +148,94 @@ const Register: React.FC = () => {
         <section className={style.aura}>
             <Button variant='text' color='secondary' className={style.goHomeBtn}><ArrowBackIcon /> <Link to='/'>На главную</Link></Button>
             <section className={`${style.regWin} regWin`}>
-                <form name='register'>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <h1>Регистрация</h1>
                     <section className={style.inputWindows}>
                             <section className={style.inputs}>
                                 <h4>Информация о себе</h4>
                                 <div className={style.regDiv}>
                                     <label htmlFor="firts_name">Имя</label>
-                                    <input type="text" placeholder='Иван...' name='firts_name' value={first_name} onChange={e => {fnameHandler(e)}} onBlur={e => {blurHandler(e)}}/>
-                                    {(nameDirty && nameError) && <section className={style.error}>{nameError}</section>}
+                                    <input  placeholder='Иван...' {...register('first_name', {
+                                        required: 'Поле с именем обязательно!',
+                                        minLength: {
+                                            value: 2,
+                                            message: 'Поле должно содержать минимум 2 символа'
+                                        }
+                                    })}/>
+                                    {errors.first_name && <section className={style.error}>{errors?.first_name.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="last_name">Фамилия</label>
-                                    <input type="text" placeholder='Иванов...' name='last_name' onChange={e => {lnameHandler(e)}} onBlur={e => {blurHandler(e)}}/>
-                                    {(nameDirty && nameError) && <section className={style.error}>{nameError}</section>}
+                                    <input placeholder='Иванов...' {...register('last_name', {
+                                        required: 'Поле  с фамилией обязательно!',
+                                    })}/>
+                                    {errors.last_name && <section className={style.error}>{errors.last_name.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="middle_name">Отчество</label>
-                                    <input type="text" placeholder='Ваше отчество...' value={middle_name} name='middle_name' onChange={e => {middle_nameHandler(e)}} />
+                                    <input  placeholder='Ваше отчество...'  {...register('middle_name', {
+                                        required: 'Поле с отчеством обязательно!'
+                                    })}/>
+                                    {errors.middle_name && <section className={style.error}>{errors.middle_name.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="username">Username</label>
-                                    <input type="text" name='username' placeholder='Username...' value={username} onChange={e => {usernameHandler(e)}}/>
-                                    {(usernameDirty && usernameError) && <section className={style.error}>{usernameError}</section>}
+                                    <input  placeholder='Username...' {...register('username', {
+                                        required: 'Поле необходимо для дальнейшей авторизации!',
+                                        minLength: {
+                                            value: 4,
+                                            message: 'Содержит минимум 4 символа!'
+                                        }
+                                    })}/>
+                                    {errors.username && <section className={style.error}>{errors.username.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="email">Email</label>
-                                    <input onChange={e => emailHandler(e)} value={email} onBlur={e => blurHandler(e)} type="email" name="email" placeholder="Ваша почта..."/>
-                                    {(emailDirty && emailError) && <section className={style.error}>{emailError}</section>}
+                                    <input  placeholder="Ваша почта..." {...register('email',{
+                                        required: 'Укажите почту!',
+                                    
+                                    })}/>
+                                    {errors.email && <section className={style.error}>{errors.email.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="phone">Номер телефона</label>
-                                    <input type="text" name='phone' value={phone} placeholder='Ваш телефон...' onChange={e => phoneHandler(e)} onBlur={e => blurHandler(e)}/>
-                                    {(inputError && inputDirty) && <section className={style.error}>{inputError}</section>}
+                                    <input  placeholder='Ваш телефон...' {...register('phone', {
+                                        required: 'Укажите телефон!',
+                                        minLength: {
+                                            value: 11,
+                                            message: 'Номер телефона не может содержать меньше 11 символов!'
+                                        }
+                                    })}/>
+                                    {errors.phone && <section className={style.error}>{errors.phone.message}</section>}
                                 </div>
                                 
-                                <div className={style.regDiv}>
-                                    <label htmlFor="city">Населенный пункт</label>
-                                    <input type="text" name='city' value={city} placeholder='Ваш Город...' onChange={e => {cityHandler(e)}}/>
-                                </div>
+                                
                                 <div className={style.regDiv}>
                                     <label htmlFor="snils">СНИЛС</label>
-                                    <input type="text" name='snils' placeholder='xxx-xxx-xxx yy' value={snils} onChange={e => snilsHandler(e)}/>
+                                    <input placeholder='xxx-xxx-xxx yy' {...register('snils', {
+                                        required: 'Укажите СНИЛС!',
+                                        minLength: {
+                                            value: 11,
+                                            message: 'СНИЛС  может содержать только 11 цифр!'
+                                        },
+                                        maxLength: {
+                                            value: 11,
+                                            message: 'СНИЛС  может содержать только 11 цифр!'
+                                        }
+                                    })}/>
+                                    {errors.snils && <section className={style.error}>{errors.snils.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="date">Дата рождения</label>
-                                    <input type="date" placeholder='Дата рождения' value={date_birthday} onChange={e => date_birthdayHandler(e)}/>
+                                    <input type='date' placeholder='Дата рождения' {...register('date_birthday', {
+                                        valueAsDate: true,
+                                        required: 'Поле с датой рождения обязательно!'
+                                    })}/>
+                                    {errors.date_birthday && <section className={style.error}>{errors.date_birthday.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
-                                    <label htmlFor="gender">Пол</label>
-                                    <Select  color='secondary' value={sex} onChange={e => handleGender(e)} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
+                                    <label htmlFor="sex">Пол</label>
+                                    <Select  color='secondary' value={sex} onChange={e => sexHandle(e)}    style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                         <MenuItem value={"Мужской"}>Мужской</MenuItem>
                                         <MenuItem value={"Женский"}>Женский</MenuItem>
                                     </Select>
@@ -356,56 +245,58 @@ const Register: React.FC = () => {
                                 <h4>Информация об образовательной огранизации</h4>
                                 <div className={style.regDiv}>
                                     <label htmlFor="region">Регион</label>
-                                    <input type="text" name='region' value={region} placeholder='Ваш Регион...' onChange={e => {regionHandler(e)}}/>
+                                    <input  placeholder='Ваш Регион...' {...register('region', {
+                                        required: 'Укажит регион!'
+                                    })}/>
+                                    {errors.region && <section className={style.error}>{errors.region.message}</section>}
+                                </div>
+                                <div className={style.regDiv}>
+                                    <label htmlFor="city">Населенный пункт</label>
+                                    <input  placeholder='Ваш Город...' {...register('city', {
+                                        required: 'Поле обязательно!'
+                                    })}/>
+                                    {errors.city && <section className={style.error}>{errors.city.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="SchoolOrCollege">Школа/Колледж</label>
-                                    <Select value={schoolCategory} style={{width: 200}} color='secondary' onChange={e => handleSchoolCategory(e)}>
+                                    <Select  style={{width: 200}} color='secondary' value={schoolCategory} onChange={e => SchoolOrCollegeHandle(e)}>
                                         <MenuItem value={"Школа"}>Школа</MenuItem>
                                         <MenuItem value={"Колледж/Техникум"}>Колледж/Техникум</MenuItem>
                                     </Select>
                                 </div>
-                                {schoolCategory==='Школа' ? <div className={style.regDiv}>
+                                {schoolCategory === 'Школа' &&  <div className={style.regDiv}>
                                     <label htmlFor="class">Класс обучения</label>
-                                    <Select  color='secondary' value={grade} onChange={e => handleClass(e)} style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
-                                        <MenuItem value={1}>1</MenuItem>
-                                        <MenuItem value={2}>2</MenuItem>
-                                        <MenuItem value={3}>3</MenuItem>
-                                        <MenuItem value={4}>4</MenuItem>
-                                        <MenuItem value={5}>5</MenuItem>
-                                        <MenuItem value={6}>6</MenuItem>
-                                        <MenuItem value={7}>7</MenuItem>
-                                        <MenuItem value={8}>8</MenuItem>
-                                        <MenuItem value={9}>9</MenuItem>
+                                    <Select  color='secondary' value={grade} onChange={e => {GradeHandle(e)}}  style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
                                         <MenuItem value={10}>10</MenuItem>
                                         <MenuItem value={11}>11</MenuItem>
                                     </Select>
-                                </div> : <div className={style.regDiv}>
+                                </div> }
+
+                                {schoolCategory === 'Колледж/Техникум' && <div className={style.regDiv}>
                                         <label htmlFor="course">Курс обучения</label>
-                                        <Select value={grade} style={{width: 100}} onChange={e => handleCourse(e)} color='secondary'>
+                                        <Select value={grade} onChange={e => {GradeHandle(e)}} style={{width: 100}}  color='secondary'>
                                             <MenuItem value={1}>1</MenuItem>
                                             <MenuItem value={2}>2</MenuItem>
-                                            <MenuItem value={3}>3</MenuItem>
-                                            <MenuItem value={4}>4</MenuItem>
                                         </Select>
-                                    </div>}
-                                
-                                
+                                </div>}
                                 <div className={style.regDiv}>
                                     <label htmlFor="school">Наименование учебного заведения</label>
-                                    <input type="text" value={school} name='school' onChange={e => {schoolHandle(e)}} placeholder='Ваше учебное заведение...' onBlur={e => blurHandler(e)}/>
-                                    {(inputError && inputDirty) && <section className={style.error}>{inputError}</section>}
+                                    <input  placeholder='Ваше учебное заведение...' {...register('school', {
+                                        required: 'Поле обязательно!'
+                                    })}/>
+                                   {errors.school && <section className={style.error}>{errors.school.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="password">Придумайте пароль</label>
-                                    <input value={password} onChange={e => passworHandler(e)} onBlur={e => blurHandler(e)} type={`${eye ? "password" : "text"}`} name="password" placeholder="Ваш пароль..."/>
+                                    <input type={`${eye ? "password" : "text"}`}  placeholder="Ваш пароль..." {...register('passsord', {
+                                        required: 'Придумайте пароль для вашего аккаунта!',
+                                        minLength: {
+                                            value: 6,
+                                            message: 'Пароль должен содержать не менее 6 символов'
+                                        }
+                                    })}/>
                                     <div onClick={() => {setEye(!eye)}} className={style.eye}>{eye ? <VisibilityOutlinedIcon color='secondary'/> : <VisibilityOffOutlinedIcon color='secondary'/>}</div>
-                                    {(passwordDirty && passwordError) && <section className={style.error}>{passwordError}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="ConfirmPassword">Подтвердите пароль</label>
-                                    <input type="password" name='ConfirmPassword' value={confirmPassword} onBlur={e => blurHandler(e)} onChange={e => {confirmPasswordHandler(e)}} placeholder='Ваш пароль...'/>
-                                    {(passwordMatchError && passwordMatch) && <section className={style.error}>{passwordMatchError}</section>}
+                                    {errors.passsord && <section className={style.error}>{errors.passsord.message}</section>}
                                 </div>
                             </section>
                     </section>
@@ -414,9 +305,9 @@ const Register: React.FC = () => {
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_2} onClick={handlerCheck_2}/><p>Cогласен получать информацию об этапах олимпиады, публикации заданий и результатов на e-mail.</p></div>
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_3} onClick={handlerCheck_3}/><p>Даю <Link to='/PDFReader'>согласие</Link> на обработку персональных данных.</p></div>
                     </section>
-                    <button form='register' type='submit' className={style.regBtn} disabled={!formValid}  onClick={handleRegister} onMouseDown={handleSuccessBar}>Зарегистрироваться</button>
                     
                     
+                    <input type="submit" className={style.regBtn} disabled={!isValid}/>
                 </form>
                 <p>У вас уже есть аккаунт?<Link to='/войти'>Войти</Link></p>
                 
