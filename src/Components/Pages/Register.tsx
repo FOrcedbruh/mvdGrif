@@ -22,16 +22,7 @@ const Register: React.FC = () => {
     type Inputs = {
         username: string,
         passsord: string,
-        first_name: string,
-        last_name: string,
-        middle_name: string,
         email: string,
-        region: string,
-        city: string,
-        phone: string,
-        snils: string,
-        date_birthday: string,
-        school: string,
     }
 
     const {
@@ -68,25 +59,7 @@ const Register: React.FC = () => {
     const [eye, setEye] = useState(true);
 
 
-    const [sex, setSex] = useState<string>('Мужской')
 
-    const sexHandle = (e: SelectChangeEvent<string>) => {
-        setSex(e.target.value)
-    }
-
-    // логика для выбора школы и колледжа
-
-    const [schoolCategory, setSchoolCategory] = useState<string>('Школа');
-
-    const SchoolOrCollegeHandle = (e: SelectChangeEvent<string>)  => {
-        setSchoolCategory(e.target.value);
-    }
-
-    const [grade, setGrade] = useState<string>('');
-
-    const GradeHandle = (e: SelectChangeEvent<string>) => {
-        setGrade(e.target.value);
-    }
     
 
     // success bar
@@ -106,40 +79,25 @@ const Register: React.FC = () => {
         setSuccesBar(false);
       };
 
+    // отправка данных на сервер
+
+
     const onSubmit = (data: any) => {
-        alert(JSON.stringify(data))
         const username: string = data.username;
-        const first_name: string = data.first_name;
-        const last_name: string = data.last_name;
-        const middle_name: string = data.middle_name;
+        const password: string = data.password;
         const email: string = data.email;
-        const region: string = data.region;
-        const phone: string = data.phone;
-        const snils: string = data.snils;
-        const date_birthday: string = data.date_birthday;
-        const school: string = data.school;
         console.log(
             username,
-            first_name,
-            last_name,
-            middle_name,
+            password,
             email,
-            region,
-            phone,
-            snils,
-            date_birthday,
-            school,
             data
         )
+        //authAPI.create(username, email, password).then(data => {console.log(data)});
+        handleSuccessBar()
         reset();
     }
 
-    // отправка данных на сервер
-
-    //  const handleRegister = () => {
-       // authAPI.create(username, first_name, last_name, email, region, city, password, sex, grade, phone, snils, middle_name, date_birthday, school).then(data => {console.log(data)});
-       
-    //  }
+    
 
 
     return (
@@ -152,35 +110,10 @@ const Register: React.FC = () => {
                     <h1>Регистрация</h1>
                     <section className={style.inputWindows}>
                             <section className={style.inputs}>
-                                <h4>Информация о себе</h4>
+                                
                                 <div className={style.regDiv}>
-                                    <label htmlFor="firts_name">Имя</label>
-                                    <input  placeholder='Иван...' {...register('first_name', {
-                                        required: 'Поле с именем обязательно!',
-                                        minLength: {
-                                            value: 2,
-                                            message: 'Поле должно содержать минимум 2 символа'
-                                        }
-                                    })}/>
-                                    {errors.first_name && <section className={style.error}>{errors?.first_name.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="last_name">Фамилия</label>
-                                    <input placeholder='Иванов...' {...register('last_name', {
-                                        required: 'Поле  с фамилией обязательно!',
-                                    })}/>
-                                    {errors.last_name && <section className={style.error}>{errors.last_name.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="middle_name">Отчество</label>
-                                    <input  placeholder='Ваше отчество...'  {...register('middle_name', {
-                                        required: 'Поле с отчеством обязательно!'
-                                    })}/>
-                                    {errors.middle_name && <section className={style.error}>{errors.middle_name.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="username">Username</label>
-                                    <input  placeholder='Username...' {...register('username', {
+                                    <label htmlFor="username">Придумайте логин</label>
+                                    <input  placeholder='Логин...' {...register('username', {
                                         required: 'Поле необходимо для дальнейшей авторизации!',
                                         minLength: {
                                             value: 4,
@@ -198,95 +131,6 @@ const Register: React.FC = () => {
                                     {errors.email && <section className={style.error}>{errors.email.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
-                                    <label htmlFor="phone">Номер телефона</label>
-                                    <input  placeholder='Ваш телефон...' {...register('phone', {
-                                        required: 'Укажите телефон!',
-                                        minLength: {
-                                            value: 11,
-                                            message: 'Номер телефона не может содержать меньше 11 символов!'
-                                        }
-                                    })}/>
-                                    {errors.phone && <section className={style.error}>{errors.phone.message}</section>}
-                                </div>
-                                
-                                
-                                <div className={style.regDiv}>
-                                    <label htmlFor="snils">СНИЛС</label>
-                                    <input placeholder='xxx-xxx-xxx yy' {...register('snils', {
-                                        required: 'Укажите СНИЛС!',
-                                        minLength: {
-                                            value: 11,
-                                            message: 'СНИЛС  может содержать только 11 цифр!'
-                                        },
-                                        maxLength: {
-                                            value: 11,
-                                            message: 'СНИЛС  может содержать только 11 цифр!'
-                                        }
-                                    })}/>
-                                    {errors.snils && <section className={style.error}>{errors.snils.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="date">Дата рождения</label>
-                                    <input type='date' placeholder='Дата рождения' {...register('date_birthday', {
-                                        valueAsDate: true,
-                                        required: 'Поле с датой рождения обязательно!'
-                                    })}/>
-                                    {errors.date_birthday && <section className={style.error}>{errors.date_birthday.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="sex">Пол</label>
-                                    <Select  color='secondary' value={sex} onChange={e => sexHandle(e)}    style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
-                                        <MenuItem value={"Мужской"}>Мужской</MenuItem>
-                                        <MenuItem value={"Женский"}>Женский</MenuItem>
-                                    </Select>
-                                </div>
-                            </section>
-                            <section className={style.inputs}>
-                                <h4>Информация об образовательной огранизации</h4>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="region">Регион</label>
-                                    <input  placeholder='Ваш Регион...' {...register('region', {
-                                        required: 'Укажит регион!'
-                                    })}/>
-                                    {errors.region && <section className={style.error}>{errors.region.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="city">Населенный пункт</label>
-                                    <input  placeholder='Ваш Город...' {...register('city', {
-                                        required: 'Поле обязательно!'
-                                    })}/>
-                                    {errors.city && <section className={style.error}>{errors.city.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
-                                    <label htmlFor="SchoolOrCollege">Школа/Колледж</label>
-                                    <Select  style={{width: 200}} color='secondary' value={schoolCategory} onChange={e => SchoolOrCollegeHandle(e)}>
-                                        <MenuItem value={"Школа"}>Школа</MenuItem>
-                                        <MenuItem value={"Колледж/Техникум"}>Колледж/Техникум</MenuItem>
-                                    </Select>
-                                </div>
-                                {schoolCategory === 'Школа' &&  <div className={style.regDiv}>
-                                    <label htmlFor="class">Класс обучения</label>
-                                    <Select  color='secondary' value={grade} onChange={e => {GradeHandle(e)}}  style={{width: 100}} labelId="demo-simple-select-standard-label" id="demo-simple-select-standard">
-                                        <MenuItem value={10}>10</MenuItem>
-                                        <MenuItem value={11}>11</MenuItem>
-                                    </Select>
-                                </div> }
-
-                                {schoolCategory === 'Колледж/Техникум' && <div className={style.regDiv}>
-                                        <label htmlFor="course">Курс обучения</label>
-                                        <Select value={grade} onChange={e => {GradeHandle(e)}} style={{width: 100}}  color='secondary'>
-                                            <MenuItem value={1}>1</MenuItem>
-                                            <MenuItem value={2}>2</MenuItem>
-                                        </Select>
-                                </div>}
-                                <div className={style.regDiv}>
-                                    <label htmlFor="school">Наименование учебного заведения</label>
-                                    <input  placeholder='Ваше учебное заведение...' {...register('school', {
-                                        required: 'Поле обязательно!'
-                                    })}/>
-                                   {errors.school && <section className={style.error}>{errors.school.message}</section>}
-                                </div>
-                                <div className={style.regDiv}>
                                     <label htmlFor="password">Придумайте пароль</label>
                                     <input type={`${eye ? "password" : "text"}`}  placeholder="Ваш пароль..." {...register('passsord', {
                                         required: 'Придумайте пароль для вашего аккаунта!',
@@ -299,13 +143,12 @@ const Register: React.FC = () => {
                                     {errors.passsord && <section className={style.error}>{errors.passsord.message}</section>}
                                 </div>
                             </section>
-                    </section>
                     <section className={style.checkboxies}>
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_1} onClick={handlerCheck_1}/><p>С порядком проведения олимпиады, приложением и регламентом ознакомлен.</p></div>
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_2} onClick={handlerCheck_2}/><p>Cогласен получать информацию об этапах олимпиады, публикации заданий и результатов на e-mail.</p></div>
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_3} onClick={handlerCheck_3}/><p>Даю <Link to='/PDFReader'>согласие</Link> на обработку персональных данных.</p></div>
                     </section>
-                    
+                </section>
                     
                     <input type="submit" className={style.regBtn} disabled={!isValid}/>
                 </form>
