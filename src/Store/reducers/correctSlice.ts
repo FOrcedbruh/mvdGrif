@@ -16,16 +16,16 @@ const correctSlice = createSlice({
     name: 'correct',
     initialState: initialState,
     reducers: {
-        increment(state) {
+        incrementCorrect(state) {
             state.correct += 1
         },
-        nothing(state) {
+        nothingCorrect(state) {
             state.correct += 0
         },
         incrementPoints(state, action: PayloadAction<number>) {
             state.points += action.payload
         },
-        decrementPoints(state) {
+        nothingPoints(state) {
             state.points -= 0
         },
         reset(state, action: PayloadAction<number>) {
@@ -37,5 +37,5 @@ const correctSlice = createSlice({
 })
 
 
-export const {increment, nothing, incrementPoints, decrementPoints, reset} = correctSlice.actions;
+export const {incrementCorrect, nothingCorrect, incrementPoints, nothingPoints, reset} = correctSlice.actions;
 export default correctSlice.reducer;

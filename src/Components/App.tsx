@@ -21,6 +21,8 @@ const OlimpicPreview = lazy(() => import("./Pages/OlimpicPreview"));
 const Olimpics = lazy(() => import("./Pages/Olimpics"));
 const MaterialsPage = lazy(() => import("./Pages/MaterialsPage"));
 
+
+
 const App: React.FC = () => {
     
 
@@ -41,20 +43,23 @@ const App: React.FC = () => {
         return () => {window.removeEventListener('scroll', progress)};
     }, []);
 
-    // отображение в header имени и фамилии
+    // отображение в header username и email
 
-    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
-    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
+    const [username, setUsername] = useState<string>(localStorage.getItem('username') || 'Kumar');
+    const [email, setEmail] = useState<string>(localStorage.getItem('email') || 'ilya925512@gmail.com');
+    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || 'Ilya');
+    const [last_name, setLast_name] = useState<string>(localStorage.getItem('first_name') || 'Chaplya');
     
     // состоние для логики рендера профиля
 
     const [showProfile, setShowProfile] = useState<boolean>(false);
 
     useEffect(() => {
-        if (first_name && last_name) {
+        if (username) {
             setShowProfile(true)
         }
-        else if (!first_name && !last_name) {
+
+        else if (!username) {
             setShowProfile(false);
         }
     })
@@ -86,14 +91,11 @@ const App: React.FC = () => {
         query: "(max-width: 1224px) and (min-width: 787px)"
       });
      
-      const isMobile = useMediaQuery({
-        query: "(max-width: 786px)"
-      });
 
 
     return (
         <>
-            <StoreContext.Provider value={{first_name, last_name, setFirst_name, setLast_name, showProfile, setShowProfile, preview, setPreview, snack, setSnack, handleClose}}>
+            <StoreContext.Provider value={{first_name, last_name, username, email, setEmail, setUsername, showProfile, setShowProfile, preview, setPreview, snack, setSnack, handleClose}}>
                 <section className="wrapper">
                     <div className='progressBar' style={{width: `${percent}%`}}></div>
                             <Routes>

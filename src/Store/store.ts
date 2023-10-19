@@ -1,9 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import correctSlice from "./reducers/correctSlice";
-
+import AccountStatusSlice from "./reducers/AccountStatusSlice";
 
 const rootReducer = combineReducers({
-    correctSlice: correctSlice
+    correctSlice: correctSlice,
+    AccountStatusSlice: AccountStatusSlice,
 })
 
 const store = configureStore({

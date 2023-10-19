@@ -72,7 +72,7 @@ const Materials: React.FC = () => {
 
 const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
 
-    const {last_name, first_name, showProfile, preview} = useContext(StoreContext);
+    const {username, last_name, first_name, showProfile, preview} = useContext(StoreContext);
 
 
     const [home, setHome] = useState<boolean>(false);
@@ -120,7 +120,7 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                     <ThemeThumb />
                 {showProfile ?
                     <div className={style.profileInf}>
-                        <Tooltip title='Перейти к профилю'><NavLink to='/профиль' className={style.profileLink}>{first_name} {last_name}</NavLink></Tooltip> <Avatar src={preview}/>
+                        <Tooltip title='Перейти к профилю'><NavLink to='/профиль' className={style.profileLink}>{first_name? <>{first_name} {last_name}</> : <>{username}</>}</NavLink></Tooltip> <Avatar src={preview}/>
                     </div>
                  : 
                 <div className={style.profile}>

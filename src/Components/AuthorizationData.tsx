@@ -5,9 +5,10 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://6264-46-188-120-131.ngrok-free.app',
+    baseURL: 'https://api.dev.гриф-рус.рус',
     // Authorization: 'Token 3ae7399c2fb938265eb2c46438e8f5862ac3f776'
 })
+
 
 const authAPI = {
     create(username: string, first_name: string, last_name: string, email: string, region: string, city: string, password: string, sex: string, phone: string, snils: string, middle_name: string,  date_birthday: string, school: string, grade: string) {

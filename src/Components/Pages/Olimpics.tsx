@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, Link } from 'react-router-dom';
 import { Alert, Button, Modal, Tooltip, Box, Snackbar } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
-import { nothing, increment, incrementPoints, decrementPoints } from '../../Store/reducers/correctSlice';
+import { nothingCorrect, incrementCorrect, incrementPoints, nothingPoints } from '../../Store/reducers/correctSlice';
 import { authAPI } from '../AuthorizationData';
 
 
@@ -156,12 +156,12 @@ const Olimpics: React.FC = () => {
         setStep(step + 1);
         setPressed(false);
         if (correctClick === true) {
-            dispatch(increment());
+            dispatch(incrementCorrect());
             dispatch(incrementPoints(question.value))
         }
         else if (correctClick === false) {
-            dispatch(nothing())
-            dispatch(decrementPoints())
+            dispatch(nothingCorrect())
+            dispatch(nothingPoints())
         }
         setCorrectClick(false);
         console.log("балы", points);
