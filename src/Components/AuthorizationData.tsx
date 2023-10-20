@@ -5,20 +5,20 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://api.dev.гриф-рус.рус',
+    baseURL: 'https://api.dev.гриф-рус.рус/',
     // Authorization: 'Token 3ae7399c2fb938265eb2c46438e8f5862ac3f776'
 })
 
 
 const authAPI = {
-    create(username: string, first_name: string, last_name: string, email: string, region: string, city: string, password: string, sex: string, phone: string, snils: string, middle_name: string,  date_birthday: string, school: string, grade: string) {
-        return  instance.post<string>(`user/register/`, {username, first_name, last_name, email, region, city, password, sex, phone, snils, middle_name, date_birthday, school, grade})
+    create(username: string,  email: string, password: string) {
+        return  instance.post(`auth/users/`, {username, email, password})
             .then(response => {
                 return response.data
             })
     },
     login(username: string, password: string) {
-        return instance.post('user/login/', { username, password })
+        return instance.post('auth/token/login/', { username, password })
             .then(response => {
                 const token = response.data.access;
                 localStorage.setItem('authToken', token);

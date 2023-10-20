@@ -49,16 +49,17 @@ const Login: React.FC<LoginType> = () => {
         const username: string = data.username;
         const password: string = data.password;
         console.log(username, password);
+        authAPI.login(username, password).then(response => {
+            const token = response.data.access;
+            // Сохраняем токен в localStorage
+            localStorage.setItem('authToken', token);
+            authAPI.me(token).then(data => {
+                console.log(data)
+            })
+        })
         reset();
     }
 
-
-    //const loginHandler = () => {
-    //    authAPI.login(username, password).then(data => {console.log(data)});
-     //   const token = localStorage.getItem('authToken');
-     //   console.log(token);
-     //   authAPI.me(token).then(data => {console.log(data)})
-  //  }
 
 
     return (

@@ -21,7 +21,7 @@ const Register: React.FC = () => {
 
     type Inputs = {
         username: string,
-        passsord: string,
+        password: string,
         email: string,
     }
 
@@ -92,7 +92,7 @@ const Register: React.FC = () => {
             email,
             data
         )
-        //authAPI.create(username, email, password).then(data => {console.log(data)});
+        authAPI.create(username, email, password).then(data => {console.log(data)});
         handleSuccessBar()
         reset();
     }
@@ -126,21 +126,26 @@ const Register: React.FC = () => {
                                     <label htmlFor="email">Email</label>
                                     <input  placeholder="Ваша почта..." {...register('email',{
                                         required: 'Укажите почту!',
+                                        pattern: {
+                                            value: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu,
+                                            message: 'Почта имеет определенный формат, укажите валидную почту!'
+                                        }
+                                        
                                     
                                     })}/>
                                     {errors.email && <section className={style.error}>{errors.email.message}</section>}
                                 </div>
                                 <div className={style.regDiv}>
                                     <label htmlFor="password">Придумайте пароль</label>
-                                    <input type={`${eye ? "password" : "text"}`}  placeholder="Ваш пароль..." {...register('passsord', {
+                                    <input type={`${eye ? "password" : "text"}`}  placeholder="Ваш пароль..." {...register('password', {
                                         required: 'Придумайте пароль для вашего аккаунта!',
                                         minLength: {
-                                            value: 6,
-                                            message: 'Пароль должен содержать не менее 6 символов'
+                                            value: 8,
+                                            message: 'Пароль должен содержать не менее 8 символов'
                                         }
                                     })}/>
                                     <div onClick={() => {setEye(!eye)}} className={style.eye}>{eye ? <VisibilityOutlinedIcon color='secondary'/> : <VisibilityOffOutlinedIcon color='secondary'/>}</div>
-                                    {errors.passsord && <section className={style.error}>{errors.passsord.message}</section>}
+                                    {errors.password && <section className={style.error}>{errors.password.message}</section>}
                                 </div>
                             </section>
                     <section className={style.checkboxies}>
