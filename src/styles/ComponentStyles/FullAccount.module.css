@@ -83,6 +83,9 @@ form div input:focus {
     border-radius: 20px;
     cursor: pointer;
     transition: all .3s ease;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
 }
 .Btn input:hover {
     box-shadow: 0 0 20px blueviolet;

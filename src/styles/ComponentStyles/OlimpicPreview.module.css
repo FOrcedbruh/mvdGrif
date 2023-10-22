@@ -2,9 +2,21 @@
     width: 100%;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
+}
+
+.head {
+    position: absolute;
+    font-size: 40px;
+    font-weight: 800;
+    padding-top: 40px;
+    padding-left: 140px;
+    padding-bottom: 60vh;
+    align-self: start;
+    z-index: 2;
 }
 
 .window img {
@@ -20,4 +32,9 @@
 }
 .window a {
     text-decoration: none;
+}
+@media only screen and (max-width: 776px) {
+    .head {
+        padding-left: 30px;
+    }
 }

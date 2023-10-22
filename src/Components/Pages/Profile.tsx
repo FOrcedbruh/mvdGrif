@@ -102,7 +102,9 @@ return (
         <section className={`${style.window} profile`}>
             {renderChoosePhoto && <AddingAvatar renderChoosePhotoHandler={renderChoosePhotoHandler} renderChoosePhoto={renderChoosePhoto} setPreview={setPreview} preview={preview}/>}
             <Button onClick={goBack} color='secondary' className={style.backBtn}><ArrowBackIcon/> Назад </Button>
+            <h1 className={style.head}>Профиль</h1>
             <div className={style.topSector}>
+                
                 <div className={style.userData}>
                     <h2> <span>Личные</span> данные</h2>
                     <div className={style.avatar}>
@@ -129,7 +131,7 @@ return (
         </section>
         <Snackbar open={!fullAccount}>
                 <Alert severity='error'>
-                    <p>Ваш аккаунт не полный! <Link to='/дополнение_аккаунта'>Дополните его</Link> , для доступа к олимпиаде.</p>
+                    <p>Ваш аккаунт не полный! <Tooltip title='Перейти' placement='top'><Link to='/дополнение_аккаунта'>Дополните его</Link></Tooltip> , для доступа к олимпиаде.</p>
                 </Alert>
         </Snackbar>
     </>

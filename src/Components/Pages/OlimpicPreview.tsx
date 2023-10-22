@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { StoreContext } from '../../contexts/storeContext';
 import { Snackbar, Alert, Tooltip } from '@mui/material';
-import { useAppDispatch } from '../../hooks/reducerHooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
 import { reset } from '../../Store/reducers/correctSlice';
 
 
 const OlimpicPreview: React.FC = () => {
 
+    const { fullAccount } = useAppSelector(state => state.AccountStatusSlice);
 
     const dispatch = useAppDispatch();
 
@@ -45,13 +46,14 @@ const OlimpicPreview: React.FC = () => {
 
     
     return (
-        <section className={style.window}>
+        <section className={`${style.window} olimpicsPreviewWindow`}>
+            <h1 className={style.head}>Олимпиада</h1>
             <img src={Grif}/>
-            {showProfile ? <Link to='/Тесты олимпиады'><Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={() => dispatch(reset(0))}>Перейти к олимпиаде <ArrowOutwardIcon /></Button></Link>
+            {fullAccount ? <Link to='/Тесты олимпиады'><Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={() => dispatch(reset(0))}>Перейти к олимпиаде <ArrowOutwardIcon /></Button></Link>
              : <Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={onClick}>Перейти к олимпиаде <ArrowOutwardIcon /></Button>}
              <Snackbar open={open}  onClose={handleClose} autoHideDuration={4000}>
                 <Alert severity='error'>
-                    Для участия в олимпиаде необходимо войти в <Tooltip title='Перейти к регистрации' followCursor><Link to='/регистрация' style={{'color': 'blueviolet'}}>аккаунт</Link></Tooltip>!
+                    Для участия в олимпиаде необходимо иметь полный  <Tooltip title='Перейти к регистрации' followCursor><Link to='/профиль' style={{'color': 'blueviolet'}}>аккаунт</Link></Tooltip>!
                 </Alert>
              </Snackbar>
              <Snackbar open={warningBar} onClose={WarningHandleClose} autoHideDuration={5000}>

@@ -7,17 +7,52 @@
     align-items: center;
     user-select: none;
 }
-.carousel {
-    width: 50%;
+
+.slider {
+    width: 1000px;
+    height: 640px;
+    cursor: grab;
 }
-.carousel div{
-    width: 100%;
+.image {
+    width: 1000px;
+    height: 600px;
 }
+
+.Btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.controlBtn {
+    width: 140px;
+    height: 40px;
+    background-color: rgb(90, 30, 146);
+    outline: none;
+    border: none;
+    border-radius: 20px;
+}
+
 @media only screen and (max-width: 400px) {
     .window {
         margin-top: 50vh;
     }
-    .carousel {
+    .slider {
         width: 80%;
+    }
+}
+@media only screen and (max-width: 1030px) {
+    .slider {
+       width:  800px;
+    }
+}
+@media only screen and (max-width: 840px) {
+    .slider {
+       width:  500px;
+    }
+}
+@media only screen and (max-width: 560px) {
+    .slider {
+       width:  340px;
     }
 }

@@ -1,13 +1,15 @@
 import style from './../../styles/ComponentStyles/FullAccount.module.css';
 import { useForm } from 'react-hook-form';
 import FormType from '../../types/FullAccountFormType';
-import { Snackbar, Alert } from '@mui/material';
-
-
+import { Snackbar, Alert, Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const FullAccount: React.FC = () => {
+
 
     const {
         register,
@@ -22,13 +24,38 @@ const FullAccount: React.FC = () => {
     })
 
 
+    // snackbar
+
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+
+    // навигация
+
+    const navigate = useNavigate();
+
+    const goBack = () => navigate(-1);
+
+
+    //  отправка данных
+
     const onSubmit = (data: any) => {
         console.log(data);
+        if (isValid) {
+            setOpen(true);
+        }
         reset();
-    } 
+    }
 
     return (
         <section className={`${style.window} fullAccountWindow`}>
+            <Button variant='text' color='secondary' onClick={goBack} style={{'alignSelf': 'start', 'marginLeft': '40px'}}><ArrowBackIcon /> Назад</Button>
             <div className={style.formDiv}>
                 <h3>Дополните ваш аккаунт</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -103,16 +130,20 @@ const FullAccount: React.FC = () => {
                             })}/>
                             {errors.school && <section className={style.error}>{errors.school.message}</section>}
                         </div>
-                        
                     </section>
                     
 
                     <section className={style.Btn}>
-                        <input type="submit" disabled={!isValid} style={{'cursor': isValid ? 'pointer' : 'not-allowed'}} value={'Подтвердить изменения'}/>
+                        <input type="submit" disabled={!isValid}  style={{'cursor': isValid ? 'pointer' : 'not-allowed'}} value={'Подтвердить изменения'}/>
                     </section>  
                     
                 </form>
             </div>
+            <Snackbar onClose={handleClose} open={open} autoHideDuration={4000}>
+                <Alert severity='success'>
+                    <p>Ваши данные отправлены успешно!</p>
+                </Alert>
+            </Snackbar>
         </section>
     )
 }
