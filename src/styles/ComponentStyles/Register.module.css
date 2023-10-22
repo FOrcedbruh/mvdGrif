@@ -78,6 +78,7 @@ form {
     border-radius: 20px;
     background-color: #ff8a8a;
     font-size: 12px;
+    font-weight: 600;
     color: red;
     display: flex;
     justify-content: center;

@@ -126,12 +126,12 @@ return (
                     <p className={style.result}><StarIcon color='secondary'/>Баллы: <span>{points}</span></p>
                 </div>}
             </div>
-            <Snackbar open={!fullAccount}>
-                <Alert severity='error'>
-                    <p>Ваш аккаунт не полный! <Link to='/'>Дополните его</Link> , для доступа к олимпиаде</p>
-                </Alert>
-            </Snackbar>
         </section>
+        <Snackbar open={!fullAccount}>
+                <Alert severity='error'>
+                    <p>Ваш аккаунт не полный! <Link to='/дополнение_аккаунта'>Дополните его</Link> , для доступа к олимпиаде.</p>
+                </Alert>
+        </Snackbar>
     </>
 )
 }

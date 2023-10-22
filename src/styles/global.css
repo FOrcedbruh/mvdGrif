@@ -175,6 +175,9 @@ footer {
     color: var(--textColor);
     background: var(--footerBackground);
 }
+.fullAccountWindow {
+    color: var(--textColor);
+}
 .loader {
     width: 100%;
     height: 100vh;

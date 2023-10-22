@@ -8,8 +8,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, Link } from 'react-router-dom';
 import { Alert, Button, Modal, Tooltip, Box, Snackbar } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
-import { nothingCorrect, incrementCorrect, incrementPoints, nothingPoints } from '../../Store/reducers/correctSlice';
+import { nothingCorrect, incrementCorrect, incrementPoints, nothingPoints, reset } from '../../Store/reducers/correctSlice';
 import { authAPI } from '../AuthorizationData';
+import DoneIcon from '@mui/icons-material/Done';
 
 
 
@@ -75,7 +76,7 @@ const Olimpics: React.FC = () => {
                 answer_correct: 'Библиотека',
             },
             value: 4,
-            image: 'https://ru.legacy.reactjs.org/logo-og.png'
+            image: 'https://ru.legacy.reactjs.org/logo-og.png',
         },
         {
             id: 2,
@@ -87,7 +88,7 @@ const Olimpics: React.FC = () => {
                 answer_3: 'метод разметки сайта',
             },
             value: 8,
-            image: 'https://static-xf1.vietnix.vn/wp-content/uploads/2022/04/scss-sass-la-gi.webp'
+            image: 'https://static-xf1.vietnix.vn/wp-content/uploads/2022/04/scss-sass-la-gi.webp',
         },
         {
             id: 3,
@@ -99,7 +100,7 @@ const Olimpics: React.FC = () => {
                 answer_3: 'Работы с API',
             },
             value: 2,
-            image: 'https://devio2023-media.developers.io/wp-content/uploads/2020/09/typescript.png'
+            image: 'https://devio2023-media.developers.io/wp-content/uploads/2020/09/typescript.png',
         },
         {
             id: 3,
@@ -111,7 +112,7 @@ const Olimpics: React.FC = () => {
                 answer_3: 'Утилита стилей',
             },
             value: 2,
-            image: 'https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png'
+            image: 'https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png',
         },
         {
             id: 3,
@@ -123,7 +124,7 @@ const Olimpics: React.FC = () => {
                 answer_3: 'Утилита стилей',
             },
             value: 2,
-            image: 'https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png'
+            image: 'https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png',
         }
     ]
 
@@ -150,11 +151,16 @@ const Olimpics: React.FC = () => {
     const correctText: string = question.answers.answer_correct;
     const correctValue = answers.indexOf(correctText);
     
-    
+    // кнопки
 
-    const ClickBtnHandler = () => {
-        setStep(step + 1);
-        setPressed(false);
+
+    // логика принятия ответа
+
+    const [accept, setAccept] = useState<boolean>(false);
+
+
+    const AcceptClickBtnHandler = () => {
+        setAccept(true);
         if (correctClick === true) {
             dispatch(incrementCorrect());
             dispatch(incrementPoints(question.value))
@@ -164,7 +170,20 @@ const Olimpics: React.FC = () => {
             dispatch(nothingPoints())
         }
         setCorrectClick(false);
-        console.log("балы", points);
+    }
+
+
+    const ForwardClickBtnHandler = () => {
+        setStep(step + 1);
+        setPressed(false);
+        setAccept(false);
+
+    }
+
+    const BackClickBtnHandler = () => {
+        setStep(step - 1);
+        setPressed(false);
+        setAccept(false);
     }
 
 
@@ -207,7 +226,6 @@ const Olimpics: React.FC = () => {
 
     const [zoom, setZoom] = useState<boolean>(false);
 
-
     const zoomHandler = () =>  setZoom(true);
 
     const zoomCloseHandler = () => setZoom(false);
@@ -246,7 +264,11 @@ const Olimpics: React.FC = () => {
                                     <div className={style.test}>
                                         <OlimpicsQuiz  setCorrectClick={setCorrectClick}  question={question}   answers={answers} correctValue={correctValue}  setPressed={setPressed}/>
                                     </div>
-                                    <Button color='secondary' variant='contained' onClick={ClickBtnHandler} disabled={!pressed} style={{'zIndex': 1, 'alignSelf': 'center'}}>Дальше <ArrowForwardIcon /></Button>
+                                    <div className={style.controlBtns}>
+                                        {step > 0 && <Button color='secondary' variant='outlined' onClick={BackClickBtnHandler} style={{'zIndex': 1}}><ArrowBackIcon/> Назад</Button>}
+                                        <Button color='secondary' variant='contained' onClick={AcceptClickBtnHandler} disabled={!pressed}>{accept ? 'Принято' : 'Принять ответ'}</Button>
+                                        <Button color='secondary' variant='outlined' onClick={ForwardClickBtnHandler} style={{'zIndex': 1}}>Дальше <ArrowForwardIcon /></Button>
+                                    </div>
                                 </div>
                                 
                 </section>

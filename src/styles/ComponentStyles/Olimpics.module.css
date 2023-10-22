@@ -133,6 +133,13 @@
 .resultInfo p span span {
     color: chartreuse;
 }
+.controlBtns {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
 
 @media only screen and (max-width: 1224px){
     .window {

@@ -20,7 +20,7 @@ const DocumentsPage = lazy(() => import("./Pages/DocumentsPage"));
 const OlimpicPreview = lazy(() => import("./Pages/OlimpicPreview"));
 const Olimpics = lazy(() => import("./Pages/Olimpics"));
 const MaterialsPage = lazy(() => import("./Pages/MaterialsPage"));
-
+const FullAccount = lazy(() => import('./Pages/FullAccount'))
 
 
 const App: React.FC = () => {
@@ -45,8 +45,8 @@ const App: React.FC = () => {
 
     // отображение в header username и email
 
-    const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
-    const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
+    const [username, setUsername] = useState<string>(localStorage.getItem('username') || 'Kumar');
+    const [email, setEmail] = useState<string>(localStorage.getItem('email') || 'ilya925512@gmail.com');
     const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
     const [last_name, setLast_name] = useState<string>(localStorage.getItem('first_name') || '');
     
@@ -107,6 +107,7 @@ const App: React.FC = () => {
                                     <Route path="/Олимпиада" element={<Suspense fallback={<Loader />}><OlimpicPreview /></Suspense>}/>
                                     <Route path="/Материалы" element={<Suspense fallback={<Loader />}><MaterialsPage /></Suspense>}/>
                                 </Route>
+                                <Route path="/Дополнение_аккаунта" element={<Suspense fallback={<Loader />}><FullAccount /></Suspense>}/>
                                 <Route path="/Тесты олимпиады" element={<Suspense fallback={<Loader />}><Olimpics /></Suspense>}/>
                                 <Route path="/PDFReader" element={<Suspense fallback={<Loader />}><TextReader /></Suspense>}/>
                                 <Route path="/Профиль" element={showProfile ? <Suspense fallback={<Loader />}><Profile /></Suspense> : <Suspense fallback={<Loader />}><Login/></Suspense>} />
