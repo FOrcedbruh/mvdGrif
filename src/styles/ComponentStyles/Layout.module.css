@@ -21,6 +21,9 @@
 .window nav a {
     font-size: 14px;
 }
+.window nav a:hover {
+    border-bottom: 1px solid #fff;
+}
 .window nav ul.main {
     display: flex;
     flex-direction: row;

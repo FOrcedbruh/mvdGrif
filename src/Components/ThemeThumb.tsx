@@ -29,7 +29,7 @@ const ThemeThumb: React.FC = () => {
     return (
         <>
             <section>
-                <Button variant="contained" color="secondary" onClick={() => {handleChange(); modeHandle()}}>{!mode ? <LightModeIcon /> : <DarkModeIcon />}</Button>
+                <Button variant="text" color="secondary" style={{'color': 'white'}} onClick={() => {handleChange(); modeHandle()}}>{!mode ? <LightModeIcon /> : <DarkModeIcon />}</Button>
             </section>
         </>
     )

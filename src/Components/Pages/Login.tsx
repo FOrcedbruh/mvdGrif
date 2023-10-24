@@ -89,7 +89,7 @@ const Login: React.FC<LoginType> = () => {
                             <div onClick={() => {setEye(!eye)}} className={style.eyeLog}>{eye ? <VisibilityOutlinedIcon color='secondary'/> : <VisibilityOffOutlinedIcon color='secondary'/>}</div>
                             {errors.password  && <section className={style.error}>{errors.password.message}</section>}
                         </div>
-                        <input type="submit" className={style.regBtn} disabled={!isValid}/>
+                        <input type="submit" className={style.regBtn} disabled={!isValid} value={'Войти'}/>
                     </form>
                     <p>
                     У вас еще нет аккаунта?

@@ -155,7 +155,7 @@ const Register: React.FC = () => {
                     </section>
                 </section>
                     
-                    <input type="submit" className={style.regBtn} disabled={!isValid}/>
+                    <input type="submit" className={style.regBtn} disabled={!isValid} value={'Зарегистрироваться'}/>
                 </form>
                 <p>У вас уже есть аккаунт?<Link to='/войти'>Войти</Link></p>
                 

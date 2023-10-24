@@ -44,7 +44,7 @@ const MaterialsPage: React.FC = () => {
             <div className={style.flexWrapped}>
                 {links.map(item => {
                     return (
-                        <article>
+                        <article key={item.title}>
                             <p><OpenInNewIcon /><Tooltip title='Перейти' followCursor><Link to={`/${item.link}`}>{item.title}</Link></Tooltip></p>
                             <p>{item.description}</p>
                         </article>
@@ -55,7 +55,7 @@ const MaterialsPage: React.FC = () => {
             <div className={style.tech}>
                 {technologies.map(image => {
                     return (
-                        <img src={image}/>
+                        <img key={image} src={image}/>
                     )
                 })}
             </div>
