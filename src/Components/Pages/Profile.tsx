@@ -113,7 +113,7 @@ return (
                         <ul>
                             <li><p><h5>Login:</h5> {username}</p></li>
                             <li><p><h5>Почта:</h5> {email}</p></li>
-                            {first_name && <><li><p><h5>Вы:</h5> {first_name} {last_name}</p></li>
+                            {first_name && <><li><p><h5>Вы:</h5>{last_name} {first_name}</p></li>
                             <li><p><h5>Регион:</h5> {region}</p></li>
                             <li><p><h5>Населенный пункт:</h5> {city}</p></li>
                             <li><p><h5>Наименование уч. заведения:</h5> {school}</p></li>

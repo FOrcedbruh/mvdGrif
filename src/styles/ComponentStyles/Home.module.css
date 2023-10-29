@@ -65,14 +65,17 @@
     font-weight: 600;
     line-height: normal;
     text-shadow: var(--WelcomeShadow);
+    transition: all .5s ease-in-out;
 }
 .welcome p span {
     color: var(--welcomeGrif);
     font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
     font-size: 100px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
+    
 }
 .mainGrif {
     position: absolute;

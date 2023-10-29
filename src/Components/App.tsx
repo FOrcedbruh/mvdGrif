@@ -48,7 +48,7 @@ const App: React.FC = () => {
     const [username, setUsername] = useState<string>(localStorage.getItem('username') || 'Kumar');
     const [email, setEmail] = useState<string>(localStorage.getItem('email') || 'ilya925512@gmail.com');
     const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
-    const [last_name, setLast_name] = useState<string>(localStorage.getItem('first_name') || '');
+    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
     
     // состоние для логики рендера профиля
 

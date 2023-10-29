@@ -130,7 +130,6 @@ const Register: React.FC = () => {
                                             value: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu,
                                             message: 'Почта имеет определенный формат, укажите валидную почту!'
                                         }
-                                        
                                     
                                     })}/>
                                     {errors.email && <section className={style.error}>{errors.email.message}</section>}

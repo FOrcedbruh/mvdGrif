@@ -8,6 +8,7 @@ import mainGrif from './../../images/main-grif.svg';
 
 
 
+
 const Info: React.FC = () => {
     return (
         <section className={style.infoWin}>
@@ -59,6 +60,7 @@ const Main: React.FC = () => {
         return () => {window.removeEventListener('scroll', scrollHandler)}
     }, [])
 
+    
 
     return (
         <>
@@ -66,7 +68,7 @@ const Main: React.FC = () => {
             <div className={`${style.welcome}`}>
                 <p>
                     <span>
-                        ГРИФ.
+                       Гриф.
                     </span>
                     первый полностью  бесплатный ресурс повышения уровня знаний в сфере IT.
                 </p>
@@ -83,6 +85,8 @@ const Main: React.FC = () => {
 
 const Home: React.FC = () => {
     
+
+
     return (
         <section className={`${style.window} homeWindow`}>
             <Main />

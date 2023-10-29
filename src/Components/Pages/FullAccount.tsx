@@ -55,7 +55,7 @@ const FullAccount: React.FC = () => {
 
     return (
         <section className={`${style.window} fullAccountWindow`}>
-            <Button variant='text' color='secondary' onClick={goBack} style={{'alignSelf': 'start', 'marginLeft': '40px'}}><ArrowBackIcon /> Назад</Button>
+            <Button variant='text' color='secondary' onClick={goBack} className={style.backBtn}><ArrowBackIcon /> Назад</Button>
             <div className={style.formDiv}>
                 <h3>Дополните ваш аккаунт</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -98,7 +98,7 @@ const FullAccount: React.FC = () => {
                         <div>
                             <label htmlFor="sex">Ваш пол</label>
                             <input type="text" {...register('sex', {
-                                required: 'Укажите ваш пол!'
+                                required: 'Укажите ваш пол!',
                             })}/>
                             {errors.sex && <section className={style.error}>{errors.sex.message}</section>}
                         </div>

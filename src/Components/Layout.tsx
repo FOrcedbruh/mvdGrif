@@ -24,7 +24,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -120,7 +120,7 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
                     <ThemeThumb />
                 {showProfile ?
                     <div className={style.profileInf}>
-                        <Tooltip title='Перейти к профилю'><NavLink to='/профиль' className={style.profileLink}>{first_name? <>{first_name} {last_name}</> : <>{username}</>}</NavLink></Tooltip> <Avatar src={preview}/>
+                        <Tooltip title='Перейти к профилю'><NavLink to='/профиль' className={style.profileLink}>{first_name? <>{last_name} {first_name}</> : <>{username}</>}</NavLink></Tooltip> <Avatar src={preview}/>
                     </div>
                  : 
                 <div className={style.profile}>
@@ -224,7 +224,7 @@ const LayoutMobile: React.FC = () => {
                             <ListItem disablePadding>
                                 <ListItemButton style={{'width': '100%'}}>
                                     <ListItemIcon>
-                                        {<OpenInNewIcon />}
+                                        {<FiberManualRecordIcon />}
                                     </ListItemIcon>
                                     {index === 0 ? <Link to='/' onClick={toggleDrawer(anchor, false)}>Главная</Link> : <Link to={`/${text.text}`} onClick={toggleDrawer(anchor, false)}>{text.text}</Link>}
                                 </ListItemButton>
@@ -257,7 +257,7 @@ const LayoutMobile: React.FC = () => {
                 <div>
                     {(['top'] as const).map((anchor) => (
                         <React.Fragment key={anchor}>
-                        <Button onClick={toggleDrawer(anchor, true)} color='secondary'><MenuIcon fontSize='large'/></Button>
+                        <Button onClick={toggleDrawer(anchor, true)} color='secondary' style={{'color': 'white'}}><MenuIcon fontSize='large'/></Button>
                         <Drawer
                             anchor={anchor}
                             open={state[anchor]}
