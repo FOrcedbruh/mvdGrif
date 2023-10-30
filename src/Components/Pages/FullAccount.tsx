@@ -5,8 +5,9 @@ import { Snackbar, Alert, Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
+import { authAPI } from '../AuthorizationData';
+import { useAppDispatch } from '../../hooks/reducerHooks';
+import { setFullAccount } from '../../Store/reducers/AccountStatusSlice';
 
 const FullAccount: React.FC = () => {
 
@@ -45,11 +46,28 @@ const FullAccount: React.FC = () => {
 
     //  отправка данных
 
+    const dispatch = useAppDispatch();
+
     const onSubmit = (data: any) => {
-        console.log(data);
+        
         if (isValid) {
             setOpen(true);
         }
+        const first_name: string = data.first_name;
+        const last_name: string = data.last_name;
+        const middle_name: string = data.middle_name;
+        const region: string = data.region;
+        const city: string = data.first_name;
+        const school: string = data.school;
+        const sex: string = data.sex;
+        const grade: string = data.grade;
+        const snils: string = data.snils;
+        const date_birthday: string = data.date_birthday;
+        const phone: string = data.phone;
+        console.log(data);
+
+        authAPI.FullAccount(first_name, last_name, middle_name, region, city, school, sex, grade, snils, date_birthday, phone);
+        dispatch(setFullAccount());
         reset();
     }
 
@@ -129,6 +147,13 @@ const FullAccount: React.FC = () => {
                                 required: 'Укажите учебное заведение!'
                             })}/>
                             {errors.school && <section className={style.error}>{errors.school.message}</section>}
+                        </div>
+                        <div>
+                            <label htmlFor="grade">Класс или курс обучения</label>
+                            <input type="text" {...register('grade', {
+                                required: 'Укажие класс или курс обучения!'
+                            })}/>
+                            {errors.grade && <section className={style.error}>{errors.grade.message}</section>}
                         </div>
                     </section>
                     

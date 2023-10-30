@@ -13,7 +13,7 @@ import { StoreContext } from '../../contexts/storeContext';
 import Tooltip from '@mui/material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
-import { resetFullAccount, setFullAccount } from '../../Store/reducers/AccountStatusSlice';
+import { resetFullAccount } from '../../Store/reducers/AccountStatusSlice';
 import { Link } from 'react-router-dom';
 import DoneIcon from '@mui/icons-material/Done';
 import StarIcon from '@mui/icons-material/Star';
@@ -24,11 +24,12 @@ import StarIcon from '@mui/icons-material/Star';
 
 const Profile: React.FC = () => {
 
+    const dispatch = useAppDispatch();
+
     // берем данные из context и reduxStore
 
     const {first_name, last_name, email, username, preview, setPreview} = useContext(StoreContext);
 
-    const dispatch = useAppDispatch();
 
     const { fullAccount } = useAppSelector(state => state.AccountStatusSlice);
     
@@ -82,17 +83,8 @@ const Profile: React.FC = () => {
     const handleLogout = () => {
         localStorage.clear();
         window.location.reload();
+        dispatch(resetFullAccount());
     };
-
-    // логика для неполного аккаунта
-
-    useLayoutEffect(() => {
-        if (first_name && last_name) {
-            dispatch(setFullAccount());
-        } else {
-            dispatch(resetFullAccount());
-        }
-    }, [fullAccount]);
 
 
 
