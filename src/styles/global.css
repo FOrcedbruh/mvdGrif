@@ -124,8 +124,9 @@ html[data-theme = 'dark'] {
 }
 .testCategoryWindow {
     background-color: var(--Color);
+    color: var(--textColor)
 }
-.testCategoryWindow h1 {
+.testCategoryWindow h1, h3 {
     color: var(--textColor);
 }
 .quizWindow {

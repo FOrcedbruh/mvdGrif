@@ -1,6 +1,6 @@
 import style from './../../styles/ComponentStyles/Profile.module.css';
 import newsLine from './../../images/newsLine.svg';
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { StoreContext } from '../../contexts/storeContext';
 import Tooltip from '@mui/material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
-import { resetFullAccount } from '../../Store/reducers/AccountStatusSlice';
+import { resetFullAccount, setFullAccount } from '../../Store/reducers/AccountStatusSlice';
 import { Link } from 'react-router-dom';
 import DoneIcon from '@mui/icons-material/Done';
 import StarIcon from '@mui/icons-material/Star';
@@ -28,10 +28,15 @@ const Profile: React.FC = () => {
 
     // берем данные из context и reduxStore
 
+    const {correct, points } = useAppSelector(state => state.correctSlice);
+
     const {first_name, last_name, email, username, preview, setPreview} = useContext(StoreContext);
 
 
     const { fullAccount } = useAppSelector(state => state.AccountStatusSlice);
+
+
+    
     
 
     // навигация
@@ -42,11 +47,6 @@ const Profile: React.FC = () => {
 
     const [correctProfile, setCorrectProfile] = useState<boolean>(false);
 
-    
-    const [region, setRegion] = useState<string>(localStorage.getItem('region') || '');
-    const [city, setCity] = useState<string>(localStorage.getItem('city') || '');
-    const [school, setSchool] = useState<string>(localStorage.getItem('school') || '');
-    const [date_birthday, setDate_birthday] = useState<string>(localStorage.getItem('date_birthday') || '');
 
 
 
@@ -77,7 +77,7 @@ const Profile: React.FC = () => {
 
 
 
-    const {correct, points } = useAppSelector(state => state.correctSlice);
+    
 
 
     const handleLogout = () => {
@@ -98,18 +98,14 @@ return (
             <div className={style.topSector}>
                 
                 <div className={style.userData}>
-                    <h2> <span>Личные</span> данные</h2>
+                    <h2> <span>Данные</span> аккаунта</h2>
                     <div className={style.avatar}>
                     <Avatar src={preview} />  {correctProfile && <Tooltip followCursor title='Сменить аватар'><Fab style={{'width': 40, 'height': 30}} onClick={renderChoosePhotoHandler}><AddIcon /></Fab></Tooltip>}
                     </div>
                         <ul>
                             <li><p><h5>Login:</h5> {username}</p></li>
                             <li><p><h5>Почта:</h5> {email}</p></li>
-                            {first_name && <><li><p><h5>Вы:</h5>{last_name} {first_name}</p></li>
-                            <li><p><h5>Регион:</h5> {region}</p></li>
-                            <li><p><h5>Населенный пункт:</h5> {city}</p></li>
-                            <li><p><h5>Наименование уч. заведения:</h5> {school}</p></li>
-                            <li><p><h5>Дата рождения:</h5> {date_birthday}</p></li></>}
+                            {first_name && <><li><p><h5>Вы:</h5>{last_name} {first_name}</p></li></>}
                         </ul>
                     <Button variant='outlined' color='secondary' onClick={correctProfileHandler} >{correctProfile ? <p>Подтвердить изменения</p> : <p>Редактировать профиль</p>}</Button>
                     <Button variant='contained' color='secondary' className={style.logoutBtn} onClick={handleLogout}>Выйти  <LogoutIcon /></Button>

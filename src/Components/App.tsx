@@ -45,8 +45,8 @@ const App: React.FC = () => {
 
     // отображение в header username и email
 
-    const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
-    const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
+    const [username, setUsername] = useState<string>(localStorage.getItem('username') || 'Kumar');
+    const [email, setEmail] = useState<string>(localStorage.getItem('email') || 'ilya925512@gmail.com');
     const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
     const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
     
@@ -55,11 +55,11 @@ const App: React.FC = () => {
     const [showProfile, setShowProfile] = useState<boolean>(false);
 
     useEffect(() => {
-        if (username) {
+        if (username && email) {
             setShowProfile(true)
         }
 
-        else if (!username) {
+        else if (!username || !email) {
             setShowProfile(false);
         }
     })

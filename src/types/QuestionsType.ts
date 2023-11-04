@@ -11,5 +11,5 @@ export default interface QuestionsType {
     question_text: string,
     value: number,
     answers: Answers,
-    image: string,
+    image?: string,
 }

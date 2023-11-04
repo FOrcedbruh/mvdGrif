@@ -1,16 +1,16 @@
 import style from './../../styles/ComponentStyles/Olimpics.module.css';
 import QuestionsType from '../../types/QuestionsType';
 import { OlimpicsQuiz } from '../OlimpicsQuiz';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Grif from './../../images/testGrif.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, Link } from 'react-router-dom';
 import { Alert, Button, Modal, Tooltip, Box, Snackbar } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
-import { nothingCorrect, incrementCorrect, incrementPoints, nothingPoints, reset } from '../../Store/reducers/correctSlice';
+import { nothingCorrect, incrementCorrect, incrementPoints, nothingPoints, allReset } from '../../Store/reducers/correctSlice';
 import { authAPI } from '../AuthorizationData';
-import DoneIcon from '@mui/icons-material/Done';
+import { StoreContext } from '../../contexts/storeContext';
 
 
 
@@ -62,7 +62,7 @@ const Olimpics: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const {correct, points} = useAppSelector(state => state.correctSlice)
+    const {points} = useAppSelector(state => state.correctSlice)
     
 
     const Questions: Array<QuestionsType> = [
@@ -103,7 +103,7 @@ const Olimpics: React.FC = () => {
             image: 'https://devio2023-media.developers.io/wp-content/uploads/2020/09/typescript.png',
         },
         {
-            id: 3,
+            id: 4,
             question_text: 'MaterialUI это...',
             answers: {
                 answer_1: 'Библиотека для API JS',
@@ -115,16 +115,28 @@ const Olimpics: React.FC = () => {
             image: 'https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png',
         },
         {
-            id: 3,
-            question_text: 'MaterialUI это...',
+            id: 5,
+            question_text: 'Самый популярный язык программирования?',
             answers: {
-                answer_1: 'Библиотека для API JS',
-                answer_2: 'Фреймворк для анимаций React',
-                answer_correct: 'Библиотека компонентов React',
-                answer_3: 'Утилита стилей',
+                answer_correct: 'Python',
+                answer_2: 'JS',
+                answer_1: 'Go',
+                answer_3: 'Rust',
             },
             value: 2,
-            image: 'https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png',
+            image: ''
+        },
+        {
+            id: 6,
+            question_text: 'test',
+            answers: {
+                answer_1: 'test',
+                answer_2: 'test',
+                answer_correct: 'test',
+                answer_3: 'test',
+            },
+            value: 0,
+            image: ''
         }
     ]
 
@@ -230,6 +242,18 @@ const Olimpics: React.FC = () => {
 
     const zoomCloseHandler = () => setZoom(false);
 
+    // логика выхода с олимпиады
+
+    const {showProfile} = useContext(StoreContext);
+
+    const backBtnHandler = () => {
+        goBack();
+        if (showProfile) {
+            dispatch(allReset(0));
+        }
+
+    }
+
 
     
     if (step > Questions.length - 2) {
@@ -246,7 +270,7 @@ const Olimpics: React.FC = () => {
                                                 <Alert severity='warning' style={{'borderRadius': '20px'}}>
                                                     <div>
                                                         <p>Вы уверены, что хотите выйти? Все данные о ваших ответах будут утеряны.</p>
-                                                        <Button color='secondary' onClick={goBack} variant='contained'>Выйти</Button>
+                                                        <Button color='secondary' onClick={backBtnHandler} variant='contained'>Выйти</Button>
                                                     </div>
                                                 </Alert>
                                             </Box>
@@ -257,9 +281,10 @@ const Olimpics: React.FC = () => {
                                             </Box>
                                         </Modal>
                                 <img src={Grif} className={style.grif}/>
-                                <div className={style.testImage}>
+                                {question.image && <div className={style.testImage}>
                                     <Tooltip title='Увеличить изображение' followCursor><img src={question.image} onClick={zoomHandler}/></Tooltip>
-                                </div>
+                                </div>}
+                                
                                 <div className={style.testAura}>
                                     <div className={style.test}>
                                         <OlimpicsQuiz  setCorrectClick={setCorrectClick}  question={question}   answers={answers} correctValue={correctValue}  setPressed={setPressed}/>

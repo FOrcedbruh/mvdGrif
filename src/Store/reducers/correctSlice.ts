@@ -28,7 +28,7 @@ const correctSlice = createSlice({
         nothingPoints(state) {
             state.points -= 0
         },
-        reset(state, action: PayloadAction<number>) {
+        allReset(state, action: PayloadAction<number>) {
             state.correct = action.payload;
             state.points = action.payload;
             console.log(state.correct, state.points);
@@ -37,5 +37,5 @@ const correctSlice = createSlice({
 })
 
 
-export const {incrementCorrect, nothingCorrect, incrementPoints, nothingPoints, reset} = correctSlice.actions;
+export const {incrementCorrect, nothingCorrect, incrementPoints, nothingPoints, allReset} = correctSlice.actions;
 export default correctSlice.reducer;

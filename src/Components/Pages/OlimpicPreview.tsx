@@ -3,14 +3,16 @@ import Grif from './../../images/testGrif.svg';
 import Button from '@mui/material/Button';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Link } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
-import { StoreContext } from '../../contexts/storeContext';
+import {  useState, useLayoutEffect, useContext } from 'react';
 import { Snackbar, Alert, Tooltip } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
-import { reset } from '../../Store/reducers/correctSlice';
-
+import { allReset } from '../../Store/reducers/correctSlice';
+import { setFullAccount } from '../../Store/reducers/AccountStatusSlice';
+import { StoreContext } from '../../contexts/storeContext';
 
 const OlimpicPreview: React.FC = () => {
+
+    const {username, email} = useContext(StoreContext);
 
     const { fullAccount } = useAppSelector(state => state.AccountStatusSlice);
 
@@ -20,7 +22,7 @@ const OlimpicPreview: React.FC = () => {
 
     const onClick = () => {
         setOpen(true);
-        dispatch(reset(0))
+        dispatch(allReset(0))
     }
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -30,8 +32,6 @@ const OlimpicPreview: React.FC = () => {
 
         setOpen(false);
     }
-
-    const {showProfile} = useContext(StoreContext);
 
     const [warningBar, setWarningBar] = useState<boolean>(true);
 
@@ -43,13 +43,19 @@ const OlimpicPreview: React.FC = () => {
         setWarningBar(false);
     }
 
+    useLayoutEffect(() => {
+        if (username && email) {
+            dispatch(setFullAccount());
+        }
+    })
+
 
     
     return (
         <section className={`${style.window} olimpicsPreviewWindow`}>
             <h1 className={style.head}>Олимпиада</h1>
             <img src={Grif}/>
-            {fullAccount ? <Link to='/Тесты олимпиады'><Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={() => dispatch(reset(0))}>Перейти к олимпиаде <ArrowOutwardIcon /></Button></Link>
+            {fullAccount ? <Link to='/Тесты олимпиады'><Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={() => dispatch(allReset(0))}>Перейти к олимпиаде <ArrowOutwardIcon /></Button></Link>
              : <Button variant='contained' color='secondary' className={style.goToOlimpicsBtn} onClick={onClick}>Перейти к олимпиаде <ArrowOutwardIcon /></Button>}
              <Snackbar open={open}  onClose={handleClose} autoHideDuration={4000}>
                 <Alert severity='error'>
