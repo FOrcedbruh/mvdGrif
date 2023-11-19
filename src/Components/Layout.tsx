@@ -91,14 +91,20 @@ const LayoutDesktop: React.FC<LayoutType> = ({gap}) => {
         setMaterials(false);
     }
 
+
     return (
         <>
             <header className={`${style.window} header`}>
-                <div className={style.logo}>
-                    <img src={gerb}/>
-                    <img src={line}/>
-                    <img src={grif}/>
-                </div>
+                <Link to='/'>
+                    <Tooltip title='На главную' followCursor>
+                        <div className={style.logo}>
+                            <img src={gerb}/>
+                            <img src={line}/>
+                            <img src={grif}/>
+                        </div>
+                    </Tooltip>
+                    
+                </Link>
                 <nav className='nav'>
                     <ul className={style.main} style={{'gap': gap}}>
                         <li onMouseOver={homeHandler} onMouseOut={homeOutHandler}>

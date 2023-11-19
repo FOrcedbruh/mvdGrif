@@ -142,7 +142,7 @@ const InstructionDesktopPage: React.FC = () => {
                                     </Button>
                                     <Box sx={{ flex: '1 1 auto' }} />
                                     {isStepOptional(activeStep) && (
-                                    <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }} variant='outlined'>
+                                    <Button color="secondary" onClick={handleSkip} sx={{ mr: 1 }} variant='outlined'>
                                         Пропустить
                                     </Button>
                                     )}
