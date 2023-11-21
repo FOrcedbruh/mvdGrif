@@ -45,6 +45,8 @@ const Register: React.FC = () => {
     const [check_2, setCheck_2] = useState<boolean>(false);
     const [check_3, setCheck_3] = useState<boolean>(false);
 
+    const [validCheck, setValidCheck] = useState<boolean>(false);
+
 
     const handlerCheck_1 = () => {
         setCheck_1(!check_1)
@@ -56,6 +58,18 @@ const Register: React.FC = () => {
         setCheck_3(!check_3)
     }
 
+    useEffect(() => {
+        if (check_1 && check_2 && check_3) {
+            setValidCheck(true);
+        } else {
+            setValidCheck(false);
+        };
+
+
+    }, [check_1, check_2, check_3])
+
+    // view password
+    
     const [eye, setEye] = useState(true);
 
 
@@ -154,7 +168,7 @@ const Register: React.FC = () => {
                     </section>
                 </section>
                     
-                    <input type="submit" className={style.regBtn} disabled={!isValid} value={'Зарегистрироваться'}/>
+                    <input type="submit" className={style.regBtn} disabled={!(isValid && validCheck)} value={'Зарегистрироваться'}/>
                 </form>
                 <p>У вас уже есть аккаунт?<Link to='/войти'>Войти</Link></p>
                 

@@ -3,14 +3,25 @@ import Grif from './../../images/testGrif.svg';
 import Button from '@mui/material/Button';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Link } from 'react-router-dom';
-import {  useState, useLayoutEffect, useContext } from 'react';
+import {  useState, useLayoutEffect, useContext, useEffect } from 'react';
 import { Snackbar, Alert, Tooltip } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
 import { allReset } from '../../Store/reducers/correctSlice';
 import { setFullAccount } from '../../Store/reducers/AccountStatusSlice';
 import { StoreContext } from '../../contexts/storeContext';
+import { instance } from '../AuthorizationData';
+
 
 const OlimpicPreview: React.FC = () => {
+
+    const [Questions, setQuestions] = useState([]);
+
+    /*useEffect(() => {
+        instance.get('task/list/').then(res => {
+            setQuestions(res.data.result);
+            console.log(res.data);
+        });
+    }, []);*/
 
     const {username, email} = useContext(StoreContext);
 

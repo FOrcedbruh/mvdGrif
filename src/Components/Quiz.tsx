@@ -1,9 +1,9 @@
 import style from './../styles/ComponentStyles/Quiz.module.css';
 import { useState, useEffect } from 'react';
-import Test from '../types/Test';
 import { useNavigate } from 'react-router-dom';
-import { Web } from '../tests';
-
+import { tests } from '../tests';
+import { useParams } from 'react-router-dom';
+import { TestType } from '../types/Test';
 
 interface CorrectType {
     correct: number;
@@ -19,7 +19,7 @@ const Result: React.FC<CorrectType> = ({correct}) => {
     return (
         <div className={style.aura}>   
             <div className={style.result}>
-                <h1>Правильных  ответов <span>{correct}</span> / {Web.length}</h1>
+                <h1>Правильных  ответов <span>{correct}</span> / {test.length}</h1>
             </div>
         </div>
         
@@ -29,8 +29,14 @@ const Result: React.FC<CorrectType> = ({correct}) => {
 
 
 
-
 const Quiz: React.FC = () => {
+    
+
+    const { id } = useParams();
+
+
+    const test: Array<TestType> = tests[0].body;
+    console.log(test.length)
 
     const navigate = useNavigate();
 
@@ -41,7 +47,7 @@ const Quiz: React.FC = () => {
 
     const [step, setStep] = useState<number>(0);
     const [correct, setCorrect] = useState<number>(0);
-    const question = Web[step];
+    const question = test[step];
 
 
     
@@ -53,13 +59,13 @@ const Quiz: React.FC = () => {
             setCorrect(correct + 1);
         }
     }
-    if (step > Web.length - 1) {
+    if (step > test.length - 1) {
         return (
             <Result correct={correct}/>
         )
     }
 
-    const percentage = Math.round(step / Web.length * 100);
+    const percentage = Math.round(step / test.length * 100);
     return (
         <section className={`${style.quizWin} quizWindow`}>
             <div className={style.quiz}>

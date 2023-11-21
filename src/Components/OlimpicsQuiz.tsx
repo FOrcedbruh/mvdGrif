@@ -1,6 +1,4 @@
 import style from './../styles/ComponentStyles/Olimpics.module.css';
-import QuestionsType from '../types/QuestionsType';
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import { QuizType } from '../types/QuizType';

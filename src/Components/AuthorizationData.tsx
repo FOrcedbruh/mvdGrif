@@ -3,9 +3,9 @@ import axios from 'axios';
 
 
 
-const instance = axios.create({
+export const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://81.163.26.144:8000/',
+    baseURL: 'http://80.253.19.86:8000/',
     // Authorization: 'Token 3ae7399c2fb938265eb2c46438e8f5862ac3f776'
 })
 

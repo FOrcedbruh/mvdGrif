@@ -4,22 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import Test from '../../types/Test';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import TestCategoriesType from '../../types/TestCategoriesType';
+import { tests } from '../../tests';
+import CategoryItemType from '../../types/Test';
 
-
-
-interface Category {
-    category: TestCategoriesType;
+interface TestItemProps {
+    test: CategoryItemType,
 }
 
-
-const TestItem: React.FC<Category> = ({category}) => {
+const TestItem: React.FC<TestItemProps> = ({test}) => {
     return (
         <section className={style.categories}>
             <div>
-                <h3>{category.title}</h3>
+                <h3>{test.title}</h3>
                 <article>
-                    <p> <Link to={`./${category}`}>Перейти к тесту</Link></p>
+                    <p> <Link to={`./${test.id}`}>Перейти к тесту</Link></p>
                 </article>
             </div>
         </section>
@@ -30,24 +28,6 @@ const TestItem: React.FC<Category> = ({category}) => {
 
 const TestCategories: React.FC = () => {
 
-    const categories: Array<TestCategoriesType> = [
-        {
-            title: 'web',
-            icon: ''
-        },
-        {
-            title: 'forensic',
-            icon: ''
-        },
-        {
-            title: 'crypto',
-            icon: ''
-        },
-        {
-            title: 'programming',
-            icon: ''
-        },
-    ]
 
     const navigate = useNavigate();
 
@@ -59,8 +39,8 @@ const TestCategories: React.FC = () => {
             <Button variant='text' color='secondary' onClick={goBack} className={style.backBtn}><ArrowBackIcon />  Назад</Button>
             <h1 className={style.title}>Тесты</h1>
             <div className={style.tests}>
-                {categories.map(category => {
-                    return (<TestItem key={category.title}  category={category}/>)
+                {tests.map(test => {
+                    return (<TestItem key={test.title}  test={test}/>)
                 })}
             </div>
             <div className={style.grif}>

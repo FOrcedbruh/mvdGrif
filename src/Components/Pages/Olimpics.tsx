@@ -1,7 +1,7 @@
 import style from './../../styles/ComponentStyles/Olimpics.module.css';
 import QuestionsType from '../../types/QuestionsType';
 import { OlimpicsQuiz } from '../OlimpicsQuiz';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Grif from './../../images/testGrif.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reducerHooks';
 import { nothingCorrect, incrementCorrect, incrementPoints, nothingPoints, allReset } from '../../Store/reducers/correctSlice';
 import { authAPI } from '../AuthorizationData';
 import { StoreContext } from '../../contexts/storeContext';
+import { instance } from '../AuthorizationData';
 
 
 
@@ -62,79 +63,88 @@ const Olimpics: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const {points} = useAppSelector(state => state.correctSlice)
+    const {points} = useAppSelector(state => state.correctSlice);
+
+    //const [Questions, setQuestions] = useState<Array<QuestionsType>>([]);
+
+    /*useEffect(() => {
+        instance.get('task/list/').then(res => {
+            setQuestions(res.data.result);
+            console.log(res.data);
+        });
+    }, []);*/
     
 
     const Questions: Array<QuestionsType> = [
         {
             id: 1,
             question_text: 'Что такое React...',
-            answers: {
+            answers: [{
                 answer_1: 'Утилита',
                 answer_2: 'Фреймворк',
                 answer_3: 'Язык программирания',
                 answer_correct: 'Библиотека',
-            },
+            }],
             value: 4,
             image: 'https://ru.legacy.reactjs.org/logo-og.png',
         },
         {
             id: 2,
             question_text: 'SCSS это...',
-            answers: {
+            answers: [{
                 answer_correct: 'Препроцессор',
                 answer_1: 'Утилита',
                 answer_2: 'Каскадная таблица стилей',
                 answer_3: 'метод разметки сайта',
-            },
+            }],
             value: 8,
             image: 'https://static-xf1.vietnix.vn/wp-content/uploads/2022/04/scss-sass-la-gi.webp',
         },
         {
             id: 3,
             question_text: 'TypeScript нужен для...',
-            answers: {
+            answers: [{
                 answer_1: 'Корректировки кода',
                 answer_2: 'Ускорения C++',
                 answer_correct: 'Типизации JS',
                 answer_3: 'Работы с API',
-            },
+            }],
             value: 2,
             image: 'https://devio2023-media.developers.io/wp-content/uploads/2020/09/typescript.png',
         },
         {
             id: 4,
             question_text: 'MaterialUI это...',
-            answers: {
+            answers: [{
                 answer_1: 'Библиотека для API JS',
                 answer_2: 'Фреймворк для анимаций React',
                 answer_correct: 'Библиотека компонентов React',
                 answer_3: 'Утилита стилей',
-            },
+            }],
             value: 2,
             image: 'https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png',
         },
         {
             id: 5,
             question_text: 'Самый популярный язык программирования?',
-            answers: {
+            answers: [{
                 answer_correct: 'Python',
                 answer_2: 'JS',
                 answer_1: 'Go',
                 answer_3: 'Rust',
-            },
+            }],
             value: 2,
             image: ''
         },
         {
             id: 6,
             question_text: 'test',
-            answers: {
+            answers: [{
                 answer_1: 'test',
                 answer_2: 'test',
                 answer_correct: 'test',
                 answer_3: 'test',
-            },
+            }],
             value: 0,
             image: ''
         }
@@ -156,11 +166,11 @@ const Olimpics: React.FC = () => {
 
     const question = Questions[step];
 
-    const answers: Array<string> = Object.values(question.answers);
+    const answers: Array<string> = Object.values(question.answers[0]);
 
 
     
-    const correctText: string = question.answers.answer_correct;
+    const correctText: string = question.answers[0].answer_correct;
     const correctValue = answers.indexOf(correctText);
     
     // кнопки
