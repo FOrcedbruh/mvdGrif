@@ -69,7 +69,6 @@ const OlimpicsQuiz: React.FC<QuizType> = ({correctValue, question, answers,  set
             
                 <ul>
                     {answers.map((item, index) => {
-
                         return (
                             <li key={index} onClick={() => {OnclickHandler(index)}}><ListButton variant='contained' style={{'width': '100%'}}><p>{item}</p></ListButton></li>
                         )

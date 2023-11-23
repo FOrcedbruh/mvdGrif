@@ -14,11 +14,11 @@ import { instance } from '../AuthorizationData';
 
 const OlimpicPreview: React.FC = () => {
 
-    const [Questions, setQuestions] = useState([]);
+    /*const [Questions, setQuestions] = useState([]);
 
-    /*useEffect(() => {
+    useEffect(() => {
         instance.get('task/list/').then(res => {
-            setQuestions(res.data.result);
+            setQuestions(res.data.results);
             console.log(res.data);
         });
     }, []);*/
@@ -54,11 +54,10 @@ const OlimpicPreview: React.FC = () => {
         setWarningBar(false);
     }
 
-    useLayoutEffect(() => {
-        if (username && email) {
-            dispatch(setFullAccount());
-        }
-    })
+    useEffect(() => {
+        dispatch(setFullAccount())
+    }, [])
+
 
 
     

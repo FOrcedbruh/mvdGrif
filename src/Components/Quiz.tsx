@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { tests } from '../tests';
 import { useParams } from 'react-router-dom';
 import { TestType } from '../types/Test';
+import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+
+
+
 
 interface CorrectType {
     correct: number;
 }
-
-
-
-
 
 
 
@@ -27,15 +29,16 @@ const Result: React.FC<CorrectType> = ({correct}) => {
 }
 
 
-
-
 const Quiz: React.FC = () => {
     
 
-    const { id } = useParams();
+    let {id} = useParams();
+
+    let numId = Number(id);
 
 
-    const test: Array<TestType> = tests[0].body;
+
+    const test: Array<TestType> = tests[numId].body;
     console.log(test.length)
 
     const navigate = useNavigate();
@@ -66,8 +69,10 @@ const Quiz: React.FC = () => {
     }
 
     const percentage = Math.round(step / test.length * 100);
+
     return (
         <section className={`${style.quizWin} quizWindow`}>
+            <Button className={style.backBtn} variant='text' color='secondary' onClick={goBack}><ArrowBackIcon />Назад</Button>
             <div className={style.quiz}>
                 <div className={style.progress} style={{width: `${percentage}%`}}></div>
                 <h1>{question.title}</h1>

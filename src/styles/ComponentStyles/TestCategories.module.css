@@ -56,13 +56,22 @@ h1.title {
 }
 
 .categories div article {
+    color: #000;
     border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
     border: 1px solid #E1E1E1;
     background: linear-gradient(124deg, #FFF 0%, #E9E9E9 100%);
     width: 160px;
     height: 130px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+.categories div article h5  {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
 }
 .categories div article p{
     color: #000;
@@ -72,7 +81,19 @@ h1.title {
     line-height: normal;
     letter-spacing: 0.595px;
     align-self: end;
-    padding-bottom: 5px;
+    
+}
+.categories div article p a {
+    text-decoration: none;
+    color: blueviolet;
+    font-size: 14px;
+    font-weight: 600;
+}
+.categories div article p.animP {
+    transition: transform .3s ease;
+}
+.categories div article p.animP:hover {
+    transform: scale(1.1);
 }
 .backBtn {
     align-self: start;

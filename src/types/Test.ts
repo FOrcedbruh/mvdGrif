@@ -7,5 +7,6 @@ export interface TestType {
 export default interface CategoryItemType {
     title: string,
     body: TestType[],
-    id: number
+    id: number,
+    complexity: string
 }

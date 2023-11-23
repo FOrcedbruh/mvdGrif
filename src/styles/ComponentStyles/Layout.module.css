@@ -19,8 +19,10 @@
 }
 .window nav a {
     font-size: 14px;
+    transition: font-size .3s ease;
 }
 .window nav a:hover {
+    font-size: 16px;
     border-bottom: 1px solid #fff;
 }
 .window nav ul.main {
@@ -79,6 +81,7 @@
     z-index: 5;
     color: #fff;
     border-radius: 20px;
+    font-size: 14px;
 }
 .innerUl a:hover {
     color: #8437c2;

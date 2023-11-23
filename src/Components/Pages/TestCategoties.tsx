@@ -1,23 +1,31 @@
 import style from './../../styles/ComponentStyles/TestCategories.module.css';
 import grif from './../../images/testGrif.svg';
 import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Test from '../../types/Test';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { tests } from '../../tests';
 import CategoryItemType from '../../types/Test';
 
+
 interface TestItemProps {
     test: CategoryItemType,
 }
 
 const TestItem: React.FC<TestItemProps> = ({test}) => {
+
+
+    
+
+
     return (
         <section className={style.categories}>
             <div>
                 <h3>{test.title}</h3>
                 <article>
-                    <p> <Link to={`./${test.id}`}>Перейти к тесту</Link></p>
+                    <h5><p>Уровень сложности:</p> <span style={{'color': `${test.complexity === 'Легкий' && 'chartreuse' || test.complexity === 'Очень сложный' && 'red'}`}}>{test.complexity}</span></h5>
+                    <p className={style.animP}> <Link to={`./${test.id}`}>Перейти к тесту</Link></p>
                 </article>
             </div>
         </section>
@@ -32,6 +40,7 @@ const TestCategories: React.FC = () => {
     const navigate = useNavigate();
 
     const goBack = () => navigate(-1);
+
 
 
     return (

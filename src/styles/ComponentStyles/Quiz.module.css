@@ -83,6 +83,15 @@
     align-items: center;
     z-index: 1;
 }
+.backBtn {
+    position: absolute;
+    align-self: start;
+    margin-right: 80%;
+    margin-top: 10vh;
+}
+
+
+
 @media only screen and (max-width: 1224px) {
     .quiz {
         width: 60%;
