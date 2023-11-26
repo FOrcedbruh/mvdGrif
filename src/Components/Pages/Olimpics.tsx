@@ -65,17 +65,17 @@ const Olimpics: React.FC = () => {
 
     const {points} = useAppSelector(state => state.correctSlice);
 
-    const [Questions, setQuestions] = useState<Array<any>>([]);
+    //const [Questions, setQuestions] = useState<Array<any>>([]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         instance.get('task/list/').then(res => {
             setQuestions(res.data.results);
             console.log(res.data.results);
         });
-    }, []);
+    }, []);*/
     
 
-    /*const Questions: Array<QuestionsType> = [
+    const Questions: Array<QuestionsType> = [
         {
             id: 1,
             question_text: 'Что такое React...',
@@ -148,7 +148,7 @@ const Olimpics: React.FC = () => {
             value: 0,
             image: ''
         }
-    ]*/
+    ]
 
     
 

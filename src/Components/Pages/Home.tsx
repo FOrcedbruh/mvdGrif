@@ -2,10 +2,13 @@ import style from './../../styles/ComponentStyles/Home.module.css';
 import gerb from './../../images/gerb.svg';
 import line from './../../images/line.svg';
 import CarouselWin from '../Carousel';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import mainGrif from './../../images/main-grif.svg';
-
-
+import { Link } from 'react-router-dom';
+import ImportContactsRoundedIcon from '@mui/icons-material/ImportContactsRounded';
+import { StoreContext } from '../../contexts/storeContext';
+import { useAppSelector } from '../../hooks/reducerHooks';
+import { Tooltip } from '@mui/material';
 
 
 
@@ -34,6 +37,30 @@ const Info: React.FC = () => {
                     <li>Программы бакалавриата, программы специалитета, программы магистратуры на 2024 год</li>
                 </ul>
             </div>
+        </section>
+    )
+}
+
+const OlimpicsBtn: React.FC = () => {
+
+    const {showProfile} = useContext(StoreContext);
+    const {fullAccount} = useAppSelector(state => state.AccountStatusSlice);
+
+    const [animBtn, setAnimBtn] = useState<boolean>(false);
+
+    const animBtnHandle = () => {
+        setAnimBtn(true);
+    }
+
+    useEffect(() => {
+        setTimeout(animBtnHandle, 400);
+    }, [])
+
+
+    return (
+        <section className={style.OlimpicsBtn}>
+            <h3>Начните проходить олимпиаду прямо сейчас</h3>
+            <Tooltip arrow title={`${!showProfile ? 'Сначала войдите или создайте аккаунт' : ''}`}  placement='right'><Link to={`${!showProfile && '/войти' || !fullAccount && '/олимпиада'}`}><button className={`${animBtn ? `${style.view}` : ''}`}><ImportContactsRoundedIcon style={{'color': '#fff'}}/>   <p>Перейти к олимпиаде</p></button></Link></Tooltip>
         </section>
     )
 }
@@ -90,6 +117,7 @@ const Home: React.FC = () => {
     return (
         <section className={`${style.window} homeWindow`}>
             <Main />
+            <OlimpicsBtn />
             <Info />
             <CarouselWin />
         </section>

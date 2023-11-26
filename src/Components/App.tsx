@@ -32,21 +32,20 @@ const App: React.FC = () => {
 
     const progress: any = () => {
         const windowScroll: number = window.scrollY;
-        const height: number = 2400;
+        const height: number = 2500;
         setPercent(percent + (windowScroll / height) * 100);
     }
 
     useEffect(() => {
         window.addEventListener('scroll', progress);
 
-
         return () => {window.removeEventListener('scroll', progress)};
     }, []);
 
     // отображение в header username и email
 
-    const [username, setUsername] = useState<string>(localStorage.getItem('username') || 'Ilya');
-    const [email, setEmail] = useState<string>(localStorage.getItem('email') || 'ilya925512@gmail.com');
+    const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
+    const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
     const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
     const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
     

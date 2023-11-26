@@ -35,7 +35,7 @@ const CarouselWin: React.FC = () => {
     return (
         <section className={style.window}>
             <CarouselProvider
-            naturalSlideWidth={800}
+            naturalSlideWidth={1000}
             naturalSlideHeight={600}
             totalSlides={3}
         >

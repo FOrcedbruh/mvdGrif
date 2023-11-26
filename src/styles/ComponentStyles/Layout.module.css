@@ -21,8 +21,8 @@
     font-size: 14px;
     transition: font-size .3s ease;
 }
-.window nav a:hover {
-    font-size: 16px;
+.window nav .main a:hover {
+    font-size: 17px;
     border-bottom: 1px solid #fff;
 }
 .window nav ul.main {

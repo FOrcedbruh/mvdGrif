@@ -1,6 +1,6 @@
 export interface TestType {
     correct: number;
-    title: string;
+    head: string;
     variants: Array<string>;
 }
 

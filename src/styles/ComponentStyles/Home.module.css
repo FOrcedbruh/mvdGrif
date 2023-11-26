@@ -88,6 +88,52 @@
 .activeMainGrif {
     transform: scale(0.7) translateX(30%) translateY(-20%);
 }
+.OlimpicsBtn {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    margin-left: 10%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 30px;
+}
+a {
+    text-decoration: none;
+}
+.OlimpicsBtn button {
+    width: 300px;
+    height: 60px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(269deg, #6C15FA 0.02%, rgba(80, 53, 114, 0.90) 99.84%);
+    backdrop-filter: blur(60px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 5px blueviolet;
+    transition: transform .4s ease, box-shadow .4s ease, opacity .7s ease-in-out;
+    opacity: 0;
+    transform: translateX(-40px);
+}
+.OlimpicsBtn button:hover {
+    box-shadow: 0 0 24px blueviolet;
+}
+.OlimpicsBtn button.view {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+.OlimpicsBtn button p {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: #fff;
+}
+
+
 
 @media only screen and (max-width: 1224px) {
     .welcome p{
@@ -116,5 +162,12 @@
     }
     .activeMainGrif {
         transform: scale(0.8);
+    }
+    .OlimpicsBtn {
+        width: 90%;
+        margin-left: 0;
+    }
+    .OlimpicsBtn button {
+        padding: 0 10px;
     }
 }

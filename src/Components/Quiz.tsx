@@ -13,15 +13,16 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 interface CorrectType {
     correct: number;
+    testLength: number
 }
 
 
 
-const Result: React.FC<CorrectType> = ({correct}) => {
+const Result: React.FC<CorrectType> = ({correct, testLength}) => {
     return (
         <div className={style.aura}>   
             <div className={style.result}>
-                <h1>Правильных  ответов <span>{correct}</span> / {test.length}</h1>
+                <h1>Правильных  ответов <span>{correct}</span> / {testLength}</h1>
             </div>
         </div>
         
@@ -39,7 +40,7 @@ const Quiz: React.FC = () => {
 
 
     const test: Array<TestType> = tests[numId].body;
-    console.log(test.length)
+    const testLength: number = test.length;
 
     const navigate = useNavigate();
 
@@ -62,20 +63,20 @@ const Quiz: React.FC = () => {
             setCorrect(correct + 1);
         }
     }
-    if (step > test.length - 1) {
+    if (step > testLength - 1) {
         return (
-            <Result correct={correct}/>
+            <Result correct={correct} testLength={testLength}/>
         )
     }
 
-    const percentage = Math.round(step / test.length * 100);
+    const percentage = Math.round(step / testLength * 100);
 
     return (
         <section className={`${style.quizWin} quizWindow`}>
             <Button className={style.backBtn} variant='text' color='secondary' onClick={goBack}><ArrowBackIcon />Назад</Button>
             <div className={style.quiz}>
                 <div className={style.progress} style={{width: `${percentage}%`}}></div>
-                <h1>{question.title}</h1>
+                <h1>{question.head}</h1>
                 <section className={style.variants}>
                     {question.variants.map((text, index) => (<li key={index} onClick={() => OnClickVariant(index)}>{text}</li>))}
                 </section>
