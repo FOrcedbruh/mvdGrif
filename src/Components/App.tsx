@@ -44,10 +44,10 @@ const App: React.FC = () => {
 
     // отображение в header username и email
 
-    const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
-    const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
-    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
-    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
+    const [username, setUsername] = useState<string>(localStorage.getItem('username') || 'Илья');
+    const [email, setEmail] = useState<string>(localStorage.getItem('email') || 'ilya925512@gmail.com');
+    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || 'Илья');
+    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || 'Чапля');
     
     // состоние для логики рендера профиля
 

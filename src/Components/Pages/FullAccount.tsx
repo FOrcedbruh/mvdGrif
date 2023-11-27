@@ -1,7 +1,7 @@
 import style from './../../styles/ComponentStyles/FullAccount.module.css';
 import { useForm } from 'react-hook-form';
 import FormType from '../../types/FullAccountFormType';
-import { Snackbar, Alert, Button } from '@mui/material';
+import { Snackbar, Alert, Button, Select, MenuItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -115,9 +115,12 @@ const FullAccount: React.FC = () => {
                         </div>
                         <div>
                             <label htmlFor="sex">Ваш пол</label>
-                            <input type="text" {...register('sex', {
-                                required: 'Укажите ваш пол!',
-                            })}/>
+                           <Select style={{'width': 200, 'textAlign': 'center', 'color': 'white'}}  color='secondary' {...register('sex', {
+                            required: 'Укажите ваш пол!'
+                           })}>
+                                <MenuItem value={'Мужской'}>Мужской</MenuItem>
+                                <MenuItem value={'Женский'}>Женский</MenuItem>
+                           </Select>
                             {errors.sex && <section className={style.error}>{errors.sex.message}</section>}
                         </div>
                         <div>

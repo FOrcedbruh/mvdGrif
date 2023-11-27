@@ -16,7 +16,6 @@ interface TestItemProps {
 const TestItem: React.FC<TestItemProps> = ({test}) => {
 
 
-    
 
 
     return (
@@ -24,7 +23,7 @@ const TestItem: React.FC<TestItemProps> = ({test}) => {
             <div>
                 <h3>{test.title}</h3>
                 <article>
-                    <h5><p>Уровень сложности:</p> <span style={{'color': `${test.complexity === 'Легкий' && 'chartreuse' || test.complexity === 'Очень сложный' && 'red'}`}}>{test.complexity}</span></h5>
+                    <h5><p>Уровень сложности:</p> <span style={{'color': `${test.complexity === 'Легкий' && 'chartreuse' || test.complexity === 'Очень сложный' && 'red' || test.complexity === 'Сложный' && 'orange'}`}}>{test.complexity}</span></h5>
                     <p className={style.animP}> <Link to={`./${test.id}`}>Перейти к тесту</Link></p>
                 </article>
             </div>
