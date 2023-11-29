@@ -4,6 +4,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
+import { Docs } from '../../projectFiles/docs';
+import { id } from 'date-fns/locale';
+
 
 const DocumentsPage: React.FC = () => {
 
@@ -20,9 +23,13 @@ const DocumentsPage: React.FC = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <ul>
-                            <li><Link to='/PDFReader'>Согласие на обработку персональных данных</Link></li>
-                            <li><Link to='/PDFReader'>Положение</Link></li>
-                            <li><Link to='/PDFReader'>Регламент</Link></li>
+                            {Docs.map(doc => {
+                                return (
+                                    <li key={doc.id}>
+                                        <Link to={`/${doc.id}`}>{doc.title}</Link>
+                                    </li>
+                                )
+                            })}
                         </ul>
                     </AccordionDetails>
                 </Accordion>

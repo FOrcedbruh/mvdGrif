@@ -44,8 +44,8 @@ const App: React.FC = () => {
 
     // отображение в header username и email
 
-    const [username, setUsername] = useState<string>(localStorage.getItem('username') || 'Илья');
-    const [email, setEmail] = useState<string>(localStorage.getItem('email') || 'ilya925512@gmail.com');
+    const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
+    const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
     const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || 'Илья');
     const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || 'Чапля');
     
@@ -108,7 +108,7 @@ const App: React.FC = () => {
                                 </Route>
                                 <Route path="/Дополнение_аккаунта" element={<Suspense fallback={<Loader />}><FullAccount /></Suspense>}/>
                                 <Route path="/Тесты олимпиады" element={<Suspense fallback={<Loader />}><Olimpics /></Suspense>}/>
-                                <Route path="/PDFReader" element={<Suspense fallback={<Loader />}><TextReader /></Suspense>}/>
+                                <Route path="/:id" element={<Suspense fallback={<Loader />}><TextReader /></Suspense>}/>
                                 <Route path="/Профиль" element={showProfile ? <Suspense fallback={<Loader />}><Profile /></Suspense> : <Suspense fallback={<Loader />}><Login/></Suspense>} />
                                 <Route path='/Войти' element={<Suspense fallback={<Loader />}><Login showProfile={showProfile} setShowProfile={setShowProfile}/></Suspense>}/>
                                 <Route path='/Регистрация' element={<Suspense fallback={<Loader />}><Register /></Suspense>}/>

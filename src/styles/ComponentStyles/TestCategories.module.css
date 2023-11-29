@@ -7,6 +7,7 @@
     align-items: center;
     gap: 10%;
     padding: 50px 80px;
+    overflow-x: hidden;
 }
 .grif {
     width: fit-content;
@@ -81,20 +82,23 @@ h1.title {
     line-height: normal;
     letter-spacing: 0.595px;
     align-self: end;
-    
 }
+
 .categories div article p a {
     text-decoration: none;
     color: blueviolet;
     font-size: 14px;
     font-weight: 600;
 }
+
 .categories div article p.animP {
     transition: transform .3s ease;
 }
+
 .categories div article p.animP:hover {
     transform: scale(1.1);
 }
+
 .backBtn {
     align-self: start;
     z-index: 1;

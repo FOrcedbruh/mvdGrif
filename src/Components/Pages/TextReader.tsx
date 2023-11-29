@@ -1,10 +1,15 @@
-import { accept } from "../../projectFiles/accept";
+import { Docs } from '../../projectFiles/docs';
 import style from './../../styles/ComponentStyles/TextReader.module.css';
 import { Button } from "@mui/material";
 import ArrowBack from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const TextReader: React.FC = () => {
+
+    const {id} = useParams();
+    console.log(id);
+
+    const numberID = Number(id);
 
     const navigate = useNavigate();
 
@@ -13,9 +18,9 @@ const TextReader: React.FC = () => {
     return (
         <section className={`${style.window} textReader`}>
             <Button color="secondary" onClick={goBack} className={style.backBtn}><ArrowBack/> Назад</Button>
-            <h1>{accept.title}</h1>
+            <h1>{Docs[numberID].title}</h1>
             <article className={style.article}>
-                <p>{accept.article}</p>
+                <p>{Docs[numberID].article}</p>
             </article>
         </section>
     )

@@ -155,6 +155,10 @@ const Register: React.FC = () => {
                                         minLength: {
                                             value: 8,
                                             message: 'Пароль должен содержать не менее 8 символов'
+                                        },
+                                        pattern: {
+                                            value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g,
+                                            message: 'не менее 1 спец. символа, 1 цифры, заглавной и прописной буквы!'
                                         }
                                     })}/>
                                     <div onClick={() => {setEye(!eye)}} className={style.eye}>{eye ? <VisibilityOutlinedIcon color='secondary'/> : <VisibilityOffOutlinedIcon color='secondary'/>}</div>
