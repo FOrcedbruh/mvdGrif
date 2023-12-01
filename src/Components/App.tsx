@@ -7,6 +7,9 @@ import Layout from "./Layout";
 import { Loader } from "./Loader";
 import { useMediaQuery } from 'react-responsive';
 
+import { setRenderFullAccount } from "../Store/reducers/AccountStatusSlice";
+import { useAppDispatch } from "../hooks/reducerHooks";
+
 const Register = lazy(() => import("./Pages/Register"));
 const Login = lazy(() => import("./Pages/Login"));
 const TestCategories = lazy(() => import("./Pages/TestCategoties"));
@@ -24,6 +27,8 @@ const FullAccount = lazy(() => import('./Pages/FullAccount'))
 
 
 const App: React.FC = () => {
+
+    const dispatch = useAppDispatch();
     
 
     // progressBar
@@ -37,6 +42,7 @@ const App: React.FC = () => {
     }
 
     useEffect(() => {
+        dispatch(setRenderFullAccount());
         window.addEventListener('scroll', progress);
 
         return () => {window.removeEventListener('scroll', progress)};
@@ -46,8 +52,8 @@ const App: React.FC = () => {
 
     const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
     const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
-    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || 'Илья');
-    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || 'Чапля');
+    const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
+    const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
     
     // состоние для логики рендера профиля
 

@@ -85,6 +85,7 @@ const Profile: React.FC = () => {
         window.location.reload();
         dispatch(resetFullAccount());
     };
+    console.log(fullAccount);
 
 
 

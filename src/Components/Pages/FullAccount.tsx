@@ -55,6 +55,9 @@ const FullAccount: React.FC = () => {
         }
         const first_name: string = data.first_name;
         const last_name: string = data.last_name;
+        localStorage.setItem('first_name', first_name);
+        localStorage.setItem('last_name', last_name);
+
         const middle_name: string = data.middle_name;
         const region: string = data.region;
         const city: string = data.first_name;
@@ -69,6 +72,8 @@ const FullAccount: React.FC = () => {
         authAPI.FullAccount(first_name, last_name, middle_name, region, city, school, sex, grade, snils, date_birthday, phone);
         dispatch(setFullAccount());
         reset();
+
+        window.location.reload();
     }
 
     return (

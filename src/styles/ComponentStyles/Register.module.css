@@ -86,6 +86,9 @@ form {
     padding: 5px;
     text-align: center;
 }
+.profileLink {
+    display: flex;
+}
 .regBtn {
     border: none;
     outline: none;

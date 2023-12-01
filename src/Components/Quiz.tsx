@@ -19,13 +19,19 @@ interface CorrectType {
 
 
 const Result: React.FC<CorrectType> = ({correct, testLength}) => {
+
+    const navigate = useNavigate();
+
+    const goback = () => navigate(-1);
+
+
     return (
-        <div className={style.aura}>   
+        <div className={style.aura}>
+            <Button className={style.backBtn} onClick={goback} variant='text' color='secondary'><ArrowBackIcon/> Назад</Button>
             <div className={style.result}>
                 <h1>Правильных  ответов <span>{correct}</span> / {testLength}</h1>
             </div>
         </div>
-        
     )
 }
 
