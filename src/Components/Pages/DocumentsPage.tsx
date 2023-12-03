@@ -26,7 +26,7 @@ const DocumentsPage: React.FC = () => {
                             {Docs.map(doc => {
                                 return (
                                     <li key={doc.id}>
-                                        <Link to={`/${doc.id}`}>{doc.title}</Link>
+                                        <Link to={`/Документы/${doc.id}`}>{doc.title}</Link>
                                     </li>
                                 )
                             })}

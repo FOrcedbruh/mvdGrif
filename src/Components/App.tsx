@@ -7,7 +7,7 @@ import Layout from "./Layout";
 import { Loader } from "./Loader";
 import { useMediaQuery } from 'react-responsive';
 
-import { setRenderFullAccount } from "../Store/reducers/AccountStatusSlice";
+import { setFullAccount } from "../Store/reducers/AccountStatusSlice";
 import { useAppDispatch } from "../hooks/reducerHooks";
 
 const Register = lazy(() => import("./Pages/Register"));
@@ -41,12 +41,7 @@ const App: React.FC = () => {
         setPercent(percent + (windowScroll / height) * 100);
     }
 
-    useEffect(() => {
-        dispatch(setRenderFullAccount());
-        window.addEventListener('scroll', progress);
-
-        return () => {window.removeEventListener('scroll', progress)};
-    }, []);
+    
 
     // отображение в header username и email
 
@@ -54,6 +49,16 @@ const App: React.FC = () => {
     const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
     const [first_name, setFirst_name] = useState<string>(localStorage.getItem('first_name') || '');
     const [last_name, setLast_name] = useState<string>(localStorage.getItem('last_name') || '');
+
+
+    useEffect(() => {
+        if (first_name && last_name) {
+            dispatch(setFullAccount());
+        }
+        window.addEventListener('scroll', progress);
+
+        return () => {window.removeEventListener('scroll', progress)};
+    }, []);
     
     // состоние для логики рендера профиля
 
@@ -95,7 +100,6 @@ const App: React.FC = () => {
       const isTablet = useMediaQuery({
         query: "(max-width: 1224px) and (min-width: 787px)"
       });
-     
 
 
     return (
@@ -114,12 +118,12 @@ const App: React.FC = () => {
                                 </Route>
                                 <Route path="/Дополнение_аккаунта" element={<Suspense fallback={<Loader />}><FullAccount /></Suspense>}/>
                                 <Route path="/Тесты олимпиады" element={<Suspense fallback={<Loader />}><Olimpics /></Suspense>}/>
-                                <Route path="/:id" element={<Suspense fallback={<Loader />}><TextReader /></Suspense>}/>
+                                <Route path="/Документы/:id" element={<Suspense fallback={<Loader />}><TextReader /></Suspense>}/>
                                 <Route path="/Профиль" element={showProfile ? <Suspense fallback={<Loader />}><Profile /></Suspense> : <Suspense fallback={<Loader />}><Login/></Suspense>} />
                                 <Route path='/Войти' element={<Suspense fallback={<Loader />}><Login showProfile={showProfile} setShowProfile={setShowProfile}/></Suspense>}/>
                                 <Route path='/Регистрация' element={<Suspense fallback={<Loader />}><Register /></Suspense>}/>
-                                <Route path="Тесты/:id" element={<Suspense fallback={<Loader />}><Quiz /></Suspense>}/>
-                                <Route path='/Тесты' element={<Suspense fallback={<Loader />}><TestCategories /></Suspense>}/>
+                                <Route path="Тесты/:testID" element={<Suspense fallback={<Loader />}><Quiz /></Suspense>}/>
+                                <Route path='/Тесты' element={<Suspense fallback={<Loader />}>{showProfile ? <TestCategories /> : <Login />}</Suspense>}/>
                             </Routes>
                         {(isDesktop || isTablet)  && <TopButton />}
                 </section>

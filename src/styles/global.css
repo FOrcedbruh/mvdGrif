@@ -25,6 +25,7 @@
     --placeholderColor: #2c2c2c;
     --footerBackground: linear-gradient(#fff, #8437c2);
 }
+
 body {
     overflow-x: hidden;
     margin: 0;

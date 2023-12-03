@@ -168,7 +168,7 @@ const Register: React.FC = () => {
                     <section className={style.checkboxies}>
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_1} onClick={handlerCheck_1}/><p>С порядком проведения олимпиады, приложением и регламентом ознакомлен.</p></div>
                         <div className={style.checkbox}><Checkbox color='secondary' checked={check_2} onClick={handlerCheck_2}/><p>Cогласен получать информацию об этапах олимпиады, публикации заданий и результатов на e-mail.</p></div>
-                        <div className={style.checkbox}><Checkbox color='secondary' checked={check_3} onClick={handlerCheck_3}/><p>Даю <Link to='/PDFReader' target='_blank'>согласие</Link> на обработку персональных данных.</p></div>
+                        <div className={style.checkbox}><Checkbox color='secondary' checked={check_3} onClick={handlerCheck_3}/><p>Даю <Link to='/Документы/0' target='_blank'>согласие</Link> на обработку персональных данных.</p></div>
                     </section>
                 </section>
                     

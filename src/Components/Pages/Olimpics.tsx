@@ -12,7 +12,7 @@ import { nothingCorrect, incrementCorrect, incrementPoints, nothingPoints, allRe
 import { authAPI } from '../AuthorizationData';
 import { StoreContext } from '../../contexts/storeContext';
 import { instance } from '../AuthorizationData';
-
+import { setOlimpicsComplete, resetOlimpicsComplete } from '../../Store/reducers/OlimpicsStatusSlice';
 
 
 interface ResultType {
@@ -21,6 +21,10 @@ interface ResultType {
 }
 
 const Result: React.FC<ResultType> = ({ Questions, points}) => {
+
+    const dispatch = useAppDispatch();
+
+    
 
     const [open, setOpen] = useState<boolean>(true);
 
@@ -34,6 +38,7 @@ const Result: React.FC<ResultType> = ({ Questions, points}) => {
     const correct = useAppSelector(state => state.correctSlice.correct)
 
     const ResultPost = () => {
+        dispatch(setOlimpicsComplete());
         authAPI.ResultPost(points).then((data) => {console.log(data)})
     }
 

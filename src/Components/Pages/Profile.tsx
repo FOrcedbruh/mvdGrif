@@ -35,9 +35,9 @@ const Profile: React.FC = () => {
 
     const { fullAccount } = useAppSelector(state => state.AccountStatusSlice);
 
+    const { correctOfLastTest, nameOfLastTest } = useAppSelector(state => state.TestsResultSlice);
 
-    
-    
+
 
     // навигация
 
@@ -116,7 +116,11 @@ return (
                     <p className={style.result}><DoneIcon color='secondary'/>Правильные ответы: <span>{correct}</span></p>
                     <p className={style.result}><StarIcon color='secondary'/>Баллы: <span>{points}</span></p>
                 </div>}
+              
             </div>
+            {nameOfLastTest != '' && <div className={style.infoOfLastTest}>
+                <p>Последний раз вы прошли тест по теме "{nameOfLastTest}" с количеством правильных ответов: <span style={{'color': 'blueviolet'}}>{correctOfLastTest}</span> </p>
+            </div>}
         </section>
         <Snackbar open={!fullAccount}>
                 <Alert severity='error'>

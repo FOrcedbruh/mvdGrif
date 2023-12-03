@@ -33,6 +33,20 @@
 .window a {
     text-decoration: none;
 }
+.modal {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   padding: 20px;
+   gap: 10px;
+   max-width: 400px;
+   background-color: #2c2c2c;
+}
+
+
+
+
 @media only screen and (max-width: 776px) {
     .head {
         padding-left: 30px;

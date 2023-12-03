@@ -158,9 +158,14 @@ const FullAccount: React.FC = () => {
                         </div>
                         <div>
                             <label htmlFor="grade">Класс или курс обучения</label>
-                            <input type="text" {...register('grade', {
-                                required: 'Укажие класс или курс обучения!'
-                            })}/>
+                            <Select style={{'width': 200, 'textAlign': 'center', 'color': 'white'}} color='secondary' {...register('grade', {
+                                required: 'Укажите класс обучения!'
+                            })}>
+                                <MenuItem value={'9'}>9</MenuItem>
+                                <MenuItem value={'8'}>8</MenuItem>
+                                <MenuItem value={'7'}>7</MenuItem>
+                                <MenuItem value={'6'}>6</MenuItem>
+                            </Select>
                             {errors.grade && <section className={style.error}>{errors.grade.message}</section>}
                         </div>
                     </section>

@@ -113,7 +113,7 @@ const InstructionDesktopPage: React.FC = () => {
                                 })}
                             </Stepper>
                             {activeStep === steps.length - 3 && <div className={style.info}><Typography fontSize={20} >Создайте {showProfile ? <a  href='#' onClick={handleClick}>аккаунт</a> : <Tooltip title='Перейти к регистрации'><Link to='/регистрация'>аккаунт</Link></Tooltip>}, если у вас его еще нет, иначе войдите в уже имеющийся.</Typography></div>}
-                            {activeStep === steps.length - 2 && <div className={style.info}><Typography fontSize={20} >Ознакомьтесь с регламентом, <Tooltip title='Перейти к документу'><Link target='_blank' to='/PDFReader'>согласием</Link></Tooltip> на обработку персональных данных и правилами проведения онлайн олимпиады.</Typography></div>}
+                            {activeStep === steps.length - 2 && <div className={style.info}><Typography fontSize={20} >Ознакомьтесь с регламентом, <Tooltip title='Перейти к документу'><Link target='_blank' to='/Документы/0'>согласием</Link></Tooltip> на обработку персональных данных и правилами проведения онлайн олимпиады.</Typography></div>}
                             {activeStep === steps.length - 1 && <div className={style.info}><Typography fontSize={20} >Вы готовы учавствовать в олимпиаде и получать наивысшие баллы! Вперед к победам!!!</Typography></div>}
 
                             

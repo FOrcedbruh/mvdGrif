@@ -60,7 +60,7 @@ const OlimpicsBtn: React.FC = () => {
     return (
         <section className={style.OlimpicsBtn}>
             <h3>Начните проходить олимпиаду прямо сейчас</h3>
-            <Tooltip arrow title={`${!showProfile ? 'Сначала войдите или создайте аккаунт' : ''}`}  placement='right'><Link to={`${!showProfile && '/войти' || !fullAccount && '/олимпиада'}`}><button className={`${animBtn ? `${style.view}` : ''}`}><ImportContactsRoundedIcon style={{'color': '#fff'}}/>   <p>Перейти к олимпиаде</p></button></Link></Tooltip>
+            <Tooltip arrow title={`${!showProfile ? 'Сначала войдите или создайте аккаунт' : ''}`}  placement='right'><Link to={`${!showProfile && '/войти' || !fullAccount && '/олимпиада' || fullAccount && '/олимпиада'}`}><button className={`${animBtn ? `${style.view}` : ''}`}><ImportContactsRoundedIcon style={{'color': '#fff'}}/>   <p>Перейти к олимпиаде</p></button></Link></Tooltip>
         </section>
     )
 }

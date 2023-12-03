@@ -6,24 +6,32 @@ import { useParams } from 'react-router-dom';
 import { TestType } from '../types/Test';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
+import { useAppDispatch } from '../hooks/reducerHooks';
+import { setNameOfLastTest, setCorrectOfLastTest } from '../Store/reducers/TestsResultSlice';
 
 
 
 
 interface CorrectType {
     correct: number;
-    testLength: number
+    testLength: number;
+    testTitle: string
 }
 
 
 
-const Result: React.FC<CorrectType> = ({correct, testLength}) => {
+const Result: React.FC<CorrectType> = ({correct, testLength, testTitle}) => {
+
+    const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
 
     const goback = () => navigate(-1);
 
+    useEffect(() => {
+        dispatch(setCorrectOfLastTest(correct));
+        dispatch(setNameOfLastTest(testTitle));
+    }, []);
 
     return (
         <div className={style.aura}>
@@ -39,14 +47,17 @@ const Result: React.FC<CorrectType> = ({correct, testLength}) => {
 const Quiz: React.FC = () => {
     
 
-    let {id} = useParams();
+    let {testID} = useParams();
 
-    let numId = Number(id);
+    let numId = Number(testID);
 
 
 
     const test: Array<TestType> = tests[numId].body;
     const testLength: number = test.length;
+
+    const testTitle: string = tests[numId].title;
+    
 
     const navigate = useNavigate();
 
@@ -71,7 +82,7 @@ const Quiz: React.FC = () => {
     }
     if (step > testLength - 1) {
         return (
-            <Result correct={correct} testLength={testLength}/>
+            <Result testTitle={testTitle} correct={correct} testLength={testLength}/>
         )
     }
 
